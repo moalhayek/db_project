@@ -20,24 +20,24 @@ def generate_city(prof):
   return fake.city()
 
 def generate_salary(prof):
-  return str(abs(gauss(95000,35000)))
+  return str(abs(int(gauss(95000,35000))))
 
 def generate_spending_per_night(prof):
-  return str(gauss(50,500))
+  return str(abs(int(gauss(50,500))))
 
 def generate_crowding_pref(prof):
   crowd_types = ['Not crowded','Moderately crowded','Very crowded']
   return choice(crowd_types)
 
 def generate_relationship_status(prof):
-  relationship_types = ['Single','Married']
+  relationship_types = ['Single','In a relationship']
   return choice(relationship_types)
  
 #first we establish what our attributes are
 drinker_attributes = ["name","age","gender","street_address","city","salary","spending_per_night","crowding_pref","relationship_status"] 
 
 #how many?
-amount = 20000
+amount = 15000
 
 #use a dict to map the attributes to their functions  
 options = {'name': generate_name,
