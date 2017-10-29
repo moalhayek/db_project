@@ -19,9 +19,6 @@ def generate_street_address(prof):
 def generate_city(prof):
   return fake.city()
 
-def generate_phone_num(prof):
-  return fake.phone_number()
-
 def generate_salary(prof):
   return str(abs(gauss(95000,35000)))
 
@@ -37,10 +34,10 @@ def generate_relationship_status(prof):
   return choice(relationship_types)
  
 #first we establish what our attributes are
-drinker_attributes = ["name","age","gender","street_address","city","phone","salary","spending_per_night","crowding_pref","relationship_status"] 
+drinker_attributes = ["name","age","gender","street_address","city","salary","spending_per_night","crowding_pref","relationship_status"] 
 
 #how many?
-amount = 15000
+amount = 20000
 
 #use a dict to map the attributes to their functions  
 options = {'name': generate_name,
@@ -48,7 +45,6 @@ options = {'name': generate_name,
            'gender': generate_gender,
            'street_address': generate_street_address,
            'city': generate_city,
-           'phone': generate_phone_num,
            'salary': generate_salary,
            'spending_per_night': generate_spending_per_night,
            'crowding_pref': generate_crowding_pref,
@@ -58,6 +54,7 @@ options = {'name': generate_name,
 outputfile_name = 'drinker_table.csv'
 outputfile = open(outputfile_name,'w')
 
+outputfile.write(','.join(drinker_attributes)+'\n')
 #iterate for as many tuples as you need
 for index in range(1,amount):
     tuple_list = []

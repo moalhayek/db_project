@@ -1,5 +1,4 @@
-name,age,gender,street_address,city,salary,spending_per_night,crowding_pref,relationship_status
-Eric Hicks,34,M,8534 Charles Courts,North Christopherfort,71444.0481824,-560.682600608,Not crowded,Single
+name,age,gender,street_address,city,salary,spending_per_night,crowding_pref,relationship_statusEric Hicks,34,M,8534 Charles Courts,North Christopherfort,71444.0481824,-560.682600608,Not crowded,Single
 Eric Nichols,27,M,220 Sheppard Loaf Suite 667,Lake Luiston,83800.796846,-411.878175574,Not crowded,Married
 Timothy Pacheco,60,M,94503 Mcguire Rapid Apt. 063,Henryborough,108051.126829,-212.539055423,Moderately crowded,Single
 Joshua Nelson,51,M,990 Dennis Tunnel Apt. 118,Bethview,107768.766219,-98.2941110691,Very crowded,Married
