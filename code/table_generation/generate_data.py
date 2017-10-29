@@ -43,14 +43,14 @@ def generate_spending_per_night(salary):
 def generate_crowding_pref(age):
   crowd_types = ['Not crowded','Moderately crowded','Very crowded']
   prob = []
-  if (age < 30):
+
+  if (age<30):
     prob = [.33, .33, .34]
   elif (age<45):
     prob = [.5, .3, .2]
   else:
     prob = [.7, .2, .1]
-  
-  #print np.random.choice(crowd_types, prob)
+
   return np.random.choice(crowd_types, p=prob)
 
 def generate_relationship_status():
@@ -82,7 +82,7 @@ for index in range(1,amount):
     tuple_list.append(generate_city())
     tuple_list.append(sal)
     tuple_list.append(generate_spending_per_night(sal))
-    tuple_list.append(generate_crowding_pref(age))
+    tuple_list.append(generate_crowding_pref(int(age)))
     tuple_list.append(generate_relationship_status())
 
   #format as comma_delimited string 
