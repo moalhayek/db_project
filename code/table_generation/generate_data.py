@@ -21,24 +21,32 @@ def generate_city():
   return fake.city()
 
 def generate_salary(age):
+
   if (age < 25):
     mean = 55000
+    sigma = 10000
   elif (age < 35):
     mean = 75000
+    sigma = 15000
   else:
     mean = 95000
+    sigma = 40000
   
-  return str(abs(int(gauss(mean,35000))))
+  return str(abs(int(gauss(mean,sigma))))
 
 def generate_spending_per_night(salary):
+
   if (salary < 60000):
-    mean = 25
+    mean = 20
+    sigma = 8
   elif (salary < 130000):
     mean = 50
+    sigma = 20
   else:
     mean = 100
+    sigma = 50
 
-  return str(abs(int(gauss(mean,500))))
+  return str(abs(int(gauss(mean,sigma))))
 
 def generate_crowding_pref(age):
   crowd_types = ['Not crowded','Moderately crowded','Very crowded']
@@ -61,7 +69,7 @@ def generate_relationship_status():
 drinker_attributes = ["name","age","gender","street_address","city","salary","spending_per_night","crowding_pref","relationship_status"] 
 
 #how many?
-amount = 15000
+amount = 10000
 
 outputfile_name = 'drinker_table.csv'
 outputfile = open(outputfile_name,'w')
@@ -81,7 +89,7 @@ for index in range(1,amount):
     tuple_list.append(generate_street_address())
     tuple_list.append(generate_city())
     tuple_list.append(sal)
-    tuple_list.append(generate_spending_per_night(sal))
+    tuple_list.append(generate_spending_per_night(int(sal)))
     tuple_list.append(generate_crowding_pref(int(age)))
     tuple_list.append(generate_relationship_status())
 
