@@ -18,7 +18,7 @@ def generate_street_address():
   return fake.street_address()
 
 def generate_city():
-  return fake.city()
+  return fake.state_abbr()
 
 def generate_salary(age):
 
@@ -36,17 +36,22 @@ def generate_salary(age):
 
 def generate_spending_per_night(salary):
 
-  if (salary < 60000):
-    mean = 20
-    sigma = 8
-  elif (salary < 130000):
-    mean = 50
-    sigma = 20
-  else:
-    mean = 150
-    sigma = 50
+  while (True):
+    if (salary < 60000):
+      mean = 20
+      sigma = 8
+    elif (salary < 130000):
+      mean = 50
+      sigma = 20
+    else:
+      mean = 150
+      sigma = 50
 
-  return str(abs(int(gauss(mean,sigma))))
+    spn = abs(int(gauss(mean,sigma)))
+    if (spn < (salary/365)/2):
+      break
+
+  return str(spn)
 
 def generate_crowding_pref(age):
   crowd_types = ['Not crowded','Moderately crowded','Very crowded']
