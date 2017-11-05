@@ -10,7 +10,7 @@ class CheckAssertion{
 		void CheckAssertion(int sal, int spen){
 			//check to see if the assertion was violated
 			int spendingLimit = sal/(365*2);
-			string result = (spen > spendingLimit) ? "REJECTED" : "ACCEPTED";
+			string result = (spen >= spendingLimit) ? "REJECTED" : "ACCEPTED";
 
 			//set and print out the result of the check
 			setResult(result);
