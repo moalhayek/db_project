@@ -43,7 +43,7 @@ def generate_spending_per_night(salary):
     mean = 50
     sigma = 20
   else:
-    mean = 100
+    mean = 150
     sigma = 50
 
   return str(abs(int(gauss(mean,sigma))))
@@ -83,6 +83,7 @@ for index in range(1,amount):
     random_profile = fake.profile()
     age = generate_age()
     sal = generate_salary(int(age))
+    tuple_list.append(index)
     tuple_list.append(generate_name(random_profile))
     tuple_list.append(age)
     tuple_list.append(generate_gender(random_profile))
@@ -96,4 +97,6 @@ for index in range(1,amount):
   #format as comma_delimited string 
     csv_string = ','.join(tuple_list)
     csv_string += '\n'
-    outputfile.write(csv_string)        
+    outputfile.write(csv_string) 
+
+       
