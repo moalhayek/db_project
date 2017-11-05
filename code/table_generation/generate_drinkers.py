@@ -71,7 +71,7 @@ def generate_relationship_status():
   return choice(relationship_types)
  
 #first we establish what our attributes are
-drinker_attributes = ["name","age","gender","street_address","city","salary","spending_per_night","crowding_pref","relationship_status"] 
+drinker_attributes = ['id',"name","age","gender","street_address","city","salary","spending_per_night","crowding_pref","relationship_status"] 
 
 #how many?
 amount = 10000

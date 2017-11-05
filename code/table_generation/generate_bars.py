@@ -16,7 +16,7 @@ def generate_state():
 
 def generate_liquor_license(state):
     license_str = state
-    for i in range(1,5):
+    for i in range(0,5):
         license_str += str(randint(0,9))
 
     return license_str
