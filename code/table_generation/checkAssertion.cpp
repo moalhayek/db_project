@@ -18,8 +18,8 @@ class CheckAssertion{
 			return;
 		}
 		//function that sets the result of the assertion check
-		void setResult(bool assertionBool){
-			result = assertionBool;
+		void setResult(string checkResult){
+			result = checkResult;
 		}
 		//function that gets the result of the assertion check
 		string getResult(){
