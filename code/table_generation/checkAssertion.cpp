@@ -7,7 +7,7 @@ using namespace std;
 class CheckAssertion{
 	public:
 		//function that checks the assertion of whether or not the drinker spends more than half their daily salary
-		void CheckAssertion(int sal, int spen){
+		void CheckSpending(int sal, int spen){
 			//check to see if the assertion was violated
 			int spendingLimit = sal/(365*2);
 			string result = (spen >= spendingLimit) ? "REJECTED" : "ACCEPTED";
