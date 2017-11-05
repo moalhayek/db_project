@@ -18,14 +18,11 @@ INTO TABLE drinkers
 FIELDS TERMINATED BY ','
 IGNORE 1 LINES;
 
-
+Create TRIGGER `delete_drinker` BEFORE DELETE ON `drinkers`
+	FOR EACH ROW
+		UPDATE frequents SET frequents.drinker_id = -1
+        WHERE OLD.id = frequents.drinker_id;   
+        
 Select * 
 From drinkers d
 Where Exists(select d1.spending_per_night from drinkers d1 where d1.spending_per_night >= (d1.salary/(365*2)));
-
-CREATE TABLE 'frequents' (
-  'drinker_id' INT NOT NULL,
-  'bar_id' INT NOT NULL,
-  FOREIGN KEY ('drinker_id') REFERENCES drinkers('id'),
-  
-);
