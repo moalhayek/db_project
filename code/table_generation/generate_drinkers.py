@@ -18,7 +18,7 @@ def generate_street_address():
   return fake.street_address()
 
 def generate_city():
-  return fake.state_abbr()
+  return fake.city()
 
 def generate_salary(age):
 
@@ -29,26 +29,30 @@ def generate_salary(age):
     mean = 75000
     sigma = 15000
   else:
-    mean = 95000
+    mean = 115000
     sigma = 40000
   
   return str(abs(int(gauss(mean,sigma))))
 
+def generate_state():
+  return fake.state_abbr()
+
 def generate_spending_per_night(salary):
 
-  while (True):
-    if (salary < 60000):
-      mean = 20
-      sigma = 8
-    elif (salary < 130000):
-      mean = 50
-      sigma = 20
-    else:
-      mean = 150
-      sigma = 50
+  if (salary < 60000):
+    mean = 20
+    sigma = 8
+  elif (salary < 130000):
+    mean = 40
+    sigma = 20
+  else:
+    mean = 100
+    sigma = 40
 
+  spending_limit = salary/(365*2)
+  while (True):
     spn = abs(int(gauss(mean,sigma)))
-    if (spn < (salary/365)/2):
+    if (spn < spending_limit):
       break
 
   return str(spn)
@@ -71,7 +75,7 @@ def generate_relationship_status():
   return choice(relationship_types)
  
 #first we establish what our attributes are
-drinker_attributes = ['id',"name","age","gender","street_address","city","salary","spending_per_night","crowding_pref","relationship_status"] 
+drinker_attributes = ['id',"name","age","gender","street_address","city",'state',"salary","spending_per_night","crowding_pref","relationship_status"] 
 
 #how many?
 amount = 10000
@@ -94,6 +98,7 @@ for index in range(1,amount):
     tuple_list.append(generate_gender(random_profile))
     tuple_list.append(generate_street_address())
     tuple_list.append(generate_city())
+    tuple_list.append(generate_state())
     tuple_list.append(str(sal))
     tuple_list.append(generate_spending_per_night(int(sal)))
     tuple_list.append(generate_crowding_pref(int(age)))
