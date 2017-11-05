@@ -22,3 +22,10 @@ IGNORE 1 LINES;
 Select * 
 From drinkers d
 Where Exists(select d1.spending_per_night from drinkers d1 where d1.spending_per_night >= (d1.salary/(365*2)));
+
+CREATE TABLE 'frequents' (
+  'drinker_id' INT NOT NULL,
+  'bar_id' INT NOT NULL,
+  FOREIGN KEY ('drinker_id') REFERENCES drinkers('id'),
+  
+);
