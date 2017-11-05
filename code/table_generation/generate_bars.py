@@ -25,15 +25,23 @@ def generate_liquor_license(state):
 bar_name_filename = '../../bar_names.csv'
 bar_name_file = open(bar_name_filename,'r')
 
-names = bar_name_file.readlines()[1:]
+names = bar_name_file.readlines()
 bar_name_file.close()
+
+names_list = names[0].split('\r')
 
 output_filename = 'bar_table.csv'
 output_file = open(output_filename,'w')
 
 index = 1
 
-for line in names:
+attr_list = ['id','name','license','state','city','street_address']
+csv_string = ','.join(attr_list) + '\n'
+output_file.write(csv_string)
+
+
+
+for line in names_list[1:]:
     tuple_list = []
 
     state = generate_state()
