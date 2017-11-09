@@ -1,101 +1,1 @@
-﻿id,name,manf,abv,manf_price
-0,Budweiser,Anheuser-Busch,5,0.73
-1,Bud Light,Anheuser-Busch,4.2,0.61
-2,Bud Light Platinum,Anheuser-Busch,6,0.65
-3,Michelob Amber Bock,Anheuser-Busch,5.1,0.64
-4,Michelob Golden Draft,Anheuser-Busch,4.7,0.66
-5,Michelob Golden Draft Light,Anheuser-Busch,4.3,0.64
-6,Michelob ULTRA,Anheuser-Busch,4.2,0.70
-7,Rolling Rock,Anheuser-Busch,4.5,0.73
-8,Busch,Anheuser-Busch,4.3,0.56
-9,Busch Light,Anheuser-Busch,4.1,0.57
-10,Busch Ice,Anheuser-Busch,5.9,0.48
-11,Shock Top,Anheuser-Busch,5.2,0.48
-12,Natural Light,Anheuser-Busch,4.2,0.63
-13,Natural Ice,Anheuser-Busch,5.9,0.70
-14,LandShark,Anheuser-Busch,4.6,0.76
-15,Blue Moon,Coors Brewing Company,5.4,0.46
-16,Extra Gold,Coors Brewing Company,5,0.86
-17,Killian's,Coors Brewing Company,4.9,0.49
-18,Zima,Coors Brewing Company,5,0.69
-19,Zima Citrus,Coors Brewing Company,5,0.71
-20,Coors Banquet,Coors Brewing Company,5,0.54
-21,Coors Light,Coors Brewing Company,4.2,0.66
-22,Keystone,Coors Brewing Company,4.8,0.70
-23,Keystone Light,Coors Brewing Company,4.2,0.61
-24,Keystone Ice,Coors Brewing Company,5.9,0.62
-25,Creamy Dark,Jacob Leinenkugel Brewing Company,4.9,0.69
-26,Hefeweizen,Jacob Leinenkugel Brewing Company,5,0.66
-27,Hefeweizen Doppelbock,Jacob Leinenkugel Brewing Company,5,0.76
-28,Original Premium,Jacob Leinenkugel Brewing Company,4.7,0.55
-29,Wisconson Red Pale Ale,Jacob Leinenkugel Brewing Company,5.6,0.90
-30,Canoe Paddler,Jacob Leinenkugel Brewing Company,5,0.84
-31,Anniverseary Lager,Jacob Leinenkugel Brewing Company,5.4,0.58
-32,Oktoberfest,Jacob Leinenkugel Brewing Company,5.1,0.79
-33,Summer Shandy,Jacob Leinenkugel Brewing Company,4.2,0.59
-34,Grapefruit Shandy,Jacob Leinenkugel Brewing Company,4.2,0.75
-35,Watermelon Shandy,Jacob Leinenkugel Brewing Company,4.2,0.54
-36,Miller Lite,Miller Brewing Company,4.2,0.68
-37,Miller High Life,Miller Brewing Company,4.6,0.43
-38,Redd's Apple Ale,Miller Brewing Company,5,0.53
-39,Milwaukee's Best,Miller Brewing Company,4.8,0.57
-40,Hamm's,Miller Brewing Company,4.7,0.78
-41,Steel Reserve,Miller Brewing Company,8.1,0.70
-42,Fosters,Miller Brewing Company,5,0.61
-43,Sol Cerveza,Miller Brewing Company,4.2,0.71
-44,ICEHOUSE,Plank Road Brewery,5.5,0.82
-45,Red Dog,Plank Road Brewery,5,1.11
-46,Southpaw Light,Plank Road Brewery,5,0.80
-47,ICEHOUSE EDGE,Plank Road Brewery,8,0.52
-48,Corona Extra,Grupo Modelo,4.5,0.83
-49,Corona Light,Grupo Modelo,3.7,0.86
-50,Victoria,Grupo Modelo,4,0.62
-51,Pacifico,Grupo Modelo,4.5,0.86
-52,Negra Modelo,Grupo Modelo,5.4,0.94
-53,Modelo Light,Grupo Modelo,2.9,0.82
-54,Modelo Especial,Grupo Modelo,4.4,0.65
-55,Heineken,Heineken International,5,0.62
-56,Brooklyn Lager,Brooklyn Brewery,5.2,0.92
-57,Defender IPA,Brooklyn Brewery,5.9,0.75
-58,Brooklyn Sorachi Ace Saison,Brooklyn Brewery,7.2,0.85
-59,Brooklyn Pilsner,Brooklyn Brewery,5.1,0.87
-60,Brooklyn East IPA,Brooklyn Brewery,6.9,1.26
-61,American Ale,Brooklyn Brewery,4.5,1.09
-62,Scorcher IPA,Brooklyn Brewery,4.5,0.87
-63,Brooklyn Brown Ale,Brooklyn Brewery,5.6,1.21
-64,Brooklyn Winter Lager,Brooklyn Brewery,5.6,1.10
-65,Brooklyn Oktoberfest,Brooklyn Brewery,5.5,1.02
-66,Brooklyn Summer Ale,Brooklyn Brewery,5,0.93
-67,Allagash White,Allagash Brewing Company,5.1,1.43
-68,Allagash Black,Allagash Brewing Company,7.5,0.79
-69,Allagash Saison,Allagash Brewing Company,4.8,0.95
-70,Allagash Hoppy Table Beer,Allagash Brewing Company,4.8,1.05
-71,Fat Tire,New Belgium Brewing,5.2,0.73
-72,Citradelic Tangerine,New Belgium Brewing,6,0.75
-73,Voodoo Ranger IPA,New Belgium Brewing,7,1.23
-74,Voodoo Ranger 8 Hop Pale Ale,New Belgium Brewing,5.5,0.98
-75,Citradelic Exotic Lime Ale,New Belgium Brewing,5.2,0.75
-76,#9,Magic Hat Brewing Company,5.1,0.73
-77,Circus Boy,Magic Hat Brewing Company,4.5,1.40
-78,Single Chair,Magic Hat Brewing Company,5,1.49
-79,Low Key,Magic Hat Brewing Company,4.5,0.97
-80,Electric Peel,Magic Hat Brewing Company,6,1.21
-81,120 Minute IPA,Dogfish Brewery,17.5,1.16
-82,60 Minute IPA,Dogfish Brewery,6,1.07
-83,90 Minute IPA,Dogfish Brewery,9,1.10
-84,Guinness Draught,Guinness,4.2,0.60
-85,Guinness Blonde American Lager,Guinness,5,1.22
-86,Guinness Nitro IPA,Guinness,5.8,0.91
-87,Guiness Extra Stout,Guinness,5.6,0.95
-88,Guiness Dublin Porter,Guinness,3.8,0.87
-89,Yuengling Traditional Lager,Yuengling Brewery,4.5,0.65
-90,Yuengling Light Lager,Yuengling Brewery,4.2,0.44
-91,Yuengling Premium,Yuengling Brewery,4.5,0.75
-92,Yuengling Porter,Yuengling Brewery,4.7,0.53
-93,Pabst Blue Ribbon,Pabst Brewing Company,4.7,0.57
-94,Labatt Blue,Labatt,4.7,0.64
-95,Labatt Blue Light,Labatt,4.2,0.64
-96,Labatt Ice,Labatt,5.6,0.65
-97,Torpedo Extra,Sierra Nevada,7.2,0.88
-98,Sidecar Original Pale Ale,Sierra Nevada,5.3,1.23
-99,Stout,Sierra Nevada,5.8,1.24
+﻿id,name,manf,abv,manf_price0,Budweiser,Anheuser-Busch,5,0.731,Bud Light,Anheuser-Busch,4.2,0.612,Bud Light Platinum,Anheuser-Busch,6,0.653,Michelob Amber Bock,Anheuser-Busch,5.1,0.644,Michelob Golden Draft,Anheuser-Busch,4.7,0.665,Michelob Golden Draft Light,Anheuser-Busch,4.3,0.646,Michelob ULTRA,Anheuser-Busch,4.2,0.707,Rolling Rock,Anheuser-Busch,4.5,0.738,Busch,Anheuser-Busch,4.3,0.569,Busch Light,Anheuser-Busch,4.1,0.5710,Busch Ice,Anheuser-Busch,5.9,0.4811,Shock Top,Anheuser-Busch,5.2,0.4812,Natural Light,Anheuser-Busch,4.2,0.6313,Natural Ice,Anheuser-Busch,5.9,0.7014,LandShark,Anheuser-Busch,4.6,0.7615,Blue Moon,Coors Brewing Company,5.4,0.4616,Extra Gold,Coors Brewing Company,5,0.8617,Killian's,Coors Brewing Company,4.9,0.4918,Zima,Coors Brewing Company,5,0.6919,Zima Citrus,Coors Brewing Company,5,0.7120,Coors Banquet,Coors Brewing Company,5,0.5421,Coors Light,Coors Brewing Company,4.2,0.6622,Keystone,Coors Brewing Company,4.8,0.7023,Keystone Light,Coors Brewing Company,4.2,0.6124,Keystone Ice,Coors Brewing Company,5.9,0.6225,Creamy Dark,Jacob Leinenkugel Brewing Company,4.9,0.6926,Hefeweizen,Jacob Leinenkugel Brewing Company,5,0.6627,Hefeweizen Doppelbock,Jacob Leinenkugel Brewing Company,5,0.7628,Original Premium,Jacob Leinenkugel Brewing Company,4.7,0.5529,Wisconson Red Pale Ale,Jacob Leinenkugel Brewing Company,5.6,0.9030,Canoe Paddler,Jacob Leinenkugel Brewing Company,5,0.8431,Anniverseary Lager,Jacob Leinenkugel Brewing Company,5.4,0.5832,Oktoberfest,Jacob Leinenkugel Brewing Company,5.1,0.7933,Summer Shandy,Jacob Leinenkugel Brewing Company,4.2,0.5934,Grapefruit Shandy,Jacob Leinenkugel Brewing Company,4.2,0.7535,Watermelon Shandy,Jacob Leinenkugel Brewing Company,4.2,0.5436,Miller Lite,Miller Brewing Company,4.2,0.6837,Miller High Life,Miller Brewing Company,4.6,0.4338,Redd's Apple Ale,Miller Brewing Company,5,0.5339,Milwaukee's Best,Miller Brewing Company,4.8,0.5740,Hamm's,Miller Brewing Company,4.7,0.7841,Steel Reserve,Miller Brewing Company,8.1,0.7042,Fosters,Miller Brewing Company,5,0.6143,Sol Cerveza,Miller Brewing Company,4.2,0.7144,ICEHOUSE,Plank Road Brewery,5.5,0.8245,Red Dog,Plank Road Brewery,5,1.1146,Southpaw Light,Plank Road Brewery,5,0.8047,ICEHOUSE EDGE,Plank Road Brewery,8,0.5248,Corona Extra,Grupo Modelo,4.5,0.8349,Corona Light,Grupo Modelo,3.7,0.8650,Victoria,Grupo Modelo,4,0.6251,Pacifico,Grupo Modelo,4.5,0.8652,Negra Modelo,Grupo Modelo,5.4,0.9453,Modelo Light,Grupo Modelo,2.9,0.8254,Modelo Especial,Grupo Modelo,4.4,0.6555,Heineken,Heineken International,5,0.6256,Brooklyn Lager,Brooklyn Brewery,5.2,0.9257,Defender IPA,Brooklyn Brewery,5.9,0.7558,Brooklyn Sorachi Ace Saison,Brooklyn Brewery,7.2,0.8559,Brooklyn Pilsner,Brooklyn Brewery,5.1,0.8760,Brooklyn East IPA,Brooklyn Brewery,6.9,1.2661,American Ale,Brooklyn Brewery,4.5,1.0962,Scorcher IPA,Brooklyn Brewery,4.5,0.8763,Brooklyn Brown Ale,Brooklyn Brewery,5.6,1.2164,Brooklyn Winter Lager,Brooklyn Brewery,5.6,1.1065,Brooklyn Oktoberfest,Brooklyn Brewery,5.5,1.0266,Brooklyn Summer Ale,Brooklyn Brewery,5,0.9367,Allagash White,Allagash Brewing Company,5.1,1.4368,Allagash Black,Allagash Brewing Company,7.5,0.7969,Allagash Saison,Allagash Brewing Company,4.8,0.9570,Allagash Hoppy Table Beer,Allagash Brewing Company,4.8,1.0571,Fat Tire,New Belgium Brewing,5.2,0.7372,Citradelic Tangerine,New Belgium Brewing,6,0.7573,Voodoo Ranger IPA,New Belgium Brewing,7,1.2374,Voodoo Ranger 8 Hop Pale Ale,New Belgium Brewing,5.5,0.9875,Citradelic Exotic Lime Ale,New Belgium Brewing,5.2,0.7576,#9,Magic Hat Brewing Company,5.1,0.7377,Circus Boy,Magic Hat Brewing Company,4.5,1.4078,Single Chair,Magic Hat Brewing Company,5,1.4979,Low Key,Magic Hat Brewing Company,4.5,0.9780,Electric Peel,Magic Hat Brewing Company,6,1.2181,120 Minute IPA,Dogfish Brewery,17.5,1.1682,60 Minute IPA,Dogfish Brewery,6,1.0783,90 Minute IPA,Dogfish Brewery,9,1.1084,Guinness Draught,Guinness,4.2,0.6085,Guinness Blonde American Lager,Guinness,5,1.2286,Guinness Nitro IPA,Guinness,5.8,0.9187,Guiness Extra Stout,Guinness,5.6,0.9588,Guiness Dublin Porter,Guinness,3.8,0.8789,Yuengling Traditional Lager,Yuengling Brewery,4.5,0.6590,Yuengling Light Lager,Yuengling Brewery,4.2,0.4491,Yuengling Premium,Yuengling Brewery,4.5,0.7592,Yuengling Porter,Yuengling Brewery,4.7,0.5393,Pabst Blue Ribbon,Pabst Brewing Company,4.7,0.5794,Labatt Blue,Labatt,4.7,0.6495,Labatt Blue Light,Labatt,4.2,0.6496,Labatt Ice,Labatt,5.6,0.6597,Torpedo Extra,Sierra Nevada,7.2,0.8898,Sidecar Original Pale Ale,Sierra Nevada,5.3,1.2399,Stout,Sierra Nevada,5.8,1.24
