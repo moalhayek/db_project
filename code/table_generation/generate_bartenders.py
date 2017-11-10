@@ -71,7 +71,9 @@ for bar_id in bar_iter:
 
         for shift in shift_list: 
             if shift not in bartender_avg_dict:
-                bartender_avg_dict[shift] = '\N'       
+                bartender_avg_dict[shift] = '\N' 
+
+                      
         csv_str = '{0},{1},{2},'.format(str(bar_id),str(bartender),start_date)
         for (shift,sales) in bartender_avg_dict.iteritems():
             csv_str += sales+','
