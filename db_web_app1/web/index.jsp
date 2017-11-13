@@ -6,14 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <html>
   <head>
     <title>$Title$</title>
   </head>
   <body>
-  <div>
-      HELLO Sean!
-  </div>
-  $END$
+  HELLO WORLD!
   </body>
 </html>
