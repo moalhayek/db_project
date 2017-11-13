@@ -117,7 +117,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1769" />
+    <option name="x" value="489" />
     <option name="y" value="203" />
     <option name="width" value="1260" />
     <option name="height" value="733" />
@@ -480,7 +480,7 @@
       <workItem from="1510439137041" duration="80000" />
       <workItem from="1510439963689" duration="890000" />
       <workItem from="1510442197261" duration="1932000" />
-      <workItem from="1510447956091" duration="921000" />
+      <workItem from="1510447956091" duration="957000" />
     </task>
     <task id="LOCAL-00001" summary="adding a connection to db java file from the class resources">
       <created>1510334408290</created>
@@ -493,10 +493,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14274000" />
+    <option name="totallyTimeSpent" value="14310000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1769" y="203" width="1260" height="733" extended-state="0" />
+    <frame x="489" y="203" width="1260" height="733" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
