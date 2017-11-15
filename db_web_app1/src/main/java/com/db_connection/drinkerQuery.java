@@ -5,9 +5,9 @@ import java.util.*;
 import java.sql.*;
 
 
-public class sampleQuery {
+public class drinkerQuery {
 
-    public static String sample(String id){
+    public static String drinker(String id){
 
         String ret = new String();
 
@@ -43,7 +43,7 @@ public class sampleQuery {
     }
 
     public static void main(String[] args) {
-        sample("1");
+        drinker("1");
     }
 
 
