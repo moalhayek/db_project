@@ -7,9 +7,9 @@ import java.sql.*;
 
 public class ageEarningsQuery {
 
-    public static ArrayList<String> ageEarnings(){
+    public static List<List<String>> ageEarnings(){
 
-        ArrayList<String> ret = new ArrayList<String>();
+        List<List<String>> ret = new ArrayList<List<String>>();
 
         try {
             //Get the database connection
@@ -25,17 +25,22 @@ public class ageEarningsQuery {
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
 
+            //initially, result points to before first row
+            result.next();
+
             ResultSetMetaData rsmd = result.getMetaData();
             int columnsNumber = rsmd.getColumnCount();
             while (result.next()) {
+                ArrayList<String> temp = new ArrayList<String>(); //temp array to hold the whole row
+                // loop through each column in the current row
                 for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
                     String columnValue = result.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+                    //add the current column value into temp
+                    temp.add(columnValue);
                 }
-                System.out.println("");
-                ret.add(result.toString());
+                ret.add(temp);
             }
+            System.out.println(ret);
 
             db.closeConnection(con);
         } catch (Exception e) {
