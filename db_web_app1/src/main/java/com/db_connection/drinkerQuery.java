@@ -1,14 +1,14 @@
 package com.db_connection;
 
-import java.io.*;
-import java.util.*;
+import com.resultClasses.drinker;
+import com.resultClasses.drinkerResult;
 import java.sql.*;
 
 
 public class drinkerQuery {
 
-    public static String drinker(String id){
-
+    public drinker drinker(String id){
+        drinker resultClass = new drinker();
         String ret = new String();
 
         try {
@@ -38,12 +38,15 @@ public class drinkerQuery {
         } catch (Exception e) {
             System.out.print(e);
         }
+        drinkerResult drinkerR = new drinkerResult();
+        drinkerR.name = ret;
 
-        return ret;
+        resultClass.drinker = drinkerR;
+        return resultClass;
     }
 
     public static void main(String[] args) {
-        drinker("1");
+        //drinker("1");
     }
 
 
