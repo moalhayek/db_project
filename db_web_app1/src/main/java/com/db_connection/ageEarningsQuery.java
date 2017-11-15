@@ -3,13 +3,15 @@ package com.db_connection;
 import java.io.*;
 import java.util.*;
 import java.sql.*;
+import com.resultClasses.ageEarningsResult;
+import com.resultClasses.drinkerAgeGroupEarnings;
 
 
 public class ageEarningsQuery {
 
-    public static List<List<String>> ageEarnings(){
-
-        List<List<String>> ret = new ArrayList<List<String>>();
+    public drinkerAgeGroupEarnings ageEarnings(){
+        drinkerAgeGroupEarnings resultClass = new drinkerAgeGroupEarnings();
+        List<ageEarningsResult> drinkers = new ArrayList<ageEarningsResult>();
 
         try {
             //Get the database connection
@@ -30,28 +32,31 @@ public class ageEarningsQuery {
 
             ResultSetMetaData rsmd = result.getMetaData();
             int columnsNumber = rsmd.getColumnCount();
+
+            //each result represents an age group of drinkers
             while (result.next()) {
-                ArrayList<String> temp = new ArrayList<String>(); //temp array to hold the whole row
+                //create a new object for each age group and assign it the age and avg earning
+                ageEarningsResult ageGroup = new ageEarningsResult();
                 // loop through each column in the current row
                 for (int i = 1; i <= columnsNumber; i++) {
-                    String columnValue = result.getString(i);
-                    //add the current column value into temp
-                    temp.add(columnValue);
+                    if (i > 1) ageGroup.averageEarning = result.getString(i);
+                    else ageGroup.age = result.getString(i);
                 }
-                ret.add(temp);
+                //add the new age group to the list of ageEarningResult age groups
+                drinkers.add(ageGroup);
             }
-            System.out.println(ret);
 
             db.closeConnection(con);
         } catch (Exception e) {
             System.out.print(e);
         }
+        resultClass.drinkersAgeGroups = drinkers;
 
-        return ret;
+        return resultClass;
     }
 
     public static void main(String[] args) {
-        ageEarnings();
+        //ageEarnings();
     }
 
 
