@@ -1,17 +1,16 @@
-package com.db_connection;
+package com.DatabaseConn;
 
-import java.io.*;
 import java.util.*;
 import java.sql.*;
-import com.resultClasses.ageEarningsResult;
-import com.resultClasses.drinkerAgeGroupEarnings;
+import com.IDBWebApp.IAgeEarnings;
+import com.IDBWebApp.IAgeEarningsResult;
 
 
 public class ageEarningsQuery {
 
-    public drinkerAgeGroupEarnings ageEarnings(){
-        drinkerAgeGroupEarnings resultClass = new drinkerAgeGroupEarnings();
-        List<ageEarningsResult> drinkers = new ArrayList<ageEarningsResult>();
+    public IAgeEarningsResult ageEarnings(){
+        IAgeEarningsResult resultClass = new IAgeEarningsResult();
+        List<IAgeEarnings> drinkers = new ArrayList<IAgeEarnings>();
 
         try {
             //Get the database connection
@@ -35,13 +34,11 @@ public class ageEarningsQuery {
 
             //each result represents an age group of drinkers
             while (result.next()) {
-                //create a new object for each age group and assign it the age and avg earning
-                ageEarningsResult ageGroup = new ageEarningsResult();
-                // loop through each column in the current row
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) ageGroup.averageEarning = result.getString(i);
-                    else ageGroup.age = result.getString(i);
-                }
+                //create a new object for each age group (result) and assign it the age and avg earning
+                IAgeEarnings ageGroup = new IAgeEarnings();
+                ageGroup.averageEarning = result.getString("avg(salary)");
+                ageGroup.age = result.getString("age");
+
                 //add the new age group to the list of ageEarningResult age groups
                 drinkers.add(ageGroup);
             }

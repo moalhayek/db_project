@@ -1,14 +1,14 @@
-package com.db_connection;
+package com.DatabaseConn;
 
-import com.resultClasses.drinker;
-import com.resultClasses.drinkerResult;
+import com.IDBWebApp.IDrinkerResult;
+import com.IDBWebApp.IDrinker;
 import java.sql.*;
 
 
 public class drinkerQuery {
 
-    public drinker drinker(String id){
-        drinker resultClass = new drinker();
+    public IDrinkerResult drinker(String id){
+        IDrinkerResult resultClass = new IDrinkerResult();
         String ret = new String();
 
         try {
@@ -38,7 +38,7 @@ public class drinkerQuery {
         } catch (Exception e) {
             System.out.print(e);
         }
-        drinkerResult drinkerR = new drinkerResult();
+        IDrinker drinkerR = new IDrinker();
         drinkerR.name = ret;
 
         resultClass.drinker = drinkerR;

@@ -1,6 +1,6 @@
-package com.resultClasses;
+package com.IDBWebApp;
 
-public class ageEarningsResult {
+public class IAgeEarnings {
     public String age;
     public String averageEarning;
 }
