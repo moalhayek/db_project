@@ -10,8 +10,13 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.1.1" />
           <element id="library" level="project" name="Maven: com.sun.jersey:jersey-bundle:1.18.3" />
+          <element id="library" level="project" name="com.google.code.gson:gson:2.2.2" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.29" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.2.2" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="BarCervezaDrinker/javaeeApplication/javaEEApplication" />
+      <element id="javaee-facet-resources" facet="BarCervezaDrinker/javaeeApplication/javaEEApplication" />
     </root>
   </artifact>
 </component>
