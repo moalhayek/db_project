@@ -1,8 +1,8 @@
-package com.db_web_app;
+package com.DBWebApp;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import com.db_connection.drinkerQuery;
+import com.DatabaseConn.drinkerQuery;
 import com.google.gson.Gson;
 
 @Path("/drinkers")

@@ -10,7 +10,7 @@
 
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.db_web_app</param-value>
+            <param-value>com.DBWebApp</param-value>
         </init-param>
 
         <init-param>
