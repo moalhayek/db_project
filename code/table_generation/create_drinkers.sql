@@ -1,5 +1,5 @@
 CREATE TABLE `drinkers` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NULL,
   `age` INT NULL,
   `gender` VARCHAR(3) NULL,
@@ -18,6 +18,8 @@ INTO TABLE drinkers
 FIELDS TERMINATED BY ','
 IGNORE 1 LINES;
 
+INSERT INTO drinkers (id) values (-1);
+
 Create TRIGGER `delete_drinker` BEFORE DELETE ON `drinkers`
 	FOR EACH ROW
 		UPDATE frequents SET frequents.drinker_id = -1
@@ -26,3 +28,5 @@ Create TRIGGER `delete_drinker` BEFORE DELETE ON `drinkers`
 Select * 
 From drinkers d
 Where Exists(select d1.spending_per_night from drinkers d1 where d1.spending_per_night >= (d1.salary/(365*2)));
+
+ALTER TABLE drinkers MODIFY id INT(11) NOT NULL AUTO_INCREMENT;
