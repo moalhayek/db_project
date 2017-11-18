@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 public class BartenderEndpoints {
     @POST
     @Path("/postBartender")
-    @Consumes("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
     public void postBartender(bartenderJaxBean input) {
         //add the drinker to the drinkers table
         DrinkerQueries d = new DrinkerQueries();
