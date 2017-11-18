@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 @Path("/drinkers")
 public class DrinkerEndpoints {
+    @Path("/getDrinker")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getDrinker(@DefaultValue("1") @QueryParam("id") String id) {

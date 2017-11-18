@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 public class BartenderQueries {
-    public static void addBartender(int bar_id, int drinker_id, String start_date){
+    public void addBartender(int bar_id, int drinker_id, String start_date){
         try {
             //Get the database connection
             ApplicationDB db = new ApplicationDB();
