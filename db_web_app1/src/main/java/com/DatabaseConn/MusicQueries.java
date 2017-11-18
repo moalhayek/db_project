@@ -34,6 +34,7 @@ public class MusicQueries {
             while (result.next()) {
                 //create a new object for each age group (result) and assign it the age and avg earning
                 IMusicEndpoints.IMusic music = new IMusicEndpoints().new IMusic();
+                //music age range
                 music.ageGroup = String.format(lowerAge+"-"+upperAge);
                 music.genre = result.getString("m1.genre");
                 music.listeners = result.getString("COUNT(l1.drinker_id)");
