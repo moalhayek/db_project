@@ -54,9 +54,8 @@
                             </md-option>
                         </md-select>
                     </md-input-container>
-                </div>
-                                    
-                <div ng-if="personal.barSelected" flex="55" layout="row" layout-align="center">
+                </div>                                    
+                <div ng-if="personal.barSelected" flex="40" layout="row" layout-align="center">
                     <md-card flex flex-offset="-15" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
@@ -121,7 +120,7 @@
                         </md-card-actions>
                     </md-card>
                 </div>
-                <div flex="55"  ng-if="personal.barSelected" layout="row" layout-align="center">
+                <div flex="40"  ng-if="personal.barSelected" layout="row" layout-align="center">
                     <md-card flex md-theme="cyan-theme" ng-controller="advertisementsController as ad" ng-init="ad.setAds(personal.selectedBar.id)"md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
@@ -190,23 +189,19 @@
         </div>        
     </md-content>
     <md-content ng-if="page.currPage=='general_bar_data'" ng-controller="generalDashController as gen" layout-padding>
-        <div layout="row"  layout-align ="center">
+        <div layout="row"  layout-align ="center">            
             <div flex="10" md-theme="cyan-theme" class="md-accent">
             </div>
             <div flex="80" layout ="column" md-theme="cyan-theme" layout-align="center">
                 <h2 >{{'General Info'}}</h2>                                   
-                <div flex="55" layout="row" layout-align="center">
-                    <md-card flex flex-offset="-15" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" md-theme-watch>
+                <div flex="40" layout="row" layout-align="center">
+                    <md-card flex ng-controller="earnings as earn" >
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Drinkers</span>
-                            
-                          </md-card-title-text>
-                          <md-card-title-media>
-                            <div class="md-media-lg card-media"></div>
-                          </md-card-title-media>
+                          </md-card-title-text>                          
                         </md-card-title>
-                        <md-card-content>                            
+                        <md-card-content>                       
                             <md-radio-group ng-model="earn.timeType"">
                                 <md-radio-button value="monthly">Monthly</md-radio-button>
                                 <md-radio-button value="day-of-week">Day of Week</md-radio-button>                          
@@ -260,7 +255,7 @@
                         </md-card-actions>
                     </md-card>
                 </div>
-                <div flex="55"  layout="row" layout-align="center">
+                <div flex="40"  layout="row" layout-align="center">
                     <md-card flex md-theme="cyan-theme" ng-controller="advertisementsController as ad" ng-init="ad.setAds(personal.selectedBar.id)"md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
