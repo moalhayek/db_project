@@ -17,4 +17,13 @@ public class DrinkerEndpoints {
 
         return json;
     }
+    @Path("/getAgeEarning")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAgeEarning() {
+        DrinkerQueries earn = new DrinkerQueries();
+        Gson gson = new Gson();
+        String json = gson.toJson(earn.ageEarnings());
+        return json;
+    }
 }
