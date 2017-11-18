@@ -25,5 +25,4 @@ public class BartenderQueries {
             System.out.print(e);
         }
     }
-
 }
