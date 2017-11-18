@@ -45,7 +45,7 @@ public class DrinkerQueries {
         return resultClass;
     }
 
-    public static int addDrinker(String name, int age, String gender, String street, String city, String state){
+    public int addDrinker(String name, int age, String gender, String street, String city, String state){
         int new_id = -1;
 
         try {

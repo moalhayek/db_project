@@ -8,10 +8,11 @@ import com.google.gson.Gson;
 
 // posting a bartender using their name
 
-@Path("/postBartender")
-@Consumes("application/json")
+@Path("/bartenders")
 public class BartenderEndpoints {
     @POST
+    @Path("/postBartender")
+    @Consumes("application/json")
     public void postBartender(bartenderJaxBean input) {
         //add the drinker to the drinkers table
         DrinkerQueries d = new DrinkerQueries();
