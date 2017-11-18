@@ -6,6 +6,7 @@ import javax.ws.rs.core.MediaType;
 import com.DatabaseConn.MusicQueries;
 import com.google.gson.Gson;
 
+//rest path for music
 @Path("/music")
 public class MusicEndpoints {
     @Path("/getMusicTrends")
