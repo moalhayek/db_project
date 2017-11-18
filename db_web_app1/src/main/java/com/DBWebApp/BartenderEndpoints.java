@@ -1,6 +1,7 @@
 package com.DBWebApp;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 import com.DatabaseConn.BartenderQueries;
 import com.DatabaseConn.DrinkerQueries;
