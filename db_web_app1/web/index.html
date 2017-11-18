@@ -18,8 +18,15 @@
 
     <script type="text/javascript" src="./js/app.js"></script>
     <script type="text/javascript" src="./js/sharedproperties.factory.js"></script>
+    <script type="text/javascript" src="./js/app.config.js"></script>
+    <script type="text/javascript" src="./js/personalDashController.js"></script>
+    <script type="text/javascript" src="./js/generalDashController.js"></script>
+    <script type="text/javascript" src="./js/advertisementController.js"></script>
+    <script type="text/javascript" src="./js/drinkerController.js"></script>
+    <script type="text/javascript" src="./js/beerController.js"></script>
+
 </head>
-<body>
+<body ng-controller="pageController as page">
     <div  ng-if="page.currPage!='home'">
         <md-nav-bar  
         md-selected-nav-item="currentNavItem"
@@ -32,7 +39,7 @@
             </md-nav-item>
         </md-nav-bar>
     </div>
-    <md-content ng-controller="personalDashController as personal" layout-padding>
+    <md-content ng-if="page.currPage=='personal_bar_data'" ng-controller="personalDashController as personal" layout-padding>
         <div layout="row"  layout-align ="center">
             <div flex="10" md-theme="cyan-theme" class="md-accent">
             </div>
@@ -63,7 +70,7 @@
                         <md-card-content>                            
                             <md-radio-group ng-model="earn.timeType"">
                                 <md-radio-button value="monthly">Monthly</md-radio-button>
-                                <md-radio-button value="day-of-week">Day of Week</md-radio-button>                               
+                                <md-radio-button value="day-of-week">Day of Week</md-radio-button>                          
                             </md-radio-group>
                             <div ng-show="earn.timeType=='monthly'">
                                 <canvas  id="line" class="chart chart-line" 
@@ -180,9 +187,144 @@
             </div>
             <div flex="10" style="background-color: none;">
             </div>
+        </div>        
+    </md-content>
+    <md-content ng-if="page.currPage=='general_bar_data'" ng-controller="generalDashController as gen" layout-padding>
+        <div layout="row"  layout-align ="center">
+            <div flex="10" md-theme="cyan-theme" class="md-accent">
+            </div>
+            <div flex="80" layout ="column" md-theme="cyan-theme" layout-align="center">
+                <h2 >{{'General Info'}}</h2>                                   
+                <div flex="55" layout="row" layout-align="center">
+                    <md-card flex flex-offset="-15" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" md-theme-watch>
+                        <md-card-title>
+                          <md-card-title-text>
+                            <span class="md-headline">Drinkers</span>
+                            
+                          </md-card-title-text>
+                          <md-card-title-media>
+                            <div class="md-media-lg card-media"></div>
+                          </md-card-title-media>
+                        </md-card-title>
+                        <md-card-content>                            
+                            <md-radio-group ng-model="earn.timeType"">
+                                <md-radio-button value="monthly">Monthly</md-radio-button>
+                                <md-radio-button value="day-of-week">Day of Week</md-radio-button>                          
+                            </md-radio-group>
+                            <div ng-show="earn.timeType=='monthly'">
+                                <canvas  id="line" class="chart chart-line" 
+                                chart-data="earn.data" 
+                                chart-labels="earn.labels_months" 
+                                chart-series="earn.series" 
+                                chart-options="earn.options" 
+                                chart-dataset-override="earn.datasetOverride" 
+                                chart-click="earn.onClick()">
+                                </canvas>
+                                <md-datepicker ng-show="earn.timeType=='monthly'"ng-model="earn.startDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
+                                <md-datepicker ng-model="earn.endDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
+                            </div>
+                            <canvas ng-show="earn.timeType=='day-of-week'" id="line" class="chart chart-bar" 
+                            chart-data="earn.data" 
+                            chart-labels="earn.labels_days_of_week" 
+                            chart-series="earn.series" 
+                            chart-options="earn.options" 
+                            chart-dataset-override="earn.datasetOverride" 
+                            chart-click="earn.onClick()">
+                            </canvas>
+                        </md-card-content>
+                        <md-card-actions layout="row" layout-align="end center">
+                        </md-card-actions>
+                    </md-card>
+                    <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id)" md-theme-watch>
+                        <md-card-title>
+                          <md-card-title-text>
+                            <span class="md-headline">Beers</span>                                     
+                          </md-card-title-text>
+                          <md-card-title-media>
+                            <div class="md-media-lg card-media"></div>
+                          </md-card-title-media>
+                        </md-card-title>
+                        <md-card-content>
+                            <canvas  id="line" class="chart chart-bar" 
+                                chart-data="bt.data" 
+                                chart-labels="bt.labels()" 
+                                chart-series="bt.series" 
+                                chart-options="bt.options" 
+                                chart-dataset-override="bt.datasetOverride" 
+                                chart-click="bt.onClick()">
+                            </canvas>
+                        </md-card-content>
+                        <md-card-actions layout="row" layout-align="end center">
+                          <md-button class="md-raised md-primary" style="text-transform: none;">Add new bartender</md-button>
+                          
+                        </md-card-actions>
+                    </md-card>
+                </div>
+                <div flex="55"  layout="row" layout-align="center">
+                    <md-card flex md-theme="cyan-theme" ng-controller="advertisementsController as ad" ng-init="ad.setAds(personal.selectedBar.id)"md-theme-watch>
+                        <md-card-title>
+                          <md-card-title-text>
+                            <span class="md-headline">Music Trends</span>
+                            
+                          </md-card-title-text>
+
+                          <md-card-title-media>
+                            <div class="md-media-lg card-media"></div>
+                          </md-card-title-media>
+                        </md-card-title>
+                        <md-card-content>
+                            <md-input-container >
+                                <label>Ad platform</label>
+                                <md-select ng-model="ad.selectedAd">
+                                    <md-option ng-repeat="name in ad.getAds()" ng-value="name">
+                                    {{name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <div>
+                                <canvas  id="line" class="chart chart-pie" 
+                                chart-data="ad.data" 
+                                chart-labels="ad.labels" 
+                                chart-series="ad.series" 
+                                chart-options="ad.options" 
+                                chart-dataset-override="ad.datasetOverride" 
+                                chart-click="ad.onClick()">
+                                </canvas>  
+                            </div>
+                          </md-card-content>
+                        <md-card-actions layout="row" layout-align="end center">
+                          <md-button>Action 1</md-button>
+                          <md-button>Action 2</md-button>
+                        </md-card-actions>
+                    </md-card>
+                    <md-card flex md-theme="cyan-theme" ng-controller="beerInfoController as beer" md-theme-watch>
+                        <md-card-title>
+                          <md-card-title-text>
+                            <span class="md-headline">Beer Info</span>
+
+                          </md-card-title-text>
+                          <md-card-title-media>
+                            <div class="md-media-lg card-media"></div>
+                          </md-card-title-media>
+                        </md-card-title>
+                        <md-card-content>
+                            <canvas  id="line" class="chart chart-line" 
+                            chart-data="beer.data" 
+                            chart-labels="beer.labels" 
+                            chart-series="beer.series" 
+                            chart-options="beer.options" 
+                            chart-dataset-override="beer.datasetOverride" 
+                            chart-click="beer.onClick()">
+                            </canvas>
+                        </md-card-content>
+                        <md-card-actions layout="row" layout-align="end center">
+                        </md-card-actions>
+                    </md-card>
+                </div>
+
+            </div>
+            <div flex="10" style="background-color: none;">
+            </div>
         </div>
-            
-            
-    </div>
     </md-content>
 </body>
