@@ -1,14 +1,15 @@
 package com.DatabaseConn;
 
-import com.IDBWebApp.IDrinkerResult;
-import com.IDBWebApp.IDrinker;
+import com.IDBWebApp.IDrinkerEndpoints;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DrinkerQueries {
 
-    public IDrinkerResult drinker(String id){
-        IDrinkerResult resultClass = new IDrinkerResult();
+    public IDrinkerEndpoints.IDrinkerResult drinker(String id){
+        IDrinkerEndpoints.IDrinkerResult resultClass = new IDrinkerEndpoints().new IDrinkerResult();
         String ret = new String();
 
         try {
@@ -38,14 +39,14 @@ public class DrinkerQueries {
         } catch (Exception e) {
             System.out.print(e);
         }
-        IDrinker drinkerR = new IDrinker();
+        IDrinkerEndpoints.IDrinker drinkerR = new IDrinkerEndpoints().new IDrinker();
         drinkerR.name = ret;
 
         resultClass.drinker = drinkerR;
         return resultClass;
     }
 
-    public static int addDrinker(String name, int age, String gender, String street, String city, String state){
+    public int addDrinker(String name, int age, String gender, String street, String city, String state){
         int new_id = -1;
 
         try {
@@ -75,6 +76,47 @@ public class DrinkerQueries {
         }
 
         return new_id;
+    }
+
+    public IDrinkerEndpoints.IAgeEarningsResult ageEarnings() {
+        IDrinkerEndpoints.IAgeEarningsResult resultClass = new IDrinkerEndpoints().new IAgeEarningsResult();
+        List<IDrinkerEndpoints.IAgeEarnings> drinkers = new ArrayList<IDrinkerEndpoints.IAgeEarnings>();
+
+        try {
+            //Get the database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            //Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
+            String str = String.format("SELECT age, avg(salary) FROM drinkers GROUP BY age");
+
+            //Run the query against the database.
+            ResultSet result = stmt.executeQuery(str);
+
+            //initially, result points to before first row
+            result.next();
+
+            //each result represents an age group of drinkers
+            while (result.next()) {
+                //create a new object for each age group (result) and assign it the age and avg earning
+                IDrinkerEndpoints.IAgeEarnings ageGroup = new IDrinkerEndpoints().new IAgeEarnings();
+                ageGroup.averageEarning = result.getString("avg(salary)");
+                ageGroup.age = result.getString("age");
+
+                //add the new age group to the list of ageEarningResult age groups
+                drinkers.add(ageGroup);
+            }
+
+            db.closeConnection(con);
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        resultClass.drinkersAgeGroups = drinkers;
+
+        return resultClass;
     }
 
 //    public static void main(String[] args) {

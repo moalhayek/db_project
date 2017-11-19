@@ -1,10 +1,10 @@
-package com.DBWebApp;
+package com.IDBWebApp;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class bartenderJaxBean {
+public class IBartenderXMLEndpoints {
     @XmlElement public int barId;
     @XmlElement public String name;
     @XmlElement public int age;
