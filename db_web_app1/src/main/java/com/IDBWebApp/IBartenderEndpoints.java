@@ -1,16 +1,15 @@
 package com.IDBWebApp;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
-@XmlRootElement
 public class IBartenderEndpoints {
-    @XmlElement public int barId;
-    @XmlElement public String name;
-    @XmlElement public int age;
-    @XmlElement public String gender;
-    @XmlElement public String street_address;
-    @XmlElement public String city;
-    @XmlElement public String state;
-    @XmlElement public String startDate;
+    public class IBartender {
+        public int bar_id;
+        public int bartender_id;
+        public String shift_name;
+        public int bartender_sales;
+    }
+    public class IBartenderResult{
+        public List<IBartender> topBartenders;
+    }
 }
