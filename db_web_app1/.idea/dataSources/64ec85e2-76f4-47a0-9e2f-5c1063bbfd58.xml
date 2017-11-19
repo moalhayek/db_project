@@ -69,7 +69,7 @@
       <Primary>1</Primary>
     </key>
     <trigger id="28" parent="9" name="delete_bars">
-      <Turn>after-row</Turn>
+      <Turn>before-row</Turn>
       <Events>D</Events>
     </trigger>
     <column id="29" parent="10" name="bar_id">

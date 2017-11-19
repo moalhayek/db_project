@@ -5,7 +5,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.DatabaseConn.BartenderQueries;
 import com.DatabaseConn.DrinkerQueries;
-import com.google.gson.Gson;
+import com.IDBWebApp.IBartenderEndpoints;
 
 // posting a bartender using their name
 
@@ -14,7 +14,7 @@ public class BartenderEndpoints {
     @POST
     @Path("/postBartender")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postBartender(bartenderJaxBean input) {
+    public void postBartender(IBartenderEndpoints input) {
         //add the drinker to the drinkers table
         DrinkerQueries d = new DrinkerQueries();
         int new_drinker_id = d.addDrinker(input.name, input.age, input.gender, input.street_address, input.city, input.state);
