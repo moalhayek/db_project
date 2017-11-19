@@ -26,7 +26,7 @@ public class BartenderEndpoints {
     @Path("/getTopBartenders")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public IBartenderEndpoints.IBartenderResult getTopBartenders(@DefaultValue("1") @QueryParam("barId") String barId, @DefaultValue("sat_late_avg_sales") @QueryParam("shift") String shift) {
+    public IBartenderEndpoints.IBartenderResult getTopBartenders(@DefaultValue("1") @QueryParam("barId") int barId, @DefaultValue("sat_late_avg_sales") @QueryParam("shift") String shift) {
         BartenderQueries bt = new BartenderQueries();
         return bt.getTopBartenders(barId, shift);
     }
