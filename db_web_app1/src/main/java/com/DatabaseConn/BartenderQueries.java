@@ -31,7 +31,7 @@ public class BartenderQueries {
             System.out.print(e);
         }
     }
-    public IBarEndpoints.IBarResult getTopBartenders(int barId, String shift){
+    public IBartenderEndpoints.IBartenderResult getTopBartenders(int barId, String shift){
         IBartenderEndpoints.IBartenderResult resultClass = new IBartenderEndpoints().new IBartenderResult();
         List<IBartenderEndpoints.IBartender> bartenders = new ArrayList<IBartenderEndpoints.IBartender>();
 
@@ -44,7 +44,7 @@ public class BartenderQueries {
             Statement stmt = con.createStatement();
 
             //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-            String str = String.format("SELECT name, id FROM bars");
+            String str = String.format("SELECT bar_id, drinker_id, "+shift+" AS sales FROM bartenders WHERE bar_id="+barId+" ORDER BY "+shift+" desc");
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
@@ -55,19 +55,21 @@ public class BartenderQueries {
             //each result represents an age group of drinkers
             while (result.next()) {
                 //create a new object for each age group (result) and assign it the age and avg earning
-                IBarEndpoints.IBar bar = new IBarEndpoints().new IBar();
-                bar.name = result.getString("name");
-                bar.id = result.getInt("id");
+                IBartenderEndpoints.IBartender bartender = new IBartenderEndpoints().new IBartender();
+                bartender.bar_id = result.getInt("bar_id");
+                bartender.bartender_id = result.getInt("drinker_id");
+                bartender.bartender_sales = result.getInt("sales");
+                bartender.shift_name = shift;
 
                 //add the new age group to the list of ageEarningResult age groups
-                bars.add(bar);
+                bartenders.add(bartender);
             }
 
             db.closeConnection(con);
         } catch (Exception e) {
             System.out.print(e);
         }
-        resultClass.bars = bars;
+        resultClass.topBartenders = bartenders;
 
         return resultClass;
     }
