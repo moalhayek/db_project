@@ -21,10 +21,10 @@ for bar_id in bar_list:
     ad_list = sample(ad_platform_list,ad_amt) #select freq_amt bars from bar id list
     
     for ad_platform in ad_list:
-        date_obj = fake.date_between(start_date="-5y",end_date="-2y")
+        date_obj = fake.date_between(start_date="-2y",end_date="-1y")
         start_date = '{0}-{1}-{2}'.format(str(date_obj.year),str(date_obj.month),str(date_obj.day))
         
-        date_obj = fake.date_between(start_date="-2y",end_date="today")
+        date_obj = fake.date_between(start_date="-1y",end_date="today")
         end_date = '{0}-{1}-{2}'.format(str(date_obj.year),str(date_obj.month),str(date_obj.day))
 
         mean = 2000
