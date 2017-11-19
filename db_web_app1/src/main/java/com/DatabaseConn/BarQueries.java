@@ -35,7 +35,7 @@ public class BarQueries {
                 //create a new object for each age group (result) and assign it the age and avg earning
                 IBarEndpoints.IBar bar = new IBarEndpoints().new IBar();
                 bar.name = result.getString("name");
-                bar.id = result.getString("id");
+                bar.id = result.getInt("id");
 
                 //add the new age group to the list of ageEarningResult age groups
                 bars.add(bar);
@@ -48,5 +48,26 @@ public class BarQueries {
         resultClass.bars = bars;
 
         return resultClass;
+    }
+
+    public void deleteBar(int id){
+        try {
+            //Get the database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            //Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            //Make a insert query
+            String str = String.format("DELETE FROM bars WHERE id = %d", id);
+
+            //Run the query against the database.
+            stmt.executeUpdate(str);
+
+            db.closeConnection(con);
+        } catch (Exception e) {
+            System.out.print(e);
+        }
     }
 }
