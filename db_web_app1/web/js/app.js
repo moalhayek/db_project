@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('db-project',['ngMaterial','chart.js']);   
+    var app = angular.module('db-project',['ngMaterial','chart.js','rzModule']);   
 
     app.controller('pageController',function(){
         this.pages = ['home','personal_bar_data','general_bar_data']
