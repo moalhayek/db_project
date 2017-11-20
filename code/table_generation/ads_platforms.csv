@@ -1,11 +1,11 @@
-id	platform	user_count	cost_per_day
-0	Double Click Ad Exchange	2000000	100
-1	Sovrn	1600000	85
-2	Facebook Audience Network	1280000	20
-3	District M	1024000	35
-4	bRealtime	819200	25
-5	PulsePoint	655360	15
-6	33across	524288	10
-7	Defy Media	419430	10
-8	152 Media	335544	5
-9	.OpenX	268435	5
+id,platform,user_count,cost_per_day
+0,Redirect.com,2000000,100
+1,Outbrain,8190000,85
+2,Nativo,1680000,35
+3,Facebook Audience Network,1280000,20
+4,Gravity,355630,25
+5,Triplelift,242881,15
+6,NativeAds,419430,10
+7,Taboola,335544,10
+8,Defy Media,345812,5
+9,Open X,2684355,5

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `ad_platforms` (
   'cost_per_day' INT NULL,
   PRIMARY KEY (`id`));
   
-LOAD DATA LOCAL INFILE '/Users/Brian/Documents/School/Rutgers University/Senior Year/Fall 2017/Principles of Info & Data Management/Project/db_project/code/table_generation/ads_platforms_table.csv' 
+LOAD DATA LOCAL INFILE '/Users/Brian/Documents/School/Rutgers University/Senior Year/Fall 2017/Principles of Info & Data Management/Project/db_project/code/table_generation/ads_platforms.csv' 
 INTO TABLE ad_platforms
 FIELDS TERMINATED BY ','
 IGNORE 1 LINES;
