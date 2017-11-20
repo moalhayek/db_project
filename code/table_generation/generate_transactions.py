@@ -76,7 +76,7 @@ bar_iter = range(1,201)
 shift_list = attr_list[3:17]
 
 start = datetime.date( year=2016, month =1,day=1)
-end = datetime.date(year = 2017,month =11, day = 18)
+end = datetime.date(year = 2016,month =12, day = 31)
 
 p_early_sale = 0.35
 p_late_sale = 1-p_early_sale
@@ -103,10 +103,10 @@ for bar_id in bar_iter:
         #I generated these beer sales numbers based off what i found online
         #this code is 200bars*~1300sales*~700 days = 182mil iterations...might take a while lol
         if day_of_week in busy_day_list:
-            #mean = 650
+            #mean = 300
             mean = 100
         else:
-            #mean = 400
+            #mean = 175
             mean = 60
 
         sigma = mean/10
