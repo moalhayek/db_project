@@ -13,9 +13,7 @@ for line in lines[1:]:
     attr_list = line.strip().split(',')   
     price_dict[attr_list[0]] = attr_list[4]  
 
-
 inputfile.close()
-
 
 outputfile_name = 'sells_table.csv'
 outputfile = open(outputfile_name,'w')
@@ -33,19 +31,20 @@ for bar in bar_list:
     beer_sells_list = sample(beer_list,beer_amt) #select beer_amt beers from beer id list
     
     on_tap_prob = random()	#random float for probability
-    #person_str = str(person)
+
     for beer in beer_sells_list:
         manf_price = float(price_dict[str(beer)])
 
         #This is kinda arbitrary, I just did it by inspection and felt this to be a reasonable method
-        price_mult = uniform(2,4)
-        price_additive = uniform(2,4)
+        price_mult = uniform(2,5)
+        price_additive = uniform(2,5)
 
-        beer_price = (price_mult*manf_price) + price_additive
+        beer_price = int(round((price_mult*manf_price) + price_additive))
 
     	is_on_tap = np.random.choice([0,1], p=[1-on_tap_prob, on_tap_prob])
 
-        csv_str = '{0},{1},{2},{3:0.2f}\n'.format(str(bar),str(beer),str(is_on_tap),beer_price)
+        #not sure what we should be rounding cost to...most bars I know round to dollar amounts
+        csv_str = '{0},{1},{2},{3}\n'.format(str(bar),str(beer),str(is_on_tap),str(beer_price))
         outputfile.write(csv_str)
 
 outputfile.close()
