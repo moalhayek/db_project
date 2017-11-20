@@ -1,20 +1,24 @@
 <!DOCTYPE HTML>
 <html ng-app="db-project">
 <head>
-    <title>Spacing Tester</title>
+    <title>Database Jesters 2018</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link rel="stylesheet" type="text/css" href="./node_modules/angular-material/angular-material.min.css">
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
+    <link rel="stylesheet" type="text/css" href="./node_modules/angularjs-slider/dist/rzslider.min.css">    
     
     <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>
-
     <script type="text/javascript" src="./node_modules/angular-aria/angular-aria.min.js"></script>
     <script type="text/javascript" src="./node_modules/angular-animate/angular-animate.min.js"></script>
     <script type="text/javascript" src="./node_modules/angular-material/angular-material.min.js"></script>
     <script src="./node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="./node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="./node_modules/angularjs-slider/dist/rzslider.min.js"></script>
+    
+
+
 
     <script type="text/javascript" src="./js/app.js"></script>
     <script type="text/javascript" src="./js/sharedproperties.factory.js"></script>
@@ -45,6 +49,7 @@
             </div>
             <div flex="80" layout ="column" md-theme="cyan-theme" layout-align="center">
                 <h2 >{{'Personalized Data for '+personal.selectedBar.name}}</h2>
+                
                 <div flex="10" class="md-warn" ng-init="personal.getBars()">
                     <md-input-container >
                         <label>Bar Name</label>
@@ -54,18 +59,14 @@
                             </md-option>
                         </md-select>
                     </md-input-container>
-                </div>
-                                    
-                <div ng-if="personal.barSelected" flex="55" layout="row" layout-align="center">
+                </div>                                    
+                <div ng-if="personal.barSelected" flex="40" layout="row" layout-align="center">
                     <md-card flex flex-offset="-15" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Earnings</span>
                             
                           </md-card-title-text>
-                          <md-card-title-media>
-                            <div class="md-media-lg card-media"></div>
-                          </md-card-title-media>
                         </md-card-title>
                         <md-card-content>                            
                             <md-radio-group ng-model="earn.timeType"">
@@ -100,10 +101,7 @@
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Bartenders</span>                                     
-                          </md-card-title-text>
-                          <md-card-title-media>
-                            <div class="md-media-lg card-media"></div>
-                          </md-card-title-media>
+                          </md-card-title-text>                          
                         </md-card-title>
                         <md-card-content>
                             <canvas  id="line" class="chart chart-bar" 
@@ -121,7 +119,7 @@
                         </md-card-actions>
                     </md-card>
                 </div>
-                <div flex="55"  ng-if="personal.barSelected" layout="row" layout-align="center">
+                <div flex="40"  ng-if="personal.barSelected" layout="row" layout-align="center">
                     <md-card flex md-theme="cyan-theme" ng-controller="advertisementsController as ad" ng-init="ad.setAds(personal.selectedBar.id)"md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
@@ -129,9 +127,7 @@
                             
                           </md-card-title-text>
 
-                          <md-card-title-media>
-                            <div class="md-media-lg card-media"></div>
-                          </md-card-title-media>
+                          
                         </md-card-title>
                         <md-card-content>
                             <md-input-container >
@@ -190,23 +186,19 @@
         </div>        
     </md-content>
     <md-content ng-if="page.currPage=='general_bar_data'" ng-controller="generalDashController as gen" layout-padding>
-        <div layout="row"  layout-align ="center">
+        <div layout="row"  layout-align ="center">            
             <div flex="10" md-theme="cyan-theme" class="md-accent">
             </div>
             <div flex="80" layout ="column" md-theme="cyan-theme" layout-align="center">
-                <h2 >{{'General Info'}}</h2>                                   
-                <div flex="55" layout="row" layout-align="center">
-                    <md-card flex flex-offset="-15" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" md-theme-watch>
+                <h2 >{{'General Info'}}</h2>                                  
+                <div flex="40" layout="row" layout-align="center">
+                    <md-card flex ng-controller="earnings as earn" >
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Drinkers</span>
-                            
-                          </md-card-title-text>
-                          <md-card-title-media>
-                            <div class="md-media-lg card-media"></div>
-                          </md-card-title-media>
+                          </md-card-title-text>                          
                         </md-card-title>
-                        <md-card-content>                            
+                        <md-card-content>                       
                             <md-radio-group ng-model="earn.timeType"">
                                 <md-radio-button value="monthly">Monthly</md-radio-button>
                                 <md-radio-button value="day-of-week">Day of Week</md-radio-button>                          
@@ -240,9 +232,7 @@
                           <md-card-title-text>
                             <span class="md-headline">Beers</span>                                     
                           </md-card-title-text>
-                          <md-card-title-media>
-                            <div class="md-media-lg card-media"></div>
-                          </md-card-title-media>
+                          
                         </md-card-title>
                         <md-card-content>
                             <canvas  id="line" class="chart chart-bar" 
@@ -260,47 +250,35 @@
                         </md-card-actions>
                     </md-card>
                 </div>
-                <div flex="55"  layout="row" layout-align="center">
-                    <md-card flex md-theme="cyan-theme" ng-controller="advertisementsController as ad" ng-init="ad.setAds(personal.selectedBar.id)"md-theme-watch>
+                <div flex="40"  layout="row" layout-align="center">
+                    <md-card flex md-theme="cyan-theme" ng-controller="musicTrendController as music" ng-init="music.refreshChart(music.slider.min, music.slider.max)"md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Music Trends</span>
-                            
                           </md-card-title-text>
-
                           <md-card-title-media>
                             <div class="md-media-lg card-media"></div>
                           </md-card-title-media>
                         </md-card-title>
                         <md-card-content>
-                            <md-input-container >
-                                <label>Ad platform</label>
-                                <md-select ng-model="ad.selectedAd">
-                                    <md-option ng-repeat="name in ad.getAds()" ng-value="name">
-                                    {{name}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
-                            <div>
+                            <div>                                
                                 <canvas  id="line" class="chart chart-pie" 
-                                chart-data="ad.data" 
-                                chart-labels="ad.labels" 
-                                chart-series="ad.series" 
-                                chart-options="ad.options" 
-                                chart-dataset-override="ad.datasetOverride" 
-                                chart-click="ad.onClick()">
-                                </canvas>  
+                                chart-data="music.data" 
+                                chart-labels="music.labels" chart-options="music.options" 
+                                >
+                                </canvas>
+                                <rzslider 
+                                rz-slider-model="music.slider.minValue"
+                                rz-slider-high="music.slider.maxValue"
+                                rz-slider-options="music.slider.options"
+                                ></rzslider>                             
                             </div>
-                          </md-card-content>
-                        <md-card-actions layout="row" layout-align="end center">
-                          <md-button>Action 1</md-button>
-                          <md-button>Action 2</md-button>
-                        </md-card-actions>
+                        </md-card-content>
                     </md-card>
                     <md-card flex md-theme="cyan-theme" ng-controller="beerInfoController as beer" md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
-                            <span class="md-headline">Beer Info</span>
+                            <span class="md-headline">Ad platforms</span>
 
                           </md-card-title-text>
                           <md-card-title-media>
