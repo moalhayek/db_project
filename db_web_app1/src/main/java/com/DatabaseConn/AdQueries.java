@@ -37,8 +37,8 @@ public class AdQueries {
                 //music age range
                 adPurchase.barId = barId;
                 adPurchase.platformName = result.getString("platform");
-                adPurchase.startDate = result.getDate("start_date");
-                adPurchase.endDate = result.getDate("end_date");
+                adPurchase.startDate = result.getString("start_date");
+                adPurchase.endDate = result.getString("end_date");
                 adPurchase.totalCost = result.getInt("total_cost");
                 adPurchase.totalClicks = result.getInt("total_clicks");
                 adPurchase.costPerClick = result.getDouble("CPC");

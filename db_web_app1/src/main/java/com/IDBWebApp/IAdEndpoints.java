@@ -7,8 +7,8 @@ public class IAdEndpoints {
     public class IAdPurchase {
         public int barId;
         public String platformName;
-        public Date startDate;
-        public Date endDate;
+        public String startDate;
+        public String endDate;
         public int totalCost;
         public int totalClicks;
         public double costPerClick;
