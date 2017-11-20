@@ -409,14 +409,16 @@ platform_id</ColNames>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="106" parent="18" name="bar_id">
-      <ColNames>bar_id</ColNames>
-    </index>
-    <index id="107" parent="18" name="beer_id">
+    <index id="106" parent="18" name="beer_id">
       <ColNames>beer_id</ColNames>
     </index>
-    <index id="108" parent="18" name="employee_id">
+    <index id="107" parent="18" name="employee_id">
       <ColNames>employee_id</ColNames>
+    </index>
+    <index id="108" parent="18" name="transIndex">
+      <ColNames>bar_id
+date_of_sale
+shift_type</ColNames>
     </index>
     <foreign-key id="109" parent="18" name="transactions_ibfk_1">
       <ColNames>bar_id</ColNames>
