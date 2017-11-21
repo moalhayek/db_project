@@ -1,7 +1,7 @@
 var app = angular.module('db-project');
 
 //this will be controller for personal earnings
-app.controller("earnings", function (sharedProperties,$timeout,$q,this) {
+app.controller("earnings", function (sharedProperties,$timeout,$q) {
 
     this.startDate = '2016-01'
     this.endDate = '2016-12'
@@ -65,7 +65,6 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,this) {
         var options2 = {
             url: 'transactions/getEarnings',
             params: {
-                type: timeType,
                 barId: barID,
                 startDate: this.startDate,
                 endDate: this.endDate,
@@ -81,8 +80,8 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,this) {
         promises.push(sharedProperties.httpReq(options2))
 
         $q.all(promises).then(function(res) {
-            sharedProperties.setProperty('dailyAverages',res[0].data)
-            sharedProperties.setProperty('montlyEarnings',res[1].data)
+            sharedProperties.setProperty('dailyAverages',res[0])
+            sharedProperties.setProperty('monthlyEarnings',res[1])
             console.log('trying to refresh now')
             this.refresh(shiftType, false)
         }.bind(this));

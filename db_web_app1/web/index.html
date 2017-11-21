@@ -224,8 +224,7 @@
                                 chart-labels="earn.labels_months" 
                                 chart-series="earn.series" 
                                 chart-options="earn.options" 
-                                chart-dataset-override="earn.datasetOverride" 
-                                chart-click="earn.onClick()">
+                                >
                                 </canvas>
                                 <md-datepicker ng-show="earn.timeType=='monthly'"ng-model="earn.startDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
                                 <md-datepicker ng-model="earn.endDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
@@ -235,14 +234,13 @@
                             chart-labels="earn.labels_days_of_week" 
                             chart-series="earn.series" 
                             chart-options="earn.options" 
-                            chart-dataset-override="earn.datasetOverride" 
-                            chart-click="earn.onClick()">
+                            >
                             </canvas>
                         </md-card-content>
                         <md-card-actions layout="row" layout-align="end center">
                         </md-card-actions>
                     </md-card>
-                    <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id)" md-theme-watch>
+                    <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders('1')" md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Beers</span>                                     
@@ -286,7 +284,7 @@
                                 rz-slider-model="music.slider.minValue"
                                 rz-slider-high="music.slider.maxValue"
                                 rz-slider-options="music.slider.options"
-                                ng-change="music.refreshChart(music.slider.min,music.slider.max)"></rzslider>                             
+                                ></rzslider>
                             </div>
                         </md-card-content>
                     </md-card>

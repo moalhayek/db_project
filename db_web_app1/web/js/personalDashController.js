@@ -20,7 +20,11 @@ app.controller('personalDashController',function(sharedProperties){
         }
         var promise =  sharedProperties.httpReq(options);
         promise.then(function(res){
-            sharedProperties.setProperty('barNames',res.data)
+            console.log(res)
+            console.log(res[0])
+            console.log(res.data)
+            sharedProperties.setProperty('barNames',res)
+            console.log(sharedProperties.getProperty('barNames'))
         }.bind(this));
         
     };

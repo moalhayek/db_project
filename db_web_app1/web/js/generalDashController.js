@@ -21,7 +21,8 @@ app.controller('musicTrendController',function(sharedProperties,$q){
         var promise = sharedProperties.httpReq(options); // uncomment when server is up
         //var results = {'musicData': [{'genre': 'Gospel', 'listenerCount': 25}, {'genre': 'Rock', 'listenerCount': 35}, {'genre': 'Techno', 'listenerCount': 13}, {'genre': 'Hip-hop', 'listenerCount': 40}]};
         promise.then(function(res){
-            sharedProperties.setProperty('musicTrends',res.data);
+            sharedProperties.setProperty('musicTrends',res);
+            console.log(sharedProperties.getProperty('musicTrends'))
             this.setData();
             this.setLabels();
         }.bind(this))
@@ -29,7 +30,7 @@ app.controller('musicTrendController',function(sharedProperties,$q){
     };
 
     this.getTrends = function(){
-        return sharedProperties.getProperty('musicTrends').musicData;
+        return sharedProperties.getProperty('musicTrends').musicAgeData;
     }
 
     this.data = [];
@@ -40,8 +41,7 @@ app.controller('musicTrendController',function(sharedProperties,$q){
                 
         this.setTrends(min,max)
         //this function is now deprecated
-        
-        console.log(this.getTrends())
+
     }
 
     this.setData = function(){
@@ -51,7 +51,7 @@ app.controller('musicTrendController',function(sharedProperties,$q){
         console.log(averageArr)
 
         averageArr.forEach(function(elem){
-            tempData.push(elem.listenerCount);
+            tempData.push(elem.listeners);
         })
 
         this.data = tempData;

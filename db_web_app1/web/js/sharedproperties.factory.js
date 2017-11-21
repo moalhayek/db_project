@@ -2,7 +2,8 @@ var app = angular.module('db-project');
 
 app.factory('sharedProperties',function($http,$timeout){
     var properties = {
-        'barNames': []
+        'barNames': [],
+        'musicData': []
         //add whatever properties we want here, JSON style
     };
 
