@@ -37,7 +37,7 @@ public class DrinkerQueries {
                 IDrinkerEndpoints.IDrinker drinker = new IDrinkerEndpoints().new IDrinker();
                 drinker.name = result.getString("name");
                 drinker.spendingPerNight = result.getInt("spending_per_night");
-                drinker.beerName = result.getString("beer_name");
+                drinker.expensiveFavBeer = result.getString("beer_name");
                 drinkers.add(drinker);
             }
 

@@ -6,7 +6,7 @@ public class IDrinkerEndpoints {
     public class IDrinker {
         public String name;
         public int spendingPerNight;
-        public String beerName;
+        public String expensiveFavBeer;
     }
     public class IDrinkerResult {
         public List<IDrinker> drinkers;
