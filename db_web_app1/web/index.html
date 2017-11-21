@@ -16,9 +16,6 @@
     <script src="./node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="./node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
     <script src="./node_modules/angularjs-slider/dist/rzslider.min.js"></script>
-    
-
-
 
     <script type="text/javascript" src="./js/app.js"></script>
     <script type="text/javascript" src="./js/sharedproperties.factory.js"></script>
@@ -28,6 +25,7 @@
     <script type="text/javascript" src="./js/advertisementController.js"></script>
     <script type="text/javascript" src="./js/drinkerController.js"></script>
     <script type="text/javascript" src="./js/beerController.js"></script>
+    <script type="text/javascript" src="./js/earningsController.js"></script>
 
 </head>
 <body ng-controller="pageController as page">
@@ -61,38 +59,44 @@
                     </md-input-container>
                 </div>                                    
                 <div ng-if="personal.barSelected" flex="40" layout="row" layout-align="center">
-                    <md-card flex flex-offset="-15" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" md-theme-watch>
+                    <md-card flex="50" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Earnings</span>
-                            
+                            <br>
                           </md-card-title-text>
                         </md-card-title>
                         <md-card-content>                            
                             <md-radio-group ng-model="earn.timeType"">
-                                <md-radio-button value="monthly">Monthly</md-radio-button>
-                                <md-radio-button value="day-of-week">Day of Week</md-radio-button>                          
+                                <md-radio-button value="monthly">Monthly Totals</md-radio-button>
+                                <md-radio-button value="day-of-week">Daily Averages</md-radio-button>                          
                             </md-radio-group>
-                            <div ng-show="earn.timeType=='monthly'">
-                                <canvas  id="line" class="chart chart-line" 
-                                chart-data="earn.data" 
-                                chart-labels="earn.labels_months" 
+                            <md-checkbox ng-model="earn.early" aria-label="Checkbox 1" ng-click="earn.switchData('early',earn.early)">
+                                Early
+                            </md-checkbox>
+                            <md-checkbox ng-model="earn.late" aria-label="Checkbox 2" ng-click="earn.switchData('late',earn.late)">
+                                Late
+                            </md-checkbox>
+                            <md-checkbox ng-model="earn.total" aria-label="Checkbox 3" ng-click="earn.switchData('total',earn.total)">
+                                Total
+                            </md-checkbox>
+                            <div ng-init="earn.instantiate()">
+                            
+                                <canvas ng-show="earn.timeType=='monthly'" id="line" class="chart chart-line" 
+                                chart-data="earn.data_monthly" 
+                                chart-labels="earn.labels_monthly" 
+                                 
+                                chart-options="earn.options" >
+                                </canvas>                      
+                                <canvas ng-show="earn.timeType=='day-of-week'" id="line" class="chart chart-bar" 
+                                chart-data="earn.data_daily" 
+                                chart-labels="earn.labels_daily" 
                                 chart-series="earn.series" 
-                                chart-options="earn.options" 
-                                chart-dataset-override="earn.datasetOverride" 
-                                chart-click="earn.onClick()">
+                                chart-options="earn.options" >
                                 </canvas>
-                                <md-datepicker ng-show="earn.timeType=='monthly'"ng-model="earn.startDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
+                                <md-datepicker ng-model="earn.startDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
                                 <md-datepicker ng-model="earn.endDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
                             </div>
-                            <canvas ng-show="earn.timeType=='day-of-week'" id="line" class="chart chart-bar" 
-                            chart-data="earn.data" 
-                            chart-labels="earn.labels_days_of_week" 
-                            chart-series="earn.series" 
-                            chart-options="earn.options" 
-                            chart-dataset-override="earn.datasetOverride" 
-                            chart-click="earn.onClick()">
-                            </canvas>
                         </md-card-content>
                         <md-card-actions layout="row" layout-align="end center">
                         </md-card-actions>
@@ -108,9 +112,7 @@
                                 chart-data="bt.data" 
                                 chart-labels="bt.labels()" 
                                 chart-series="bt.series" 
-                                chart-options="bt.options" 
-                                chart-dataset-override="bt.datasetOverride" 
-                                chart-click="bt.onClick()">
+                                chart-options="bt.options" >
                             </canvas>
                         </md-card-content>
                         <md-card-actions layout="row" layout-align="end center">
@@ -133,8 +135,8 @@
                             <md-input-container >
                                 <label>Ad platform</label>
                                 <md-select ng-model="ad.selectedAd">
-                                    <md-option ng-repeat="name in ad.getAds()" ng-value="name">
-                                    {{name}}
+                                    <md-option ng-repeat="campaign in ad.getAds()" ng-value="campaign">
+                                    {{campaign.name}}
                                     </md-option>
                                 </md-select>
                             </md-input-container>
@@ -144,8 +146,7 @@
                                 chart-labels="ad.labels" 
                                 chart-series="ad.series" 
                                 chart-options="ad.options" 
-                                chart-dataset-override="ad.datasetOverride" 
-                                chart-click="ad.onClick()">
+                                >
                                 </canvas>  
                             </div>
                           </md-card-content>

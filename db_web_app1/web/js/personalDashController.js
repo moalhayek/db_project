@@ -11,18 +11,27 @@ app.controller('personalDashController',function(sharedProperties){
     };
 
     this.getBars = function(){
-        var results = [
-        {'name': 'Sean','id': '1'},
-        {'name': 'Mo','id': '2'},
-        {'name': 'Brian','id': '3'},
-        {'name': 'Ridwan','id': '4'},
-        {'name': 'Imielinski','id': '5'}
-        ];
+        var results = {"bars":
+        [
+            {'name': 'Sean','id': '1'},
+            {'name': 'Mo','id': '2'},
+            {'name': 'Brian','id': '3'},
+            {'name': 'Ridwan','id': '4'},
+            {'name': 'Imielinski','id': '5'}
+        ]
+        };
 
+        var options = {
+            url: 'bars/getBarNames',
+            params: {},
+            method: 'GET',
+            destination: 'barNames'//this is the global property you want to update
+        }
+        //sharedProperties.httpReq(options);
         sharedProperties.setProperty('barNames',results);
     };
     this.allBars = function(){
-        return sharedProperties.getProperty('barNames');
+        return sharedProperties.getProperty('barNames').bars;
         //return ['1','2','3'];
     };
     
@@ -85,39 +94,3 @@ app.controller('bartenders',function(sharedProperties){
     };
 });
 
-//this will be controller for personal earnings
-app.controller("earnings", function () {
-
-    this.timeType = 'day-of-week';  
-    this.labels_months = ['Foo',"January", "February", "March", "April", "May", "June", "July"];
-    this.labels_days_of_week = ['Mon','Tue','Wed','Thurs','Fri','Sat','Sun'];
-    this.series = ['Happy Hour Sales', 'Late Night Sales'];
-    this.data = [
-        [65, 59, 80, 81, 56, 55, 40.34],
-        [28, 48, 40, 19, 86, 27, 90,25]
-    ];
-      
-    this.onClick = function (points, evt) {
-        //console.log(points, evt);
-    };
-
-    this.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-    this.options = {
-        scales: {
-          yAxes: [
-            {
-              id: 'y-axis-1',
-              type: 'linear',
-              display: true,
-              position: 'left'
-            },
-            {
-              id: 'y-axis-2',
-              type: 'linear',
-              display: true,
-              position: 'right'
-            }
-          ]
-        }
-    };
-});

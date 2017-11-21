@@ -9,12 +9,22 @@ app.controller('generalDashController',function(){
 app.controller('musicTrendController',function(sharedProperties){
     this.setTrends = function(minAge,maxAge){
         //REST endpoint
-        var results = {'Gospel': 25, 'Rock': 35, 'Techno': 13, 'Hip-hop': 40};
+        var options = {
+            url: 'music/getMusicTrends',
+            params: {
+                lowerAge: minAge,
+                upperAge: maxAge,
+            },
+            method: 'GET',
+            destination: 'musicTrends'//this is the global property you want to update
+        }
+        //sharedProperties.httpReq(options); uncomment when server is up
+        var results = {'musicData': [{'genre': 'Gospel', 'listenerCount': 25}, {'genre': 'Rock', 'listenerCount': 35}, {'genre': 'Techno', 'listenerCount': 13}, {'genre': 'Hip-hop', 'listenerCount': 40}]};
         sharedProperties.setProperty('musicTrends',results);
     };
 
     this.getTrends = function(){
-        return sharedProperties.getProperty('musicTrends');
+        return sharedProperties.getProperty('musicTrends').musicData;
     }
 
     this.data = [];
@@ -24,17 +34,19 @@ app.controller('musicTrendController',function(sharedProperties){
     this.refreshChart = function(min,max){
         this.setTrends(min,max);
         this.setData();
-        //this.setLabels();
+        this.setLabels();
+        console.log(this.getTrends())
     }
+
     this.setData = function(){
         var tempData = [];
 
-        console.log(this.getTrends());
-        angular.forEach(this.getTrends(),function(value,key){ 
+        var averageArr = this.getTrends();
+        console.log(averageArr)
 
-            console.log(value);
-            tempData.push(value);
-        });
+        averageArr.forEach(function(elem){
+            tempData.push(elem.listenerCount);
+        })
 
         this.data = tempData;
     };
@@ -42,11 +54,12 @@ app.controller('musicTrendController',function(sharedProperties){
     this.setLabels = function(){
         var tempLabels = [];
 
-        console.log(this.getTrends());
-        angular.forEach(this.getTrends(),function(value,key){ 
-            console.log(key)
-            tempLabels.push(key);
-        });
+        var averageArr = this.getTrends();
+        console.log(averageArr)
+
+        averageArr.forEach(function(elem){
+            tempLabels.push(elem.genre);
+        })
 
         this.labels = tempLabels;
     }
