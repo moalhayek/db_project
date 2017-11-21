@@ -1,12 +1,12 @@
 var app = angular.module('db-project');
 
 //this will be controller for personal earnings
-app.controller("earnings", function (sharedProperties,$timeout) {
+app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
 
     this.startDate = '2016-01'
     this.endDate = '2016-12'
 
-    this.refresh = function(shiftType,holdOld){
+    $scope.refresh = function(shiftType,holdOld){
         console.log('refreshing chart')
         console.log(this.getDailyAverages())
         var dailyAveArr = this.getDailyAverages()
@@ -54,51 +54,39 @@ app.controller("earnings", function (sharedProperties,$timeout) {
         var endDate = this.endDate;
         var timeType = 'monthly';
 
-        var setDailyAverage = function(barID){
-            return function() {
-                var options = {
-                    url: 'transactions/getDailyAverages',
-                    params: {
-                        barId: barID,
-                        startDate: startDate,
-                        endDate: endDate,
-                    },
-                    method: 'GET',
-                    destination: 'dailyAverages'
-                }
-                sharedProperties.httpReq(options)
-            };
-        };
+        var options = {
+            url: 'transactions/getDailyAverages',
+            params: {
+                barId: barID,
+                startDate: startDate,
+                endDate: endDate,
+            },
+            method: 'GET',
+            destination: 'dailyAverages'
+        }
+        
+        var options2 = {
+            url: 'transactions/getEarnings',
+            params: {
+                type: timeType,
+                barId: barID,
+                startDate: startDate,
+                endDate: endDate,
+            },
+            method: 'GET',
+            destination: 'monthlyEarnings'
+        }
 
-        var getEarnings = function(timeType,barID){
-            return function(){
-                var options = {
-                    url: 'transactions/getEarnings',
-                    params: {
-                        type: timeType,
-                        barId: barID,
-                        startDate: startDate,
-                        endDate: endDate,
-                    },
-                    method: 'GET',
-                    destination: 'monthlyEarnings'
-                }
+        var promises = [];
+        
+        console.log('about to add http reqs to promise arr')
+        promises.push(sharedProperties.httpReq(options))
+        promises.push(sharedProperties.httpReq(options2))
 
-                sharedProperties.httpReq(options)
-            };
-        };
-        $timeout(function(){
-            console.log('in timeout for setting daily averages')
-            setDailyAverages(barID)
-        })
-        console.log('supposedly done getting daily averages')
-        $timeout(function(){
-            console.log('in timeout for setting earnings')
-            setEarnings('monthly',barID)
-        })
-        console.log('supposedly done getting earnings')
-        this.refresh(shiftType,false)
-
+        $q.all(promises).then(
+            console.log('trying to refresh now')
+            $scope.refresh(shiftType,false)
+        );
     }
 
     this.monthMap = {
@@ -136,22 +124,22 @@ app.controller("earnings", function (sharedProperties,$timeout) {
         if(!checked&&whichOne=='total'){
             this.early = false
             this.late = false
-            this.refresh(whichOne,false)
+            $scope.refresh(whichOne,false)
         }else if(!checked&&(whichOne =='early')){
             this.total = false
             if(this.late){
-                this.refresh(whichOne,true)
+                $scope.refresh(whichOne,true)
             }else{
-                this.refresh(whichOne,false)
+                $scope.refresh(whichOne,false)
             }
             
         }else if(!checked&&(whichOne=='late')){
             this.total = false
-            this.refresh(whichOne)
+            $scope.refresh(whichOne)
             if(this.early){
-                this.refresh(whichOne,true)
+                $scope.refresh(whichOne,true)
             }else{
-                this.refresh(whichOne,false)
+                $scope.refresh(whichOne,false)
             }
         }
     }

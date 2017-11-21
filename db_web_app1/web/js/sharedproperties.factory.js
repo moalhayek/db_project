@@ -18,7 +18,7 @@ app.factory('sharedProperties',function($http,$timeout){
         },
         //function template for http request, just need params as JSON
         httpReq: function(options){
-            var httpRequest = $http({
+            return httpRequest = $http({
                 method: options.method,
                 url: path+options.url,
                 params: options.params
@@ -28,7 +28,8 @@ app.factory('sharedProperties',function($http,$timeout){
                 $timeout(function(){
                     if(options.destination != null){
                         console.log(response.data)
-                        properties[options.destination] = response.data;
+                        //properties[options.destination] = response.data;
+                        sharedProperties.setProperty(options.destination,response.data);
                     }
                 });
             },function myError(response){
