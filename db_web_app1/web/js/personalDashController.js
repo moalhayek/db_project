@@ -11,7 +11,7 @@ app.controller('personalDashController',function(sharedProperties){
     };
 
     this.getBars = function(){
-        var results = {"bars":
+        /*var results = {"bars":
         [
             {'name': 'Sean','id': '1'},
             {'name': 'Mo','id': '2'},
@@ -19,7 +19,7 @@ app.controller('personalDashController',function(sharedProperties){
             {'name': 'Ridwan','id': '4'},
             {'name': 'Imielinski','id': '5'}
         ]
-        };
+        };*/
 
         var options = {
             url: 'bars/getBarNames',
@@ -27,12 +27,11 @@ app.controller('personalDashController',function(sharedProperties){
             method: 'GET',
             destination: 'barNames'//this is the global property you want to update
         }
-        //sharedProperties.httpReq(options);
-        sharedProperties.setProperty('barNames',results);
+        sharedProperties.httpReq(options);
+        //sharedProperties.setProperty('barNames',results);
     };
     this.allBars = function(){
         return sharedProperties.getProperty('barNames').bars;
-        //return ['1','2','3'];
     };
     
     this.searchBarNames = function(searchText){

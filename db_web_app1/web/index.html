@@ -26,6 +26,7 @@
     <script type="text/javascript" src="./js/drinkerController.js"></script>
     <script type="text/javascript" src="./js/beerController.js"></script>
     <script type="text/javascript" src="./js/earningsController.js"></script>
+    <script type="text/javascript" src="./js/beerFilters.js"></script>
 
 </head>
 <body ng-controller="pageController as page">
@@ -47,7 +48,6 @@
             </div>
             <div flex="80" layout ="column" md-theme="cyan-theme" layout-align="center">
                 <h2 >{{'Personalized Data for '+personal.selectedBar.name}}</h2>
-                
                 <div flex="10" class="md-warn" ng-init="personal.getBars()">
                     <md-input-container >
                         <label>Bar Name</label>
@@ -80,8 +80,8 @@
                             <md-checkbox ng-model="earn.total" aria-label="Checkbox 3" ng-click="earn.switchData('total',earn.total)">
                                 Total
                             </md-checkbox>
-                            <div ng-init="earn.instantiate()">
-                            
+                            <div ng-init="earn.instantiate(personal.selectedBar.id,'total')">
+
                                 <canvas ng-show="earn.timeType=='monthly'" id="line" class="chart chart-line" 
                                 chart-data="earn.data_monthly" 
                                 chart-labels="earn.labels_monthly" 
@@ -94,8 +94,22 @@
                                 chart-series="earn.series" 
                                 chart-options="earn.options" >
                                 </canvas>
-                                <md-datepicker ng-model="earn.startDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
-                                <md-datepicker ng-model="earn.endDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
+                                <md-input-container >
+                                    <label>Start Date</label>
+                                    <md-select ng-model="earn.startDate" ng-change="earn.instantiate(personal.selectedBar.id,earn.getTimeType())">
+                                        <md-option ng-repeat="date in earn.dateOptions" ng-value="date">
+                                        {{date|dateFilter}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container >
+                                    <label>End Date</label>
+                                    <md-select ng-model="earn.endDate" ng-change="earn.instantiate(personal.selectedBar.id,earn.getTimeType())">
+                                        <md-option ng-repeat="date in earn.dateOptions" ng-value="date">
+                                        {{date|dateFilter}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>                           
                             </div>
                         </md-card-content>
                         <md-card-actions layout="row" layout-align="end center">
@@ -272,7 +286,7 @@
                                 rz-slider-model="music.slider.minValue"
                                 rz-slider-high="music.slider.maxValue"
                                 rz-slider-options="music.slider.options"
-                                ></rzslider>                             
+                                ng-change="music.refreshChart(music.slider.min,music.slider.max)"></rzslider>                             
                             </div>
                         </md-card-content>
                     </md-card>

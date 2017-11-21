@@ -18,9 +18,9 @@ app.controller('musicTrendController',function(sharedProperties){
             method: 'GET',
             destination: 'musicTrends'//this is the global property you want to update
         }
-        //sharedProperties.httpReq(options); uncomment when server is up
-        var results = {'musicData': [{'genre': 'Gospel', 'listenerCount': 25}, {'genre': 'Rock', 'listenerCount': 35}, {'genre': 'Techno', 'listenerCount': 13}, {'genre': 'Hip-hop', 'listenerCount': 40}]};
-        sharedProperties.setProperty('musicTrends',results);
+        sharedProperties.httpReq(options); uncomment when server is up
+        //var results = {'musicData': [{'genre': 'Gospel', 'listenerCount': 25}, {'genre': 'Rock', 'listenerCount': 35}, {'genre': 'Techno', 'listenerCount': 13}, {'genre': 'Hip-hop', 'listenerCount': 40}]};
+        //sharedProperties.setProperty('musicTrends',results);
     };
 
     this.getTrends = function(){
