@@ -28,8 +28,8 @@ app.factory('sharedProperties',function($http,$timeout){
                 $timeout(function(){
                     if(options.destination != null){
                         console.log(response.data)
-                        //properties[options.destination] = response.data;
-                        sharedProperties.setProperty(options.destination,response.data);
+                        properties[options.destination] = response.data;
+                        //sharedProperties.setProperty(options.destination,response.data);
                     }
                 });
             },function myError(response){

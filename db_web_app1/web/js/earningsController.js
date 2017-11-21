@@ -8,9 +8,9 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
 
     $scope.refresh = function(shiftType,holdOld){
         console.log('refreshing chart')
-        console.log(this.getDailyAverages())
-        var dailyAveArr = this.getDailyAverages()
-        var monthlyArr = this.getEarnings()
+        console.log($scope.getDailyAverages())
+        var dailyAveArr = $scope.getDailyAverages()
+        var monthlyArr = $scope.getEarnings()
         console.log('setting data_daily')
         var new_data_daily = this.setData(dailyAveArr,shiftType);
 
@@ -83,10 +83,10 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
         promises.push(sharedProperties.httpReq(options))
         promises.push(sharedProperties.httpReq(options2))
 
-        $q.all(promises).then(
+        $q.all(promises).then(function() {
             console.log('trying to refresh now')
-            $scope.refresh(shiftType,false)
-        );
+            $scope.refresh(shiftType, false)
+        });
     }
 
     this.monthMap = {
@@ -195,18 +195,18 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
         //sharedProperties.setProperty('monthlyEarnings',results)
     };
 
-    this.getEarnings = function(){
+    $scope.getEarnings = function(){
         return sharedProperties.getProperty('monthlyEarnings').monthly_earnings;
     }
 
-    this.getDailyAverages = function(){
+    $scope.getDailyAverages = function(){
         return sharedProperties.getProperty('dailyAverages').dailyAverages;
     };
 
     this.setData = function(inputArr,shiftType){
         var tempData = [];
       
-        //var averageArr = this.getDailyAverages();
+        //var averageArr = $scope.getDailyAverages();
         var averageArr = inputArr;
         console.log(averageArr)
 
