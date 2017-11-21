@@ -8,7 +8,7 @@ public class IBeerEndpoints {
         public String manuf;
         public boolean isOnTap;
         public double abv;
-        public int price;
+        public int salePrice;
         public double manuf_price;
         public double profit;
     }

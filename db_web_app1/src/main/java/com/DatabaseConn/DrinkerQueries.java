@@ -8,9 +8,9 @@ import java.util.List;
 
 public class DrinkerQueries {
 
-    public IDrinkerEndpoints.IDrinkerResult drinker(String id){
+    public IDrinkerEndpoints.IDrinkerResult drinker(int id){
         IDrinkerEndpoints.IDrinkerResult resultClass = new IDrinkerEndpoints().new IDrinkerResult();
-        String ret = new String();
+        List<IDrinkerEndpoints.IDrinker> drinkers = new ArrayList<IDrinkerEndpoints.IDrinker>();
 
         try {
             //Get the database connection
@@ -21,28 +21,24 @@ public class DrinkerQueries {
             Statement stmt = con.createStatement();
 
             //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-            String str = String.format("SELECT * FROM drinkers WHERE id ='%s'", id);
+            String str = String.format("SELECT * FROM drinkers WHERE id = %d", id);
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
 
-            //initially, result points to before first row
-            result.next();
-
-            //now store first row results
-            ret = result.getString("name");
             while (result.next()) {
-                System.out.print(result.getString("name"));
+                IDrinkerEndpoints.IDrinker drinker = new IDrinkerEndpoints().new IDrinker();
+                drinker.name = result.getString("name");
+                drinkers.add(drinker);
             }
 
             db.closeConnection(con);
         } catch (Exception e) {
             System.out.print(e);
         }
-        IDrinkerEndpoints.IDrinker drinkerR = new IDrinkerEndpoints().new IDrinker();
-        drinkerR.name = ret;
 
-        resultClass.drinker = drinkerR;
+
+        resultClass.drinkers = drinkers;
         return resultClass;
     }
 
@@ -95,9 +91,6 @@ public class DrinkerQueries {
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
-
-            //initially, result points to before first row
-            result.next();
 
             //each result represents an age group of drinkers
             while (result.next()) {
