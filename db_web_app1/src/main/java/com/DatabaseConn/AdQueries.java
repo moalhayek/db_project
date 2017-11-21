@@ -27,9 +27,6 @@ public class AdQueries {
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
 
-            //initially, result points to before first row
-            result.next();
-
             //each result represents an age group of drinkers
             while (result.next()) {
                 //create a new object for each age group (result) and assign it the age and avg earning

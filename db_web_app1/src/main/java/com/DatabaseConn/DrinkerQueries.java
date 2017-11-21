@@ -26,9 +26,6 @@ public class DrinkerQueries {
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
 
-            //initially, result points to before first row
-            result.next();
-
             //now store first row results
             ret = result.getString("name");
             while (result.next()) {
@@ -95,9 +92,6 @@ public class DrinkerQueries {
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
-
-            //initially, result points to before first row
-            result.next();
 
             //each result represents an age group of drinkers
             while (result.next()) {
