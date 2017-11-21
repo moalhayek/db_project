@@ -32,7 +32,10 @@ app.controller('musicTrendController',function(sharedProperties){
     this.options = {legend: {display: true}};
 
     this.refreshChart = function(min,max){
-        this.setTrends(min,max);
+        
+        $timeout(function(){
+            this.setTrends(min,max)
+        })
         this.setData();
         this.setLabels();
         console.log(this.getTrends())

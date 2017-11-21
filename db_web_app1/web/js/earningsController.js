@@ -1,7 +1,7 @@
 var app = angular.module('db-project');
 
 //this will be controller for personal earnings
-app.controller("earnings", function (sharedProperties) {
+app.controller("earnings", function (sharedProperties,$timeout) {
 
     this.startDate = '2016-01'
     this.endDate = '2016-12'
@@ -50,8 +50,12 @@ app.controller("earnings", function (sharedProperties) {
     }
 
     this.instantiate = function(barID,shiftType){
-        this.setDailyAverages(barID);
-        this.setEarnings('monthly',barID)
+        $timeout(function(){
+            this.setDailyAverages(barID)
+        })
+        $timeout(function(){
+            this.setEarnings('monthly',barID)
+        })
         this.refresh(shiftType,false)
     }
 
