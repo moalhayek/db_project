@@ -30,3 +30,16 @@ From drinkers d
 Where Exists(select d1.spending_per_night from drinkers d1 where d1.spending_per_night >= (d1.salary/(365*2)));
 
 ALTER TABLE drinkers MODIFY id INT(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TRIGGER AlcoholicTrig
+  BEFORE INSERT ON drinkers
+  FOR EACH ROW
+    BEGIN
+      IF NEW.spending_per_night >= (NEW.salary/(365*2)) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot add drinker, he is an alcoholic';
+      ELSEIF NEW.age < 21 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot add drinker, he is under the legal drinking age';
+      END IF;
+    END;

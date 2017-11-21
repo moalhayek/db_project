@@ -41,6 +41,9 @@
             <md-nav-item md-nav-click="page.changePage('general_bar_data')" name="generalTab">
                 General
             </md-nav-item>
+            <md-nav-item md-nav-click="page.changePage('modify_bar_data')" name="modifyDataTab">
+                Add/Remove Data
+            </md-nav-item>
         </md-nav-bar>
     </div>
     <md-content ng-if="page.currPage=='personal_bar_data'" ng-controller="personalDashController as personal" layout-padding>
@@ -321,6 +324,209 @@
             </div>
             <div flex="10" style="background-color: none;">
             </div>
+        </div>
+
+
+    </md-content>
+    <md-content ng-if="page.currPage=='modify_bar_data'" ng-controller="modifyDataDashController as modDat" layout-padding>
+        <!--<div flex="40" layout="row" layout-align="center">
+            <md-card flex md-theme="cyan-theme" ng-controller="drinkerController as d">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Add Drinker</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media"></div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-content>
+                    <br/>
+                    <md-content class="md-no-momentum">
+                        <md-input-container class="md-icon-float md-block">
+                            <!-- Use floating label instead of placeholder --
+                            <label>Name</label>
+                            <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+                            <input ng-model="user.name" type="text">
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                            <input ng-model="user.age" type="number" step="1" placeholder="Age">
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <!-- Use floating placeholder instead of label --
+                            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="gender"></md-icon>
+                            <input ng-model="user.gender" type="text" placeholder="Gender" ng-required="true">
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.street_address" type="text" placeholder="Street Address" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.city" type="text" placeholder="City" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.state" type="text" placeholder="State" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.salary" type="number" step = "1" placeholder="Salary" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.spending_per_night" type="text" placeholder="Spending Per Night" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <md-radio-group ng-model="data.crowding_pref">
+
+                                <md-radio-button value="Not crowded" class="md-primary">Not Crowded</md-radio-button>
+                                <md-radio-button value="Moderately crowded">Moderately Crowded</md-radio-button>
+                                <md-radio-button value="Very crowded">Very Crowded</md-radio-button>
+
+                            </md-radio-group>
+
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <md-radio-group ng-model="data.relationship_status">
+
+                                <md-radio-button value="Single" class="md-primary">Single</md-radio-button>
+                                <md-radio-button value="In a relationship">In a relationship</md-radio-button>
+
+                            </md-radio-group>
+
+                        </md-input-container>
+
+                    </md-content>
+                </md-card-content>
+            </md-card>
+        </div>-->
+        <!--<div  layout="column" layout-padding ng-cloak>
+
+            <br/>
+            <md-content class="md-no-momentum">
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder --
+                    <label>Name</label>
+                    <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+                    <input ng-model="user.name" type="text">
+                </md-input-container>
+
+                <md-input-container md-no-float class="md-block">
+                    <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                    <input ng-model="user.phone" type="text" placeholder="Phone Number">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <!-- Use floating placeholder instead of label --
+                    <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                    <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+                </md-input-container>
+
+                <md-input-container md-no-float class="md-block">
+                    <input ng-model="user.address" type="text" placeholder="Address" >
+                    <md-icon md-svg-src="img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
+                </md-input-container>
+
+                <md-input-container class="md-icon-float md-icon-right md-block">
+                    <label>Donation Amount</label>
+                    <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
+                    <input ng-model="user.donation" type="number" step="0.01">
+                    <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+                </md-input-container>
+
+            </md-content>
+
+        </div>-->
+        <div flex="40" layout="row" layout-align="center">
+            <md-card flex md-theme="cyan-theme" ng-controller="drinkerController as d">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Add Drinker</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media"></div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-content>
+                    <br/>
+                    <md-content class="md-no-momentum">
+                        <md-input-container class="md-icon-float md-block">
+                            <!-- Use floating label instead of placeholder -->
+                            <label>Name</label>
+                            <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+                            <input ng-model="user.name" type="text">
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+                            <input ng-model="user.age" type="number" step="1" placeholder="Age">
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <!-- Use floating placeholder instead of label -->
+                            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="gender"></md-icon>
+                            <input ng-model="user.gender" type="text" placeholder="Gender" ng-required="true">
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.street_address" type="text" placeholder="Street Address" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.city" type="text" placeholder="City" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.state" type="text" placeholder="State" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.salary" type="number" step = "1" placeholder="Salary" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.spending_per_night" type="text" placeholder="Spending Per Night" >
+                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <md-radio-group ng-model="data.crowding_pref">
+
+                                <md-radio-button value="Not crowded" class="md-primary">Not Crowded</md-radio-button>
+                                <md-radio-button value="Moderately crowded">Moderately Crowded</md-radio-button>
+                                <md-radio-button value="Very crowded">Very Crowded</md-radio-button>
+
+                            </md-radio-group>
+
+                        </md-input-container>
+
+                        <md-input-container md-no-float class="md-block">
+                            <md-radio-group ng-model="data.relationship_status">
+
+                                <md-radio-button value="Single" class="md-primary">Single</md-radio-button>
+                                <md-radio-button value="In a relationship">In a relationship</md-radio-button>
+
+                            </md-radio-group>
+
+                        </md-input-container>
+
+                    </md-content>
+                </md-card-content>
+            </md-card>
         </div>
     </md-content>
 </body>

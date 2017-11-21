@@ -1,6 +1,8 @@
 package com.DatabaseConn;
 
 import com.IDBWebApp.IDrinkerEndpoints;
+import com.IDBWebApp.IDrinkerXMLEndpoints;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,7 @@ public class DrinkerQueries {
         return resultClass;
     }
 
-    public int addDrinker(String name, int age, String gender, String street, String city, String state){
+    public int addDrinker(String name, int age, String gender, String street, String city, String state, int salary, int spending_per_night, String crowding_pref, String relationship_status){
         int new_id = -1;
 
         try {
@@ -63,8 +65,8 @@ public class DrinkerQueries {
             Statement stmt = con.createStatement();
 
             //Make a insert query
-            String str = String.format("INSERT INTO drinkers (name, age, gender, street_address, city, state) " +
-                    "VALUES ('%s', %d, '%s', '%s', '%s', '%s')", name, age, gender, street, city, state);
+            String str = String.format("INSERT INTO drinkers (name, age, gender, street_address, city, state, salary, spending_per_night, crowding_pref, relationship_status) " +
+                    "VALUES ('%s', %d, '%s', '%s', '%s', '%s', %d, %d, '%s', '%s')", name, age, gender, street, city, state, salary, spending_per_night, crowding_pref, relationship_status);
 
             //Run the query against the database.
             stmt.executeUpdate(str, Statement.RETURN_GENERATED_KEYS);
@@ -119,6 +121,44 @@ public class DrinkerQueries {
         resultClass.drinkersAgeGroups = drinkers;
 
         return resultClass;
+    }
+
+    public IDrinkerXMLEndpoints getDrinkerById(int drinkerId){
+        IDrinkerXMLEndpoints newDrinker = new IDrinkerXMLEndpoints();
+
+        try {
+            //Get the database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            //Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
+            String str = String.format("Select * From drinkers where id = %d", drinkerId);
+
+            //Run the query against the database.
+            ResultSet result = stmt.executeQuery(str);
+
+            while (result.next()) {
+                newDrinker.name = result.getString("name");
+                newDrinker.age = result.getInt("age");
+                newDrinker.gender = result.getString("gender");
+                newDrinker.street_address = result.getString("street_address");
+                newDrinker.city = result.getString("city");
+                newDrinker.state = result.getString("state");
+                newDrinker.salary = result.getInt("salary");
+                newDrinker.spending_per_night = result.getInt("spending_per_night");
+                newDrinker.crowding_pref = result.getString("crowding_pref");
+                newDrinker.relationship_status = result.getString("relationship_status");
+            }
+
+            db.closeConnection(con);
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+
+        return newDrinker;
     }
 
 //    public static void main(String[] args) {

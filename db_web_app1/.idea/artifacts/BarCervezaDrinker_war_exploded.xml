@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="BarCervezaDrinker:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/BarCervezaDrinker_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="BarCervezaDrinker" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="com.google.code.gson:gson:2.2.2" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-bundle:1.18.3" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.1.1" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.29" />
+          <element id="library" level="project" name="Maven: com.owlike:genson:1.4" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0-m09" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="BarCervezaDrinker/web/Web" />
+    </root>
+  </artifact>
+</component>

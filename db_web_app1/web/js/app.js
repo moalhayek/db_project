@@ -2,7 +2,7 @@
     var app = angular.module('db-project',['ngMaterial','chart.js']);   
 
     app.controller('pageController',function(){
-        this.pages = ['home','personal_bar_data','general_bar_data']
+        this.pages = ['home','personal_bar_data','general_bar_data', 'modify_bar_data']
         this.currPage = 'personal_bar_data';
         
         this.changePage = function(newPage){

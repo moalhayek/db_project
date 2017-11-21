@@ -188,182 +188,186 @@ platform_id</ColNames>
       <Turn>before-row</Turn>
       <Events>D</Events>
     </trigger>
-    <column id="57" parent="13" name="drinker_id">
+    <trigger id="57" parent="12" name="AlcoholicTrig">
+      <Turn>before-row</Turn>
+      <Events>I</Events>
+    </trigger>
+    <column id="58" parent="13" name="drinker_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="58" parent="13" name="bar_id">
+    <column id="59" parent="13" name="bar_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="59" parent="13" name="bar_id">
+    <index id="60" parent="13" name="bar_id">
       <ColNames>bar_id</ColNames>
     </index>
-    <index id="60" parent="13" name="drinker_id">
+    <index id="61" parent="13" name="drinker_id">
       <ColNames>drinker_id</ColNames>
     </index>
-    <foreign-key id="61" parent="13" name="frequents_ibfk_1">
+    <foreign-key id="62" parent="13" name="frequents_ibfk_1">
       <ColNames>drinker_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>drinkers</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="62" parent="13" name="frequents_ibfk_2">
+    <foreign-key id="63" parent="13" name="frequents_ibfk_2">
       <ColNames>bar_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>bars</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="63" parent="14" name="drinker_id">
+    <column id="64" parent="14" name="drinker_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="64" parent="14" name="beer_id">
+    <column id="65" parent="14" name="beer_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="65" parent="14" name="beer_id">
+    <index id="66" parent="14" name="beer_id">
       <ColNames>beer_id</ColNames>
     </index>
-    <index id="66" parent="14" name="drinker_id">
+    <index id="67" parent="14" name="drinker_id">
       <ColNames>drinker_id</ColNames>
     </index>
-    <foreign-key id="67" parent="14" name="likes_ibfk_1">
+    <foreign-key id="68" parent="14" name="likes_ibfk_1">
       <ColNames>drinker_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>drinkers</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="68" parent="14" name="likes_ibfk_2">
+    <foreign-key id="69" parent="14" name="likes_ibfk_2">
       <ColNames>beer_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>beers</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="69" parent="15" name="drinker_id">
+    <column id="70" parent="15" name="drinker_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="70" parent="15" name="music_id">
+    <column id="71" parent="15" name="music_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="71" parent="15" name="drinker_id">
+    <index id="72" parent="15" name="drinker_id">
       <ColNames>drinker_id</ColNames>
     </index>
-    <index id="72" parent="15" name="music_id">
+    <index id="73" parent="15" name="music_id">
       <ColNames>music_id</ColNames>
     </index>
-    <foreign-key id="73" parent="15" name="listens_ibfk_1">
+    <foreign-key id="74" parent="15" name="listens_ibfk_1">
       <ColNames>drinker_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>drinkers</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="74" parent="15" name="listens_ibfk_2">
+    <foreign-key id="75" parent="15" name="listens_ibfk_2">
       <ColNames>music_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>music</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="75" parent="16" name="id">
+    <column id="76" parent="16" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="76" parent="16" name="genre">
+    <column id="77" parent="16" name="genre">
       <Position>2</Position>
       <DataType>varchar(200)|0</DataType>
     </column>
-    <key id="77" parent="16" name="PRIMARY">
+    <key id="78" parent="16" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="78" parent="17" name="bar_id">
+    <column id="79" parent="17" name="bar_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="79" parent="17" name="beer_id">
+    <column id="80" parent="17" name="beer_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="80" parent="17" name="is_on_tap">
+    <column id="81" parent="17" name="is_on_tap">
       <Position>3</Position>
       <DataType>tinyint(1)|0</DataType>
     </column>
-    <column id="81" parent="17" name="price">
+    <column id="82" parent="17" name="price">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <key id="82" parent="17" name="PRIMARY">
+    <key id="83" parent="17" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>bar_id
 beer_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="83" parent="18" name="bar_id">
+    <column id="84" parent="18" name="bar_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="84" parent="18" name="employee_id">
+    <column id="85" parent="18" name="employee_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="85" parent="18" name="date_of_sale">
+    <column id="86" parent="18" name="date_of_sale">
       <Position>3</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="86" parent="18" name="shift_type">
+    <column id="87" parent="18" name="shift_type">
       <Position>4</Position>
       <DataType>varchar(5)|0</DataType>
     </column>
-    <column id="87" parent="18" name="beer_id">
+    <column id="88" parent="18" name="beer_id">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="88" parent="18" name="sale_price">
+    <column id="89" parent="18" name="sale_price">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="89" parent="18" name="beer_id">
+    <index id="90" parent="18" name="beer_id">
       <ColNames>beer_id</ColNames>
     </index>
-    <index id="90" parent="18" name="employee_id">
+    <index id="91" parent="18" name="employee_id">
       <ColNames>employee_id</ColNames>
     </index>
-    <index id="91" parent="18" name="transIndex">
+    <index id="92" parent="18" name="transIndex">
       <ColNames>bar_id
 date_of_sale
 shift_type</ColNames>
     </index>
-    <foreign-key id="92" parent="18" name="transactions_ibfk_1">
+    <foreign-key id="93" parent="18" name="transactions_ibfk_1">
       <ColNames>bar_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>bars</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="93" parent="18" name="transactions_ibfk_2">
+    <foreign-key id="94" parent="18" name="transactions_ibfk_2">
       <ColNames>employee_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>drinkers</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="94" parent="18" name="transactions_ibfk_3">
+    <foreign-key id="95" parent="18" name="transactions_ibfk_3">
       <ColNames>beer_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>beers</RefTableName>
