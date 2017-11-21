@@ -22,7 +22,7 @@ public class MusicQueries {
             Statement stmt = con.createStatement();
 
             //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-            String str = String.format("SELECT m1.genre, COUNT(l1.drinker_id) FROM listens l1, music m1, drinkers d1 WHERE l1.music_id = m1.id AND l1.drinker_id = d1.id AND (d1.age BETWEEN "+lowerAge+" AND "+upperAge+") GROUP BY m1.genre");
+            String str = String.format("SELECT m1.genre, COUNT(l1.drinker_id) FROM listens l1 INNER JOIN music m1 INNER JOIN drinkers d1 ON (l1.music_id = m1.id AND l1.drinker_id = d1.id) WHERE (d1.age BETWEEN "+lowerAge+" AND "+upperAge+") GROUP BY m1.genre");
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);

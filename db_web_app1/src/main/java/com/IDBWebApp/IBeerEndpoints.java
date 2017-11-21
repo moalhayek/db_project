@@ -10,7 +10,10 @@ public class IBeerEndpoints {
         public double abv;
         public int salePrice;
         public double manuf_price;
-        public double profit;
+        public double profitPerBottle;
+        public int totalSold;
+        public double totalProfit;
+
     }
     public class IBeerResult{
         public List<IBeer> beers;

@@ -22,7 +22,7 @@ public class AdQueries {
             Statement stmt = con.createStatement();
 
             //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-            String str = String.format("SELECT p.bar_id, a.platform, p.start_date, p.end_date,(DATEDIFF(p.end_date, p.start_date)*a.cost_per_day) AS total_cost, p.total_clicks, (DATEDIFF(p.end_date, p.start_date)*a.cost_per_day)/p.total_clicks AS CPC FROM ad_purchases p, ad_platforms a WHERE p.bar_id = '%s' AND p.platform_id = a.id", barId);
+            String str = String.format("SELECT p.bar_id, a.platform, p.start_date, p.end_date,(DATEDIFF(p.end_date, p.start_date)*a.cost_per_day) AS total_cost, p.total_clicks, (DATEDIFF(p.end_date, p.start_date)*a.cost_per_day)/p.total_clicks AS CPC FROM ad_purchases p INNER JOIN ad_platforms a ON (p.platform_id = a.id) WHERE p.bar_id = %d", barId);
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
