@@ -5,6 +5,8 @@ import java.util.List;
 public class IDrinkerEndpoints {
     public class IDrinker {
         public String name;
+        public int spendingPerNight;
+        public String beerName;
     }
     public class IDrinkerResult {
         public List<IDrinker> drinkers;
