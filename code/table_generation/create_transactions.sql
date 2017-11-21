@@ -11,6 +11,8 @@ CREATE TABLE `transactions` (
   FOREIGN KEY (`beer_id`) REFERENCES beers(`id`)
 );
 
+CREATE INDEX transIndex on transactions(bar_id, date_of_sale, shift_type);
+
 LOAD DATA LOCAL INFILE '/Users/moalhayek/Documents/Rutgers/Year 4/Databases/transactions_table.csv'
 INTO TABLE transactions
 FIELDS TERMINATED BY ','

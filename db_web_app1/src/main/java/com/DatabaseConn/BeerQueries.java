@@ -22,13 +22,10 @@ public class BeerQueries {
             Statement stmt = con.createStatement();
 
             //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-            String str = String.format("SELECT b.name, b.manf, s.is_on_tap, b.abv, s.price, b.manf_price, (s.price - b.manf_price) AS profit FROM beers b, sells s WHERE s.bar_id = '%s' AND s.beer_id = b.id", barId);
+            String str = String.format("SELECT b.name, b.manf, s.is_on_tap, b.abv, s.price, b.manf_price, (s.price - b.manf_price) AS profit FROM beers b, sells s WHERE s.bar_id = %d AND s.beer_id = b.id", barId);
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
-
-            //initially, result points to before first row
-            result.next();
 
             //each result represents an age group of drinkers
             while (result.next()) {
