@@ -6,7 +6,7 @@ app.factory('sharedProperties',function($http,$timeout){
         //add whatever properties we want here, JSON style
     };
 
-    var path = 'localhost:8080/rest/'
+    var path = 'http://localhost:8080/rest/'
     return{
         //simple getter
         getProperty: function(whichProperty){
