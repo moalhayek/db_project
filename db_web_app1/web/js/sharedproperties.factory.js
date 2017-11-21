@@ -6,7 +6,7 @@ app.factory('sharedProperties',function($http,$timeout){
         //add whatever properties we want here, JSON style
     };
 
-    var path = 'ec2-18-216-165-164.us-east-2.compute.amazonaws.com:8080/db_project/rest/'
+    var path = 'localhost:8080/rest/'
     return{
         //simple getter
         getProperty: function(whichProperty){
