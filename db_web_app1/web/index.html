@@ -59,7 +59,7 @@
                     </md-input-container>
                 </div>                                    
                 <div ng-if="personal.barSelected" flex="40" layout="row" layout-align="center">
-                    <md-card flex="50" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" md-theme-watch>
+                    <md-card flex="50" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" ng-init="earn.instantiate(personal.selectedBar.id,'total')" md-theme-watch>
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Earnings</span>
@@ -80,7 +80,7 @@
                             <md-checkbox ng-model="earn.total" aria-label="Checkbox 3" ng-click="earn.switchData('total',earn.total)">
                                 Total
                             </md-checkbox>
-                            <div ng-init="earn.instantiate(personal.selectedBar.id,'total')">
+                            <div >
 
                                 <canvas ng-show="earn.timeType=='monthly'" id="line" class="chart chart-line" 
                                 chart-data="earn.data_monthly" 
@@ -169,7 +169,7 @@
                           <md-button>Action 2</md-button>
                         </md-card-actions>
                     </md-card>
-                    <md-card flex md-theme="cyan-theme" ng-controller="beerInfoController as beer" md-theme-watch>
+                    <md-card flex md-theme="cyan-theme" ng-controller="beerInfoController as beer" ng-init="beer.instantiate()">
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Beer Info</span>

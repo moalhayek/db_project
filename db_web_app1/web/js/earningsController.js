@@ -50,7 +50,7 @@ app.controller("earnings", function (sharedProperties) {
     }
 
     this.instantiate = function(barID,shiftType){
-        this.setDailyAverages();
+        this.setDailyAverages(barID);
         this.setEarnings('monthly',barID)
         this.refresh(shiftType,false)
     }
