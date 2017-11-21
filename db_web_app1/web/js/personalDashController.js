@@ -11,24 +11,18 @@ app.controller('personalDashController',function(sharedProperties){
     };
 
     this.getBars = function(){
-        /*var results = {"bars":
-        [
-            {'name': 'Sean','id': '1'},
-            {'name': 'Mo','id': '2'},
-            {'name': 'Brian','id': '3'},
-            {'name': 'Ridwan','id': '4'},
-            {'name': 'Imielinski','id': '5'}
-        ]
-        };*/
-
+        
         var options = {
             url: 'bars/getBarNames',
             params: {},
             method: 'GET',
             destination: 'barNames'//this is the global property you want to update
         }
-        sharedProperties.httpReq(options);
-        //sharedProperties.setProperty('barNames',results);
+        var promise =  sharedProperties.httpReq(options);
+        promise.then(function(res){
+            sharedProperties.setProperty('barNames',res.data)
+        }.bind(this));
+        
     };
     this.allBars = function(){
         return sharedProperties.getProperty('barNames').bars;

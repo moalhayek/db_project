@@ -6,7 +6,7 @@ app.controller('generalDashController',function(){
 });
 
 //this will be controller for general music modules
-app.controller('musicTrendController',function(sharedProperties){
+app.controller('musicTrendController',function(sharedProperties,$q){
     this.setTrends = function(minAge,maxAge){
         //REST endpoint
         var options = {
@@ -18,8 +18,13 @@ app.controller('musicTrendController',function(sharedProperties){
             method: 'GET',
             destination: 'musicTrends'//this is the global property you want to update
         }
-        sharedProperties.httpReq(options); // uncomment when server is up
+        var promise = sharedProperties.httpReq(options); // uncomment when server is up
         //var results = {'musicData': [{'genre': 'Gospel', 'listenerCount': 25}, {'genre': 'Rock', 'listenerCount': 35}, {'genre': 'Techno', 'listenerCount': 13}, {'genre': 'Hip-hop', 'listenerCount': 40}]};
+        promise.then(function(res){
+            sharedProperties.setProperty('musicTrends',res.data);
+            this.setData();
+            this.setLabels();
+        }.bind(this))
         //sharedProperties.setProperty('musicTrends',results);
     };
 
@@ -32,12 +37,10 @@ app.controller('musicTrendController',function(sharedProperties){
     this.options = {legend: {display: true}};
 
     this.refreshChart = function(min,max){
+                
+        this.setTrends(min,max)
+        //this function is now deprecated
         
-        $timeout(function(){
-            this.setTrends(min,max)
-        })
-        this.setData();
-        this.setLabels();
         console.log(this.getTrends())
     }
 

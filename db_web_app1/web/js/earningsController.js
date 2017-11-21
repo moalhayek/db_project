@@ -1,16 +1,16 @@
 var app = angular.module('db-project');
 
 //this will be controller for personal earnings
-app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
+app.controller("earnings", function (sharedProperties,$timeout,$q,this) {
 
     this.startDate = '2016-01'
     this.endDate = '2016-12'
 
-    $scope.refresh = function(shiftType,holdOld){
+    this.refresh = function(shiftType,holdOld){
         console.log('refreshing chart')
-        console.log($scope.getDailyAverages())
-        var dailyAveArr = $scope.getDailyAverages()
-        var monthlyArr = $scope.getEarnings()
+        console.log(this.getDailyAverages())
+        var dailyAveArr = this.getDailyAverages()
+        var monthlyArr = this.getEarnings()
         console.log('setting data_daily')
         var new_data_daily = this.setData(dailyAveArr,shiftType);
 
@@ -50,16 +50,13 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
     }
 
     this.instantiate = function(barID,shiftType){
-        var startDate = this.startDate;
-        var endDate = this.endDate;
-        var timeType = 'monthly';
 
         var options = {
             url: 'transactions/getDailyAverages',
             params: {
                 barId: barID,
-                startDate: startDate,
-                endDate: endDate,
+                startDate: this.startDate,
+                endDate: this.endDate,
             },
             method: 'GET',
             destination: 'dailyAverages'
@@ -70,8 +67,8 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
             params: {
                 type: timeType,
                 barId: barID,
-                startDate: startDate,
-                endDate: endDate,
+                startDate: this.startDate,
+                endDate: this.endDate,
             },
             method: 'GET',
             destination: 'monthlyEarnings'
@@ -83,10 +80,12 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
         promises.push(sharedProperties.httpReq(options))
         promises.push(sharedProperties.httpReq(options2))
 
-        $q.all(promises).then(function() {
+        $q.all(promises).then(function(res) {
+            sharedProperties.setProperty('dailyAverages',res[0].data)
+            sharedProperties.setProperty('montlyEarnings',res[1].data)
             console.log('trying to refresh now')
-            $scope.refresh(shiftType, false)
-        });
+            this.refresh(shiftType, false)
+        }.bind(this));
     }
 
     this.monthMap = {
@@ -124,22 +123,22 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
         if(!checked&&whichOne=='total'){
             this.early = false
             this.late = false
-            $scope.refresh(whichOne,false)
+            this.refresh(whichOne,false)
         }else if(!checked&&(whichOne =='early')){
             this.total = false
             if(this.late){
-                $scope.refresh(whichOne,true)
+                this.refresh(whichOne,true)
             }else{
-                $scope.refresh(whichOne,false)
+                this.refresh(whichOne,false)
             }
             
         }else if(!checked&&(whichOne=='late')){
             this.total = false
-            $scope.refresh(whichOne)
+            this.refresh(whichOne)
             if(this.early){
-                $scope.refresh(whichOne,true)
+                this.refresh(whichOne,true)
             }else{
-                $scope.refresh(whichOne,false)
+                this.refresh(whichOne,false)
             }
         }
     }
@@ -195,18 +194,18 @@ app.controller("earnings", function (sharedProperties,$timeout,$q,$scope) {
         //sharedProperties.setProperty('monthlyEarnings',results)
     };
 
-    $scope.getEarnings = function(){
+    this.getEarnings = function(){
         return sharedProperties.getProperty('monthlyEarnings').monthly_earnings;
     }
 
-    $scope.getDailyAverages = function(){
+    this.getDailyAverages = function(){
         return sharedProperties.getProperty('dailyAverages').dailyAverages;
     };
 
     this.setData = function(inputArr,shiftType){
         var tempData = [];
       
-        //var averageArr = $scope.getDailyAverages();
+        //var averageArr = this.getDailyAverages();
         var averageArr = inputArr;
         console.log(averageArr)
 

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html ng-app="test">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>
+
+    <script type="text/javascript" src="./apptest.js"></script>
+    <script type="text/javascript" src="./sharedPropTest.js"></script>
+</head>
+<body ng-controller="testCtrl as test">
+    <div ng-init="test.contructor()">
+        {{test.data + 'direct data access'}}
+        {{test.getter() + 'functional accesss'}}
+    </div>
+</body>
