@@ -7,7 +7,7 @@ public class IDrinkerEndpoints {
         public String name;
     }
     public class IDrinkerResult {
-        public IDrinker drinker;
+        public List<IDrinker> drinkers;
     }
     public class IAgeEarnings {
         public String age;

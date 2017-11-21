@@ -10,7 +10,7 @@ public class DrinkerEndpoints {
     @Path("/getDrinker")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public IDrinkerEndpoints.IDrinkerResult getDrinker(@DefaultValue("1") @QueryParam("id") String id) {
+    public IDrinkerEndpoints.IDrinkerResult getDrinker(@DefaultValue("1") @QueryParam("id") int id) {
         DrinkerQueries d = new DrinkerQueries();
         return d.drinker(id);
     }
