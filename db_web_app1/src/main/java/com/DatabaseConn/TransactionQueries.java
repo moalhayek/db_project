@@ -113,7 +113,7 @@ public class TransactionQueries {
                 dailyAverage.avg_early_earnings = result.getInt("early_daily_average");
                 dailyAverage.avg_late_earnings = result.getInt("late_daily_average");
 
-                dailyAverage.total_avg_earnings = dailyAverage.avg_early_earnings + dailyAverage.avg_late_earnings;
+                dailyAverage.avg_total_earnings = dailyAverage.avg_early_earnings + dailyAverage.avg_late_earnings;
                 //add the new age group to the list of ageEarningResult age groups
                 dailyAverages.add(dailyAverage);
             }

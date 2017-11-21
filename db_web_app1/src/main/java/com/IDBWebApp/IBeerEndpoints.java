@@ -8,9 +8,12 @@ public class IBeerEndpoints {
         public String manuf;
         public boolean isOnTap;
         public double abv;
-        public int price;
+        public int salePrice;
         public double manuf_price;
-        public double profit;
+        public double profitPerBottle;
+        public int totalSold;
+        public double totalProfit;
+
     }
     public class IBeerResult{
         public List<IBeer> beers;

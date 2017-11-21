@@ -23,11 +23,12 @@ public class BartenderEndpoints {
         BartenderQueries b = new BartenderQueries();
         b.addBartender(input.barId, new_drinker_id, input.startDate);
     }
-    @Path("/getTopBartenders")
+
+    @Path("/getBartenders")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public IBartenderEndpoints.IBartenderResult getTopBartenders(@DefaultValue("1") @QueryParam("barId") int barId, @DefaultValue("sat_late_avg_sales") @QueryParam("shift") String shift) {
+    public IBartenderEndpoints.IBartenderResult getBartenders(@DefaultValue("1") @QueryParam("barId") int barId) {
         BartenderQueries bt = new BartenderQueries();
-        return bt.getTopBartenders(barId, shift);
+        return bt.getBartenders(barId);
     }
 }
