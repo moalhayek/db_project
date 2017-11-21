@@ -22,7 +22,7 @@ public class BeerQueries {
             Statement stmt = con.createStatement();
 
             //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-            String str = String.format("SELECT b.name, b.manf, s.is_on_tap, b.abv, s.price, b.manf_price, (s.price - b.manf_price) AS profit FROM beers b, sells s WHERE s.bar_id = %d AND s.beer_id = b.id", barId);
+            String str = String.format("SELECT b.name, b.manf, s.is_on_tap, b.abv, s.price, b.manf_price, round((s.price - b.manf_price),2) AS profit FROM beers b, sells s WHERE s.bar_id = %d AND s.beer_id = b.id", barId);
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
@@ -36,7 +36,7 @@ public class BeerQueries {
                 beer.manuf = result.getString("manf");
                 beer.isOnTap = result.getBoolean("is_on_tap");
                 beer.abv = result.getDouble("abv");
-                beer.price = result.getInt("price");
+                beer.salePrice = result.getInt("price");
                 beer.manuf_price = result.getDouble("manf_price");
                 beer.profit = result.getDouble("profit");
 
