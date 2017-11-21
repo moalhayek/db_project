@@ -10,6 +10,6 @@ public class IBartenderEndpoints {
         public int[] total_avgs = new int[] {0,0,0,0,0,0,0};
     }
     public class IBartenderResult{
-        public List<IBartender> topBartenders;
+        public List<IBartender> bartenders;
     }
 }

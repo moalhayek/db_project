@@ -19,7 +19,7 @@ public class ITransactionsEndpoints {
         public int dayOfWeek;
         public int avg_early_earnings;
         public int avg_late_earnings;
-        public int total_avg_earnings;
+        public int avg_total_earnings;
     }
 
     public class IDailyAveragesResult {
