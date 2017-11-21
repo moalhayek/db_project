@@ -50,13 +50,55 @@ app.controller("earnings", function (sharedProperties,$timeout) {
     }
 
     this.instantiate = function(barID,shiftType){
+        var startDate = this.startDate;
+        var endDate = this.endDate;
+        var timeType = 'monthly';
+
+        var setDailyAverage = function(barID){
+            return function() {
+                var options = {
+                    url: 'transactions/getDailyAverages',
+                    params: {
+                        barId: barID,
+                        startDate: startDate,
+                        endDate: endDate,
+                    },
+                    method: 'GET',
+                    destination: 'dailyAverages'
+                }
+                sharedProperties.httpReq(options)
+            };
+        };
+
+        var getEarnings = function(timeType,barID){
+            return function(){
+                var options = {
+                    url: 'transactions/getEarnings',
+                    params: {
+                        type: timeType,
+                        barId: barID,
+                        startDate: startDate,
+                        endDate: endDate,
+                    },
+                    method: 'GET',
+                    destination: 'monthlyEarnings'
+                }
+
+                sharedProperties.httpReq(options)
+            };
+        };
         $timeout(function(){
-            this.setDailyAverages(barID)
+            console.log('in timeout for setting daily averages')
+            setDailyAverages(barID)
         })
+        console.log('supposedly done getting daily averages')
         $timeout(function(){
-            this.setEarnings('monthly',barID)
+            console.log('in timeout for setting earnings')
+            setEarnings('monthly',barID)
         })
+        console.log('supposedly done getting earnings')
         this.refresh(shiftType,false)
+
     }
 
     this.monthMap = {

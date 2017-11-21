@@ -24,9 +24,10 @@ app.factory('sharedProperties',function($http,$timeout){
                 params: options.params
             }).then(function mySuccess(response){
                 console.log('the request went well!');
+                console.log(options)
                 $timeout(function(){
                     if(options.destination != null){
-                        console.log('result of request' +response.data)
+                        console.log(response.data)
                         properties[options.destination] = response.data;
                     }
                 });
