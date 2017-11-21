@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DrinkerQueries {
 
-    public IDrinkerEndpoints.IDrinkerResult drinker(int id){
+    public IDrinkerEndpoints.IDrinkerResult drinker(int barId){
         IDrinkerEndpoints.IDrinkerResult resultClass = new IDrinkerEndpoints().new IDrinkerResult();
         List<IDrinkerEndpoints.IDrinker> drinkers = new ArrayList<IDrinkerEndpoints.IDrinker>();
 
@@ -21,7 +21,14 @@ public class DrinkerQueries {
             Statement stmt = con.createStatement();
 
             //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-            String str = String.format("SELECT * FROM drinkers WHERE id = %d", id);
+            String str = String.format("SELECT d.name, d.spending_per_night, b.name AS beer_name\n" +
+                    "FROM drinkers d INNER JOIN frequents f INNER JOIN likes l INNER JOIN beers b INNER JOIN sells s ON (d.id = f.drinker_id AND l.drinker_id = d.id AND l.beer_id = b.id AND s.beer_id = b.id AND s.bar_id = f.bar_id)\n" +
+                    "WHERE f.bar_id = %d AND b.name = (SELECT b1.name\n" +
+                    "                                   FROM sells s1 INNER JOIN likes l1 INNER JOIN beers b1 ON (l1.beer_id = b1.id AND s1.beer_id = l1.beer_id)\n" +
+                    "                                   WHERE s1.beer_id = b1.id AND s1.bar_id = f.bar_id AND l1.drinker_id = f.drinker_id\n" +
+                    "                                   ORDER BY s1.price DESC\n" +
+                    "                                   LIMIT 1)\n" +
+                    "ORDER BY d.spending_per_night desc;", barId);
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
@@ -29,6 +36,8 @@ public class DrinkerQueries {
             while (result.next()) {
                 IDrinkerEndpoints.IDrinker drinker = new IDrinkerEndpoints().new IDrinker();
                 drinker.name = result.getString("name");
+                drinker.spendingPerNight = result.getInt("spending_per_night");
+                drinker.expensiveFavBeer = result.getString("beer_name");
                 drinkers.add(drinker);
             }
 
