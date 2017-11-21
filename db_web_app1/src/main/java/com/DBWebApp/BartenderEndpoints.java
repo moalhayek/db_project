@@ -27,7 +27,7 @@ public class BartenderEndpoints {
     @Path("/getBartenders")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public IBartenderEndpoints.IBartenderResult getTopBartenders(@DefaultValue("1") @QueryParam("barId") int barId) {
+    public IBartenderEndpoints.IBartenderResult getBartenders(@DefaultValue("1") @QueryParam("barId") int barId) {
         BartenderQueries bt = new BartenderQueries();
         return bt.getBartenders(barId);
     }
