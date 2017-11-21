@@ -48,46 +48,5 @@ app.controller('personalDashController',function(sharedProperties){
 });
 
 //this will be all info about the personal bartender module
-app.controller('bartenders',function(sharedProperties){
 
-    this.series = ['Series A', 'Series B'];
-    this.data = [
-        [65, 59, 80, 81, 56]
-    ];
-      
-    this.onClick = function (points, evt) {
-        //console.log(points, evt);
-    };
-
-    this.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-    this.options = {
-        scales: {
-        yAxes: [
-            {
-              id: 'y-axis-1',
-              type: 'linear',
-              display: true,
-              position: 'left'
-            },
-            {
-              id: 'y-axis-2',
-              type: 'linear',
-              display: true,
-              position: 'right'
-            }
-          ]
-        }
-    };
-
-    this.setBartenders = function(barID){
-        //REST endpoint with whichBar as param
-        console.log('bartenders info generated with barID ' + barID);
-        var results = ['Mo','Brian','Ryan','James','Sasha'];
-        sharedProperties.setProperty('bartenders', results);
-    };
-    //this.labels = ['Mo','Brian','Ryan','James','Sasha'];
-    this.labels = function(){
-        return sharedProperties.getProperty('bartenders');
-    };
-});
 

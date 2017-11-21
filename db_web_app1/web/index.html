@@ -27,6 +27,7 @@
     <script type="text/javascript" src="./js/beerController.js"></script>
     <script type="text/javascript" src="./js/earningsController.js"></script>
     <script type="text/javascript" src="./js/beerFilters.js"></script>
+    <script type="text/javascript" src="./js/bartenderController.js"></script>
 
 </head>
 <body ng-controller="pageController as page">
@@ -122,15 +123,19 @@
                           </md-card-title-text>                          
                         </md-card-title>
                         <md-card-content>
-                            <canvas  id="line" class="chart chart-bar" 
-                                chart-data="bt.data" 
-                                chart-labels="bt.labels()" 
-                                chart-series="bt.series" 
-                                chart-options="bt.options" >
-                            </canvas>
+                            <div>
+                                <table class="table table-responsive table-condensed">
+                                    <tr>
+                                        <th ng-repeat="label in bt.labels">{{label}}</th>
+                                    </tr>
+                                    <tr ng-repeat="bartender in bt.data">
+                                        <td ng-repeat="data in bartender track by $index">{{data}}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </md-card-content>
                         <md-card-actions layout="row" layout-align="end center">
-                          <md-button class="md-raised md-primary" style="text-transform: none;">Add new bartender</md-button>
+
                           
                         </md-card-actions>
                     </md-card>
