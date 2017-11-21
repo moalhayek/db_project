@@ -147,7 +147,7 @@ app.controller("earnings", function (sharedProperties) {
             url: 'transactions/getEarnings',
             params: {
                 type: timeType,
-                barID: barId,
+                barId: barID,
                 startDate: this.startDate,
                 endDate: this.endDate,
                 timeOfDay: this.getTimeType()
