@@ -48,7 +48,7 @@
             <div flex="10" md-theme="cyan-theme" class="md-accent" style="background-color: none;">
             </div>
             <div flex="80" layout ="column" md-theme="cyan-theme" layout-align="center">
-                <h2 >{{'Personalized Data for bar: '+personal.selectedBar.name}}</h2>
+                <h2 >{{'Personalized Statistics For: '+personal.selectedBar.name}}</h2>
                 <div flex="5" layout="row" class="md-warn" ng-init="personal.getBars()">
                     <md-input-container>
                         <label>Bar Name</label>
@@ -60,9 +60,9 @@
                     </md-input-container>
                     <md-button ng-click="personal.clearValue()" ng-disabled="!personal.selectedBar">Clear</md-button>
                 </div>
-                <div flex="90" layout="column" ng-if="personal.selectedBar">
+                <div flex="87" layout="column" ng-if="personal.selectedBar">
                     <div  flex="40" layout="row" layout-align="center">
-                        <md-card flex="50" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" ng-init="earn.instantiate(personal.selectedBar.id,'total')" md-theme-watch>
+                        <md-card flex theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" ng-init="earn.instantiate(personal.selectedBar.id,'total')" md-theme-watch>
                             <md-card-title>
                               <md-card-title-text>
                                 <span class="md-headline">Earnings</span>
@@ -97,6 +97,7 @@
                                     chart-series="earn.series"
                                     chart-options="earn.options" >
                                     </canvas>
+                                    <br>
                                     <md-input-container >
                                         <label>Start Date</label>
                                         <md-select ng-model="earn.startDate" ng-change="earn.instantiate(personal.selectedBar.id,earn.getTimeType())">
@@ -118,7 +119,7 @@
                             <md-card-actions layout="row" layout-align="end center">
                             </md-card-actions>
                         </md-card>
-                        <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id,'total')" md-theme-watch>
+                        <md-card md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id)" md-theme-watch>
                             <md-card-title>
                               <md-card-title-text>
                                 <span class="md-headline">Bartender Sales</span>
@@ -148,10 +149,6 @@
                                     </table>
                                 </div>
                             </md-card-content>
-                            <md-card-actions layout="row" layout-align="end center">
-
-
-                            </md-card-actions>
                         </md-card>
                     </div>
                     <div flex="40"  layout="row" layout-align="center">
@@ -171,10 +168,10 @@
                                     </md-select>
                                 </md-input-container>
                                 <div ng-repeat="platform in ad.getAds()" ng-show="ad.selectedAd==platform">
-                                    <label>Start Date: </label>{{ad.selectedAd['startDate'] | date:"MM/dd/yyyy"}}<br>
-                                    <label>Earnings for {{ad.selectedAd['startDate'] | date:"MM/dd/yyyy"}}: $</label>{{ad.getAdEarnings(ad.selectedAd['startDate'] | date:"M")}}.00<br><br>
-                                    <label>End Date: </label>{{ad.selectedAd['endDate'] | date:"MM/dd/yyyy"}}<br>
-                                    <label>Earnings for : $</label>{{ad.getAdEarnings(ad.selectedAd['endDate'] | date:"M")}}.00<br><br>
+                                    <b><label>Start Date: </label></b>{{ad.selectedAd['startDate'] | date:"MM/dd/yyyy"}}<br>
+                                    <label>Earnings for {{ad.selectedAd['startDate'] | date:"MMMM"}}: $</label>{{ad.getAdEarnings(ad.selectedAd['startDate'] | date:"M")}}.00<br><br>
+                                    <b><label>End Date: </label></b>{{ad.selectedAd['endDate'] | date:"MM/dd/yyyy"}}<br>
+                                    <label>Earnings for {{ad.selectedAd['endDate'] | date:"MMMM"}}: $</label>{{ad.getAdEarnings(ad.selectedAd['endDate'] | date:"M")}}.00<br><br>
                                     <canvas  id="line" class="chart chart-bar"
                                              chart-data="ad.data"
                                              chart-labels="ad.labels"
