@@ -20,16 +20,17 @@ app.controller('personalDashController',function(sharedProperties){
         }
         var promise =  sharedProperties.httpReq(options);
         promise.then(function(res){
-            console.log(res)
-            console.log(res[0])
-            console.log(res.data)
-            sharedProperties.setProperty('barNames',res)
+            var temp = res.bars
+            console.log(temp)
+            temp.splice(0,1)
+            console.log(temp)
+            sharedProperties.setProperty('barNames',temp)
             console.log(sharedProperties.getProperty('barNames'))
         }.bind(this));
         
     };
     this.allBars = function(){
-        return sharedProperties.getProperty('barNames').bars;
+        return sharedProperties.getProperty('barNames');
     };
     
     this.searchBarNames = function(searchText){

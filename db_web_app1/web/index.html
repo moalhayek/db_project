@@ -56,7 +56,7 @@
                     <md-input-container >
                         <label>Bar Name</label>
                         <md-select ng-model="personal.selectedBar" ng-change="personal.recalcData()">
-                            <md-option ng-repeat="bar in personal.allBars()" ng-value="bar">
+                            <md-option ng-repeat="bar in personal.allBars()"  ng-value="bar">
                             {{bar.name}}
                             </md-option>
                         </md-select>
@@ -177,25 +177,30 @@
                           <md-button>Action 2</md-button>
                         </md-card-actions>
                     </md-card>
-                    <md-card flex md-theme="cyan-theme" ng-controller="beerInfoController as beer" ng-init="beer.instantiate()">
+                    <md-card flex md-theme="cyan-theme" ng-controller="beerInfoController as beerCtrl" ng-init="beerCtrl.setAllBeers(personal.selectedBar.id)">
                         <md-card-title>
                           <md-card-title-text>
                             <span class="md-headline">Beer Info</span>
-
                           </md-card-title-text>
-                          <md-card-title-media>
-                            <div class="md-media-lg card-media"></div>
-                          </md-card-title-media>
                         </md-card-title>
                         <md-card-content>
+                            <md-input-container >
+                                <label>Add a beer</label>
+                                <md-select ng-model="beerCtrl.newBeer" ng-change="beerCtrl.addBeer(beerCtrl.newBeer)">
+                                    <md-option ng-repeat="beer in beerCtrl.getAllBeers()| orderBy: ['manuf','name']" ng-show="!beerCtrl.beerDict.includes(beer)||1" ng-value="beer">
+                                        {{beer.manuf + ': ' + beer.name}}</md-option>
+                                </md-select>
+                            </md-input-container>
+
                             <canvas  id="line" class="chart chart-line" 
-                            chart-data="beer.data" 
-                            chart-labels="beer.labels" 
-                            chart-series="beer.series" 
-                            chart-options="beer.options" 
-                            chart-dataset-override="beer.datasetOverride" 
-                            chart-click="beer.onClick()">
+                            chart-data="beerCtrl.data"
+                            chart-labels="beerCtrl.labels"
+                            chart-series="beerCtrl.series"
+                            >
                             </canvas>
+                            <div>
+                                <span ng-repeat="(key,val) in beerCtrl.beerDict|orderBy">{{key}}</span>
+                            </div>
                         </md-card-content>
                         <md-card-actions layout="row" layout-align="end center">
                           
