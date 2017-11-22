@@ -159,7 +159,45 @@ CREATE TABLE IF NOT EXISTS `music` (
 LOAD DATA LOCAL INFILE '/Users/Brian/Documents/School/Rutgers University/Senior Year/Fall 2017/Principles of Info & Data Management/Project/db_project/code/table_generation/music_table.csv' 
 INTO TABLE music
 FIELDS TERMINATED BY ','
-IGNORE 1 LINES;  
+IGNORE 1 LINES;
+
+# Sells Table
+
+CREATE TABLE IF NOT EXISTS sells (
+  bar_id INT NOT NULL,
+  beer_id INT NULL,
+  is_on_tap BOOLEAN NULL,
+  price INT NULL,
+  PRIMARY KEY (`bar_id`,`beer_id`));
+  
+LOAD DATA LOCAL INFILE '/Users/Brian/Documents/School/Rutgers University/Senior Year/Fall 2017/Principles of Info & Data Management/Project/db_project/code/table_generation/sells_table.csv' 
+INTO TABLE sells
+FIELDS TERMINATED BY ','
+IGNORE 1 LINES;
+
+CREATE TRIGGER minPrice
+BEFORE INSERT ON sells
+FOR EACH ROW
+  BEGIN
+    IF NEW.price <= (SELECT manf_price
+                     FROM beers
+                     WHERE beers.id = NEW.beer_id) THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Cannot sell beer for less than you buy it for';
+    END IF;
+  END;
+
+CREATE TRIGGER minPriceUpdate
+  BEFORE UPDATE ON sells
+  FOR EACH ROW
+    BEGIN
+      IF NEW.price <= (SELECT manf_price
+                       FROM beers
+                       WHERE beers.id = NEW.beer_id) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot sell beer for less than you buy it for';
+      END IF;
+    END;  
 
 # Transactions Table
 CREATE TABLE `transactions` (
@@ -240,7 +278,7 @@ SELECT t1.day_of_week, AVG(t1.total_revenue) as early_daily_average, AVG(t2.tota
                                 AND date_of_sale >= '%s'
                                 AND date_of_sale <= '%s'
                                 AND shift_type = 'early'
-                          GROUP BY day_of_week, month, year) as t1
+                          GROUP BY date_of_sale) as t1
                           INNER JOIN
                           (SELECT DAYOFWEEK(date_of_sale) as day_of_week, MONTH(date_of_sale) as month, YEAR(date_of_sale) as year,  SUM(sale_price) as total_revenue
                            FROM transactions
@@ -248,7 +286,7 @@ SELECT t1.day_of_week, AVG(t1.total_revenue) as early_daily_average, AVG(t2.tota
                                  AND date_of_sale >= '%s'
                                  AND date_of_sale <= '%s'
                                  AND shift_type = 'late'
-                           GROUP BY day_of_week, month, year) as t2
+                           GROUP BY date_of_sale) as t2
                           ON t1.day_of_week = t2.day_of_week
                     Group by t1.day_of_week;
 

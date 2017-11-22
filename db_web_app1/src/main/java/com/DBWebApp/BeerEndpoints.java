@@ -25,10 +25,11 @@ public class BeerEndpoints {
     public Response postBeer(ISellsXMLEndpoint input) {
         //add the drinker to the drinkers table
         BeerQueries b = new BeerQueries();
-        int result = b.addBeerToSell(input.bar_id, input.beer_id, input.is_on_tap, input.price);
+
+        int result = b.addBeerToSell(input.bar_id, input.beer_id, input.is_on_tap, input.price, b.alreadySold(input.bar_id, input.beer_id));
 
         if (result == -1){
-            return Response.serverError().entity("Cannot sell a beer for less than you bought it for, or bar already sells this beer.").build();
+            return Response.serverError().entity("Cannot sell a beer for less than you bought it for").build();
         }
         return Response.ok(result).build();
     }

@@ -1,6 +1,7 @@
 package com.DatabaseConn;
 
 import com.IDBWebApp.IBeerEndpoints;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -61,8 +62,43 @@ public class BeerQueries {
         return resultClass;
     }
 
-    public int addBeerToSell(int bar_id, int beer_id, int is_on_tap, int price){
-        int res = -1;
+    public int addBeerToSell(int bar_id, int beer_id, int is_on_tap, int price, Boolean isUpdate){
+        int res;
+
+        try {
+            //Get the database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            //Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            //Make a insert/update query
+            String query;
+            if (isUpdate){
+                query = String.format("UPDATE sells SET is_on_tap = %d, price = %d WHERE bar_id = %d AND beer_id = %d", is_on_tap, price, bar_id, beer_id);
+                res = 1;
+            }
+            else{
+                query = String.format("INSERT INTO sells (bar_id, beer_id, is_on_tap, price) " +
+                        "VALUES (%d, %d, %d, %d)", bar_id, beer_id, is_on_tap, price);
+                res = 2;
+            }
+
+
+            //Run the query against the database.
+            stmt.executeUpdate(query);
+
+            db.closeConnection(con);
+        } catch (Exception e) {
+            System.out.print(e);
+            res = -1;
+        }
+
+        return res;
+    }
+
+    public Boolean alreadySold(int bar_id, int beer_id){
 
         try {
             //Get the database connection
@@ -73,19 +109,21 @@ public class BeerQueries {
             Statement stmt = con.createStatement();
 
             //Make a insert query
-            String str = String.format("INSERT INTO sells (bar_id, beer_id, is_on_tap, price) " +
-                    "VALUES (%d, %d, %d, %d)", bar_id, beer_id, is_on_tap, price);
+            String str = String.format("SELECT * FROM sells WHERE bar_id = %d AND beer_id = %d", bar_id, beer_id);
 
             //Run the query against the database.
-            stmt.executeUpdate(str);
+            ResultSet rs = stmt.executeQuery(str);
 
-            res = 1;
+            if (rs.absolute(1)){
+                return true;
+            }
 
             db.closeConnection(con);
         } catch (Exception e) {
             System.out.print(e);
         }
 
-        return res;
+        return false;
     }
+
 }
