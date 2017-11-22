@@ -154,45 +154,6 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
         }
     }
 
-    this.setDailyAverages = function(barID){
-        var options = {
-            url: 'transactions/getDailyAverages',
-            params: {
-                barId: barID,
-                startDate: this.startDate,
-                endDate: this.endDate,
-                timeOfDay: this.getTimeType()
-            },
-            method: 'GET',
-            destination: 'dailyAverages'
-        }
-
-        sharedProperties.httpReq(options)
-        //var results = {"dailyAverages":[{"avg_early_earnings":504,"avg_late_earnings":1045,"dayOfWeek":1,"avg_total_earnings":1549},{"avg_early_earnings":513,"avg_late_earnings":1072,"dayOfWeek":2,"avg_total_earnings":1585},{"avg_early_earnings":495,"avg_late_earnings":1051,"dayOfWeek":3,"avg_total_earnings":1546},{"avg_early_earnings":500,"avg_late_earnings":1039,"dayOfWeek":4,"avg_total_earnings":1539},{"avg_early_earnings":874,"avg_late_earnings":1740,"dayOfWeek":5,"avg_total_earnings":2614},{"avg_early_earnings":877,"avg_late_earnings":1739,"dayOfWeek":6,"avg_total_earnings":2616},{"avg_early_earnings":863,"avg_late_earnings":1725,"dayOfWeek":7,"avg_total_earnings":2588}]};
-        //console.log('updating sharedProperties with ' + results);
-        //sharedProperties.setProperty('dailyAverages', results);
-    }
-
-    this.setEarnings = function(timeType, barID){        
-
-        var options = {
-            url: 'transactions/getEarnings',
-            params: {
-                type: timeType,
-                barId: barID,
-                startDate: this.startDate,
-                endDate: this.endDate,
-                timeOfDay: this.getTimeType()
-            },
-            method: 'GET',
-            destination: 'monthlyEarnings'
-        }
-        
-        sharedProperties.httpReq(options)
-        //var results = {"monthly_earnings":[{"early_earnings":4738,"late_earnings":9632,"month":"1","total_earnings":14370,"year":"2016"},{"early_earnings":4427,"late_earnings":9018,"month":"2","total_earnings":13445,"year":"2016"},{"early_earnings":4549,"late_earnings":9339,"month":"3","total_earnings":13888,"year":"2016"},{"early_earnings":4687,"late_earnings":9528,"month":"4","total_earnings":14215,"year":"2016"},{"early_earnings":4716,"late_earnings":9585,"month":"5","total_earnings":14301,"year":"2016"},{"early_earnings":4573,"late_earnings":9328,"month":"6","total_earnings":13901,"year":"2016"},{"early_earnings":4733,"late_earnings":9638,"month":"7","total_earnings":14371,"year":"2016"},{"early_earnings":4711,"late_earnings":9610,"month":"8","total_earnings":14321,"year":"2016"},{"early_earnings":4760,"late_earnings":9592,"month":"9","total_earnings":14352,"year":"2016"},{"early_earnings":4550,"late_earnings":9202,"month":"10","total_earnings":13752,"year":"2016"},{"early_earnings":4401,"late_earnings":8862,"month":"11","total_earnings":13263,"year":"2016"},{"early_earnings":4701,"late_earnings":9621,"month":"12","total_earnings":14322,"year":"2016"}]}
-        //sharedProperties.setProperty('monthlyEarnings',results)
-    };
-
     this.getEarnings = function(){
         return sharedProperties.getProperty('monthlyEarnings').monthly_earnings;
     }
@@ -228,7 +189,9 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
         
         var monthMap = this.monthMap
         var dayMap = this.dayMap
-        
+
+
+
 
         averageArr.forEach(function(elem){
             var dayOrMonth = elem.dayOfWeek? dayMap[elem.dayOfWeek] :monthMap[elem.month]
