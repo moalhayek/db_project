@@ -161,6 +161,31 @@ INTO TABLE music
 FIELDS TERMINATED BY ','
 IGNORE 1 LINES;  
 
+# Sells Table
+CREATE TABLE IF NOT EXISTS sells (
+  bar_id INT NOT NULL,
+  beer_id INT NULL,
+  is_on_tap BOOLEAN NULL,
+  price INT NULL,
+  PRIMARY KEY (bar_id,`beer_id`));
+  
+LOAD DATA LOCAL INFILE '/Users/Brian/Documents/School/Rutgers University/Senior Year/Fall 2017/Principles of Info & Data Management/Project/db_project/code/table_generation/sells_table.csv' 
+INTO TABLE sells
+FIELDS TERMINATED BY ','
+IGNORE 1 LINES;
+
+CREATE TRIGGER minPrice
+BEFORE INSERT ON sells
+FOR EACH ROW
+  BEGIN
+    IF NEW.price <= (SELECT manf_price
+                     FROM beers
+                     WHERE beers.id = NEW.beer_id) THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Cannot sell beer for less than you buy it for';
+    END IF;
+  END;
+
 # Transactions Table
 CREATE TABLE `transactions` (
   `bar_id` INT NOT NULL,

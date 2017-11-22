@@ -60,4 +60,32 @@ public class BeerQueries {
 
         return resultClass;
     }
+
+    public int addBeerToSell(int bar_id, int beer_id, int is_on_tap, int price){
+        int res = -1;
+
+        try {
+            //Get the database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            //Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            //Make a insert query
+            String str = String.format("INSERT INTO sells (bar_id, beer_id, is_on_tap, price) " +
+                    "VALUES (%d, %d, %d, %d)", bar_id, beer_id, is_on_tap, price);
+
+            //Run the query against the database.
+            stmt.executeUpdate(str);
+
+            res = 1;
+
+            db.closeConnection(con);
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+
+        return res;
+    }
 }
