@@ -62,7 +62,7 @@
                 </div>
                 <div flex="87" layout="column" ng-if="personal.selectedBar">
                     <div  flex="40" layout="row" layout-align="center">
-                        <md-card flex theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" ng-init="earn.instantiate(personal.selectedBar.id,'total')" md-theme-watch>
+                        <md-card flex md-theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" ng-init="earn.instantiate(personal.selectedBar.id,'total')" md-theme-watch>
                             <md-card-title>
                               <md-card-title-text>
                                 <span class="md-headline">Earnings</span>
@@ -116,39 +116,35 @@
                                     </md-input-container>
                                 </div>
                             </md-card-content>
-                            <md-card-actions layout="row" layout-align="end center">
-                            </md-card-actions>
                         </md-card>
-                        <md-card md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id)" md-theme-watch>
+                        <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id)" md-theme-watch>
                             <md-card-title>
                               <md-card-title-text>
                                 <span class="md-headline">Bartender Sales</span>
+                                  <p>Sales for shift: </p>
+                                  <div layout="row">
+                                      <md-checkbox ng-model="bt.early" aria-label="Checkbox 1" ng-disabled="bt.disableCheck('early')" ng-click="bt.switchData('early',bt.early)">
+                                          Early
+                                      </md-checkbox>
+                                      <md-checkbox ng-model="bt.late" aria-label="Checkbox 2" ng-disabled="bt.disableCheck('late')" ng-click="bt.switchData('late',bt.late)">
+                                          Late
+                                      </md-checkbox>
+                                      <md-checkbox ng-model="bt.total" aria-label="Checkbox 3" ng-disabled="bt.disableCheck('total')" ng-click="bt.switchData('total',bt.total)">
+                                          Total
+                                      </md-checkbox>
+                                  </div>
+                                  <div>
+                                      <table class="table table-responsive table-condensed">
+                                          <tr>
+                                              <th ng-repeat="label in bt.labels" ng-click="bt.changeSort(label)" style="cursor: pointer;">{{label}}</th>
+                                          </tr>
+                                          <tr ng-repeat="bartender in bt.data|orderBy :bt.sortType:bt.sortReverse">
+                                              <td ng-repeat="(key,value) in bartender track by $index">{{value}}</td>
+                                          </tr>
+                                      </table>
+                                  </div>
                               </md-card-title-text>
                             </md-card-title>
-                            <md-card-content>
-                                <p>Sales for shift: </p>
-                                <div layout="row">
-                                    <md-checkbox ng-model="bt.early" aria-label="Checkbox 1" ng-disabled="bt.disableCheck('early')" ng-click="bt.switchData('early',bt.early)">
-                                        Early
-                                    </md-checkbox>
-                                    <md-checkbox ng-model="bt.late" aria-label="Checkbox 2" ng-disabled="bt.disableCheck('late')" ng-click="bt.switchData('late',bt.late)">
-                                        Late
-                                    </md-checkbox>
-                                    <md-checkbox ng-model="bt.total" aria-label="Checkbox 3" ng-disabled="bt.disableCheck('total')" ng-click="bt.switchData('total',bt.total)">
-                                        Total
-                                    </md-checkbox>
-                                </div>
-                                <div>
-                                    <table class="table table-responsive table-condensed">
-                                        <tr>
-                                            <th ng-repeat="label in bt.labels" ng-click="bt.changeSort(label)" style="cursor: pointer;">{{label}}</th>
-                                        </tr>
-                                        <tr ng-repeat="bartender in bt.data|orderBy :bt.sortType:bt.sortReverse">
-                                            <td ng-repeat="(key,value) in bartender track by $index">{{value}}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </md-card-content>
                         </md-card>
                     </div>
                     <div flex="40"  layout="row" layout-align="center">
@@ -156,39 +152,35 @@
                             <md-card-title>
                                 <md-card-title-text>
                                     <span class="md-headline">Advertisements</span>
+                                    <md-input-container >
+                                        <label>Ad platform</label>
+                                        <md-select ng-model="ad.selectedAd" ng-change="ad.setData(ad.selectedAd)">
+                                            <md-option ng-repeat="campaign in ad.getAds()" ng-value="campaign">
+                                                {{campaign.platformName}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <div ng-repeat="platform in ad.getAds()" ng-show="ad.selectedAd==platform">
+                                        <b><label>Start Date: </label></b>{{ad.selectedAd['startDate'] | date:"MM/dd/yyyy"}}<br>
+                                        <label>Earnings for {{ad.selectedAd['startDate'] | date:"MMMM"}}: $</label>{{ad.getAdEarnings(ad.selectedAd['startDate'] | date:"M")}}.00<br><br>
+                                        <b><label>End Date: </label></b>{{ad.selectedAd['endDate'] | date:"MM/dd/yyyy"}}<br>
+                                        <label>Earnings for {{ad.selectedAd['endDate'] | date:"MMMM"}}: $</label>{{ad.getAdEarnings(ad.selectedAd['endDate'] | date:"M")}}.00<br><br>
+                                        <canvas  id="line" class="chart chart-bar"
+                                                 chart-data="ad.data"
+                                                 chart-labels="ad.labels"
+                                                 chart-series="ad.series"
+                                                 chart-options="ad.options"
+                                        >
+                                        </canvas>
+                                    </div>
                                 </md-card-title-text>
                             </md-card-title>
-                            <md-card-content>
-                                <md-input-container >
-                                    <label>Ad platform</label>
-                                    <md-select ng-model="ad.selectedAd" ng-change="ad.setData(ad.selectedAd)">
-                                        <md-option ng-repeat="campaign in ad.getAds()" ng-value="campaign">
-                                            {{campaign.platformName}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
-                                <div ng-repeat="platform in ad.getAds()" ng-show="ad.selectedAd==platform">
-                                    <b><label>Start Date: </label></b>{{ad.selectedAd['startDate'] | date:"MM/dd/yyyy"}}<br>
-                                    <label>Earnings for {{ad.selectedAd['startDate'] | date:"MMMM"}}: $</label>{{ad.getAdEarnings(ad.selectedAd['startDate'] | date:"M")}}.00<br><br>
-                                    <b><label>End Date: </label></b>{{ad.selectedAd['endDate'] | date:"MM/dd/yyyy"}}<br>
-                                    <label>Earnings for {{ad.selectedAd['endDate'] | date:"MMMM"}}: $</label>{{ad.getAdEarnings(ad.selectedAd['endDate'] | date:"M")}}.00<br><br>
-                                    <canvas  id="line" class="chart chart-bar"
-                                             chart-data="ad.data"
-                                             chart-labels="ad.labels"
-                                             chart-series="ad.series"
-                                             chart-options="ad.options"
-                                    >
-                                    </canvas>
-                                </div>
-                            </md-card-content>
                         </md-card>
                         <md-card flex md-theme="cyan-theme" ng-controller="beerInfoController as beerCtrl" ng-init="beerCtrl.setAllBeers(personal.selectedBar.id)">
                             <md-card-title>
                               <md-card-title-text>
                                 <span class="md-headline">Beer Info</span>
                               </md-card-title-text>
-                            </md-card-title>
-                            <md-card-content>
                                 <md-input-container >
                                     <label>Add a beer</label>
                                     <md-select ng-model="beerCtrl.newBeer" ng-change="beerCtrl.addBeer(beerCtrl.newBeer)">
@@ -198,53 +190,34 @@
                                 </md-input-container>
 
                                 <canvas  id="line" class="chart chart-line"
-                                chart-data="beerCtrl.data"
-                                chart-labels="beerCtrl.labels"
-                                chart-series="beerCtrl.series"
+                                         chart-data="beerCtrl.data"
+                                         chart-labels="beerCtrl.labels"
+                                         chart-series="beerCtrl.series"
                                 >
                                 </canvas>
                                 <div>
                                     <span ng-repeat="(key,value) in beerCtrl.beerDict" ng-click="beerCtrl.removeBeer(key)">{{key + ', '}}</span>
                                 </div>
-                            </md-card-content>
-                            <md-card-actions layout="row" layout-align="end center">
-
-                            </md-card-actions>
+                            </md-card-title>
                         </md-card>
                     </div>
                     <div flex="40" layout="row" layout-align="center">
-                        <md-card flex ng-controller="earnings as earn" >
+                        <md-card flex md-theme="cyan-theme" ng-controller="musicTrendController as music" ng-init="music.setTrends(personal.selectedBar.id)"md-theme-watch>
                             <md-card-title>
                                 <md-card-title-text>
                                     <span class="md-headline">Drinkers</span>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-content>
-                                <md-radio-group ng-model="earn.timeType"">
-                                <md-radio-button value="monthly">Monthly</md-radio-button>
-                                <md-radio-button value="day-of-week">Day of Week</md-radio-button>
-                                </md-radio-group>
-                                <div ng-show="earn.timeType=='monthly'">
-                                    <canvas  id="line" class="chart chart-line"
-                                             chart-data="earn.data"
-                                             chart-labels="earn.labels_months"
-                                             chart-series="earn.series"
-                                             chart-options="earn.options"
+                                <div>
+                                    <canvas id="line" class="chart chart-bar"
+                                            chart-data="music.data"
+                                            chart-labels="music.labels"
+                                            chart-options="music.options"
                                     >
                                     </canvas>
-                                    <md-datepicker ng-show="earn.timeType=='monthly'"ng-model="earn.startDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
-                                    <md-datepicker ng-model="earn.endDate" md-placeholder="Enter date" md-current-view="year"></md-datepicker>
                                 </div>
-                                <canvas ng-show="earn.timeType=='day-of-week'" id="line" class="chart chart-bar"
-                                        chart-data="earn.data"
-                                        chart-labels="earn.labels_days_of_week"
-                                        chart-series="earn.series"
-                                        chart-options="earn.options"
-                                >
-                                </canvas>
                             </md-card-content>
-                            <md-card-actions layout="row" layout-align="end center">
-                            </md-card-actions>
                         </md-card>
                         <md-card flex md-theme="cyan-theme" ng-controller="musicTrendController as music" ng-init="music.setTrends(personal.selectedBar.id)"md-theme-watch>
                             <md-card-title>
