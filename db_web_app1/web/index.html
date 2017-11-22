@@ -59,7 +59,7 @@
                             </md-option>
                         </md-select>
                     </md-input-container>
-                    <md-button ng-click="personal.clearValue()" class="md-raised" ng-disabled="!personal.selectedBar">Clear</md-button>
+                    <md-button style="text-transform: none;" ng-click="personal.clearValue()" ng-disabled="!personal.selectedBar">Clear</md-button>
                 </div>
                 <div flex="87" layout="column" ng-if="personal.selectedBar">
                     <div  flex="40" layout="row" layout-align="center">
@@ -182,7 +182,7 @@
                               <md-card-title-text>
                                 <span class="md-headline">Beer Info</span>
                                   <md-input-container >
-                                      <label>Add beer data</label>
+                                      <label>Add/remove beer data</label>
                                       <md-select ng-model="beerCtrl.newBeer" ng-change="beerCtrl.addBeer(beerCtrl.newBeer)">
                                           <md-option ng-repeat="beer in beerCtrl.getAllBeers()| orderBy: ['manuf','name']" ng-show="!beerCtrl.beerDict.includes(beer.manuf + ': ' + beer.name)" ng-value="beer">
                                               {{beer.manuf + ': ' + beer.name}}</md-option>
@@ -226,6 +226,7 @@
                             <md-card-title>
                                 <md-card-title-text>
                                     <span class="md-headline">Music Trends</span>
+                                    <p>Drinkers' Genre Preferences:</p>
                                     <md-card-content>
                                         <div>
                                             <canvas id="line" class="chart chart-bar"
@@ -308,7 +309,9 @@
                     </md-option>
                 </md-select>
             </md-input-container>
+                <div>
             <md-button class="md-raised" ng-click="mod.addDrinker(mod.drinker)" ng-disabled="drinkerForm.$invalid">Add new drinker</md-button>
+                </div>
             </form>
         </md-content>
 
@@ -341,10 +344,12 @@
                 <label>Sales Price</label>
                 <input ng-model="mod.beer.price" required>
             </md-input-container>
+                <div>
             <md-button class="md-raised" ng-click="mod.addBeer(mod.beer)" ng-disabled="beerForm.$invalid">Add/update beer</md-button>
+                </div>
             </form>
         </md-content>
 
-
+        </div>
     </md-content>
 </body>

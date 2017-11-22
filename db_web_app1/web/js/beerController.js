@@ -2,7 +2,6 @@ var app = angular.module('db-project');
 
 //controller for personal beer info
 app.controller("beerInfoController", function (sharedProperties) {
-
     this.data = [];
     this.labels = ['Total Sold','Sale Price','Total Profit'];
     this.series = [];
@@ -58,9 +57,4 @@ app.controller("beerInfoController", function (sharedProperties) {
         //console.log(sharedProperties.getProperty('myBeers'))
         return sharedProperties.getProperty('myBeers')
     }
-});
-
-//controller for gen beer
-app.controller('genBeerInfoController',function(){
-
 });
