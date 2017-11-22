@@ -88,7 +88,7 @@ public class TransactionQueries {
                     "            AND date_of_sale >= '%s'\n" +
                     "            AND date_of_sale <= '%s'\n" +
                     "            AND shift_type = 'early'\n" +
-                    "      GROUP BY day_of_week, month, year) as t1\n" +
+                    "      GROUP BY date_of_sale) as t1\n" +
                     "      INNER JOIN\n" +
                     "      (SELECT DAYOFWEEK(date_of_sale) as day_of_week, MONTH(date_of_sale) as month, YEAR(date_of_sale) as year,  SUM(sale_price) as total_revenue\n" +
                     "       FROM transactions\n" +
@@ -96,7 +96,7 @@ public class TransactionQueries {
                     "             AND date_of_sale >= '%s'\n" +
                     "             AND date_of_sale <= '%s'\n" +
                     "             AND shift_type = 'late'\n" +
-                    "       GROUP BY day_of_week, month, year) as t2\n" +
+                    "       GROUP BY date_of_sale) as t2\n" +
                     "      ON t1.day_of_week = t2.day_of_week\n" +
                     "Group by t1.day_of_week;";
 
