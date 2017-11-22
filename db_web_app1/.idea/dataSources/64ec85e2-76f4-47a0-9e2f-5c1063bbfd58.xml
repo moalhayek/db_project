@@ -258,10 +258,10 @@ platform_id</ColNames>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="72" parent="15" name="drinker_id">
+    <index id="72" parent="15" name="listens_ibfk_1">
       <ColNames>drinker_id</ColNames>
     </index>
-    <index id="73" parent="15" name="music_id">
+    <index id="73" parent="15" name="listens_ibfk_2">
       <ColNames>music_id</ColNames>
     </index>
     <foreign-key id="74" parent="15" name="listens_ibfk_1">
@@ -269,12 +269,16 @@ platform_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>drinkers</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="75" parent="15" name="listens_ibfk_2">
       <ColNames>music_id</ColNames>
       <RefSchemaName>dbproject7</RefSchemaName>
       <RefTableName>music</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="76" parent="16" name="id">
       <Position>1</Position>
