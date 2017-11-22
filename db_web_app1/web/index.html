@@ -118,20 +118,32 @@
                             <md-card-actions layout="row" layout-align="end center">
                             </md-card-actions>
                         </md-card>
-                        <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id)" md-theme-watch>
+                        <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id,'total')" md-theme-watch>
                             <md-card-title>
                               <md-card-title-text>
-                                <span class="md-headline">Bartenders</span>
+                                <span class="md-headline">Bartender Sales</span>
                               </md-card-title-text>
                             </md-card-title>
                             <md-card-content>
+                                <p>Sales for shift: </p>
+                                <div layout="row">
+                                    <md-checkbox ng-model="bt.early" aria-label="Checkbox 1" ng-disabled="bt.disableCheck('early')" ng-click="bt.switchData('early',bt.early)">
+                                        Early
+                                    </md-checkbox>
+                                    <md-checkbox ng-model="bt.late" aria-label="Checkbox 2" ng-disabled="bt.disableCheck('late')" ng-click="bt.switchData('late',bt.late)">
+                                        Late
+                                    </md-checkbox>
+                                    <md-checkbox ng-model="bt.total" aria-label="Checkbox 3" ng-disabled="bt.disableCheck('total')" ng-click="bt.switchData('total',bt.total)">
+                                        Total
+                                    </md-checkbox>
+                                </div>
                                 <div>
                                     <table class="table table-responsive table-condensed">
                                         <tr>
-                                            <th ng-repeat="label in bt.labels">{{label}}</th>
+                                            <th ng-repeat="label in bt.labels" ng-click="bt.changeSort(label)" style="cursor: pointer;">{{label}}</th>
                                         </tr>
-                                        <tr ng-repeat="bartender in bt.data">
-                                            <td ng-repeat="data in bartender track by $index">{{data}}</td>
+                                        <tr ng-repeat="bartender in bt.data|orderBy :bt.sortType:bt.sortReverse">
+                                            <td ng-repeat="(key,value) in bartender track by $index">{{value}}</td>
                                         </tr>
                                     </table>
                                 </div>

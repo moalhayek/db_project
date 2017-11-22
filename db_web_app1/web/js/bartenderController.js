@@ -1,12 +1,11 @@
 app.controller('bartenders',function(sharedProperties){
 
     this.labels = ['Bartender','Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-    this.series = []
-    this.data = [
-        [65, 59, 80, 81, 56]
-    ];
 
-    this.setBartenders = function(barID){
+    this.sortType = 'name'
+
+
+    this.setBartenders = function(barID,timeType){
         //REST endpoint with whichBar as param
         var options = {
             url: 'bartenders/getBartenders',
@@ -21,13 +20,14 @@ app.controller('bartenders',function(sharedProperties){
 
         promise.then(function(res){
             sharedProperties.setProperty('bartenders',res.bartenders)
-            this.setData('total');
+            this.setData(timeType);
         }.bind(this));
     };
 
     this.data =[];
 
     this.setData = function(timeType){
+        console.log('attempting to update data')
         var allData = sharedProperties.getProperty('bartenders');
         console.log(allData)
         var tempData = []
@@ -37,11 +37,78 @@ app.controller('bartenders',function(sharedProperties){
         console.log(allData[0][sales_name])
         allData.forEach(function(elem){
             var name = elem.name;
-            var sales = elem['total_avgs'];
-            var dataSet = [name,sales[0],sales[1],sales[2],sales[3],sales[4],sales[5],sales[6]]
+            var sales = elem[sales_name];
+            var dataSet = {};
+            dataSet.name = name;
+            dataSet.monSales = sales[0]
+            dataSet.tueSales = sales[1]
+            dataSet.wedSales = sales[2]
+            dataSet.thuSales = sales[3]
+            dataSet.friSales = sales[4]
+            dataSet.satSales = sales[5]
+            dataSet.sunSales = sales[6]
+
             tempData.push(dataSet);
         });
         this.data = tempData
     }
+
+    this.sortMap = {
+        'Bartender': 'name',
+        'Mon': 'monSales',
+        'Tue': 'tueSales',
+        'Wed': 'wedSales',
+        'Thu': 'thuSales',
+        'Fri': 'friSales',
+        'Sat': 'satSales',
+        'Sun': 'sunSales'
+    }
+
+    this.sortReverse = false
+
+    this.changeSort = function(toWhat){
+        var oldSort = this.sortType
+        this.sortType = this.sortMap[toWhat];
+        if(oldSort ==this.sortType) {
+            this.sortReverse = !this.sortReverse;
+        }else{
+            this.sortReverse = false;
+        }
+    }
+
+    this.total = true;
+
+    this.disableCheck = function(time){
+        if(time=='early'){
+            return !this.late&&!this.total
+        }else if(time=='late'){
+            return !this.early&&!this.total
+        }else{
+            return !this.early&&!this.late
+        }
+    }
+    this.switchData = function(time,checked){
+
+        if(!checked){
+            if(time=='early'){
+                this.late = false;
+                this.total = false;
+                this.early = true;
+            }else if(time=='late'){
+                this.early = false;
+                this.total = false;
+                this.late = true;
+            }else{
+                console.log(time)
+                this.early = false;
+                this.late = false;
+                this.total = true;
+            }
+            this.setData(time);
+        }
+    }
+
+    this.early = false;
+    this.late = false;
 
 });

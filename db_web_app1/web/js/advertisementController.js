@@ -42,7 +42,10 @@ app.controller('advertisementController',function(sharedProperties){
         this.data = tempData
     };
     this.getAdEarnings = function(targetMonth){
-        var arr = sharedProperties.getProperty('monthlyEarnings').monthly_earnings;
+        var arr = sharedProperties.getProperty('monthlyEarnings').monthly_earnings ? sharedProperties.getProperty('monthlyEarnings').monthly_earnings: 0;
+        if(arr==0){
+            return 0;
+        }
         var obj = {}
         arr.forEach(function(elem){
             if(elem.month == targetMonth){
