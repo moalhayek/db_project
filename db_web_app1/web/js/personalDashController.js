@@ -17,9 +17,7 @@ app.controller('personalDashController',function(sharedProperties){
         var promise =  sharedProperties.httpReq(options);
         promise.then(function(res){
             var temp = res.bars
-            console.log(temp)
             temp.splice(0,1)
-            console.log(temp)
             sharedProperties.setProperty('barNames',temp)
             console.log(sharedProperties.getProperty('barNames'))
         }.bind(this));
