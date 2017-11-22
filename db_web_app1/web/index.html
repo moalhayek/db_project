@@ -202,22 +202,22 @@
                         </md-card>
                     </div>
                     <div flex="40" layout="row" layout-align="center">
-                        <md-card flex md-theme="cyan-theme" ng-controller="musicTrendController as music" ng-init="music.setTrends(personal.selectedBar.id)"md-theme-watch>
+                        <md-card flex md-theme="cyan-theme" ng-controller="drinkerController as d" ng-init="d.setDrinkers(personal.selectedBar.id)"md-theme-watch>
                             <md-card-title>
                                 <md-card-title-text>
-                                    <span class="md-headline">Drinkers</span>
+                                    <span class="md-headline">Drinker Data</span>
+                                    <div>
+                                        <table class="table table-responsive table-condensed">
+                                            <tr>
+                                                <th ng-repeat="label in d.labels" ng-click="d.changeSort(label)" style="cursor: pointer;">{{label}}</th>
+                                            </tr>
+                                            <tr ng-repeat="drinker in d.data|orderBy :d.sortType:d.sortReverse">
+                                                <td ng-repeat="(key,value) in drinker track by $index">{{value}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </md-card-title-text>
                             </md-card-title>
-                            <md-card-content>
-                                <div>
-                                    <canvas id="line" class="chart chart-bar"
-                                            chart-data="music.data"
-                                            chart-labels="music.labels"
-                                            chart-options="music.options"
-                                    >
-                                    </canvas>
-                                </div>
-                            </md-card-content>
                         </md-card>
                         <md-card flex md-theme="cyan-theme" ng-controller="musicTrendController as music" ng-init="music.setTrends(personal.selectedBar.id)"md-theme-watch>
                             <md-card-title>

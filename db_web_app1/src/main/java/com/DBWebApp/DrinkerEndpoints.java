@@ -37,6 +37,7 @@ public class DrinkerEndpoints {
         if (new_drinker_id == -1){
             return Response.serverError().entity("Cannot add alcoholics or under age drinkers to database").build();
         }
+
         return Response.ok(new_drinker_id).build();
     }
 
