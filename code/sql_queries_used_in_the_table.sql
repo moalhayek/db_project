@@ -198,7 +198,7 @@ Select t2.name, AVG(t2.total_sales) as avg_sales, t2.shift_type, t2.day_of_week
                             From (Select d.name, SUM(t.sale_price) as total_sales, t.shift_type, DAYOFWEEK(t.date_of_sale) as day_of_week
                                   From transactions t INNER JOIN drinkers d ON t.employee_id = d.id
                                   Where t.bar_id = %d
-                                  Group by day_of_week, MONTH(t.date_of_sale), YEAR(t.date_of_sale), shift_type) as t2
+                                  Group by date_of_sale, shift_type) as t2
                             Group by t2.name, t2.shift_type, t2.day_of_week;
 
 SELECT b.name, b.manf, s.is_on_tap, b.abv, s.price, b.manf_price,
