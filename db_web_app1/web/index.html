@@ -36,7 +36,7 @@
         md-selected-nav-item="currentNavItem"
         nav-bar-aria-label="navigation links">
             <md-nav-item md-nav-click="page.changePage('personal_bar_data')" name="personalTab">
-                Personal
+                Dashboard
             </md-nav-item>
             <md-nav-item md-nav-click="page.changePage('modify_bar_data')" name="modifyDataTab">
                 Add/Remove Data
@@ -48,19 +48,20 @@
             <div flex="10" md-theme="cyan-theme" class="md-accent" style="background-color: none;">
             </div>
             <div flex="80" layout ="column" md-theme="cyan-theme" layout-align="center">
-                <h2 >{{'Personalized Data for '+personal.selectedBar.name}}</h2>
-                <div flex="5" class="md-warn" ng-init="personal.getBars()">
-                    <md-input-container >
+                <h2 >{{'Personalized Data for bar: '+personal.selectedBar.name}}</h2>
+                <div flex="5" layout="row" class="md-warn" ng-init="personal.getBars()">
+                    <md-input-container>
                         <label>Bar Name</label>
-                        <md-select ng-model="personal.selectedBar" ng-change="personal.recalcData()">
+                        <md-select ng-model="personal.selectedBar" ng-disabled="personal.selectedBar" ng-change="personal.recalcData()">
                             <md-option ng-repeat="bar in personal.allBars()"  ng-value="bar">
                             {{bar.name}}
                             </md-option>
                         </md-select>
                     </md-input-container>
+                    <md-button ng-click="personal.clearValue()" ng-disabled="!personal.selectedBar">Clear</md-button>
                 </div>
-                <div flex="90" layout="column" ng-if="personal.barSelected">
-                    <div ng-if="personal.barSelected" flex="40" layout="row" layout-align="center">
+                <div flex="90" layout="column" ng-if="personal.selectedBar">
+                    <div  flex="40" layout="row" layout-align="center">
                         <md-card flex="50" theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" ng-init="earn.instantiate(personal.selectedBar.id,'total')" md-theme-watch>
                             <md-card-title>
                               <md-card-title-text>
@@ -141,7 +142,7 @@
                             </md-card-actions>
                         </md-card>
                     </div>
-                    <div flex="40"  ng-if="personal.barSelected" layout="row" layout-align="center">
+                    <div flex="40"  layout="row" layout-align="center">
                         <md-card flex md-theme="cyan-theme" ng-controller="advertisementController as ad" ng-init="ad.setAds(personal.selectedBar.id)"md-theme-watch>
                             <md-card-title>
                                 <md-card-title-text>
