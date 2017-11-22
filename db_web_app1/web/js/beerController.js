@@ -16,11 +16,9 @@ app.controller("beerInfoController", function (sharedProperties) {
         this.beerDict[name_str] = newBeer;
     }
 
-    this.removeBeer = function(oldBeer){
-        var name = oldBeer.name
-        var manf = oldBeer.manuf
-        var name_str = name+' ' +manf
-        delete this.beerDict[name_str]
+    this.removeBeer = function(beerName){
+
+        delete this.beerDict[beerName]
     }
 
     this.setAllBeers = function(barID){
