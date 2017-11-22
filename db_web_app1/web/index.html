@@ -152,7 +152,7 @@
                         <md-card flex md-theme="cyan-theme" ng-controller="advertisementController as ad" ng-init="ad.setAds(personal.selectedBar.id)"md-theme-watch>
                             <md-card-title>
                                 <md-card-title-text>
-                                    <span class="md-headline">Ad Campaign</span>
+                                    <span class="md-headline">Ad Campaigns</span>
                                     <md-input-container >
                                         <label>Ad platform</label>
                                         <md-select ng-model="ad.selectedAd" ng-change="ad.setData(ad.selectedAd)">
@@ -180,7 +180,7 @@
                         <md-card flex md-theme="cyan-theme" ng-controller="beerInfoController as beerCtrl" ng-init="beerCtrl.setAllBeers(personal.selectedBar.id)">
                             <md-card-title>
                               <md-card-title-text>
-                                <span class="md-headline">Beer Info</span>
+                                <span class="md-headline">Beer Profit Comparison</span>
                                   <md-input-container >
                                       <label>Add/remove beer data</label>
                                       <md-select ng-model="beerCtrl.newBeer" ng-change="beerCtrl.addBeer(beerCtrl.newBeer)">
@@ -189,7 +189,7 @@
                                       </md-select>
                                   </md-input-container>
                                   <div>
-                                      <md-button class="md-raised" ng-repeat="(key,value) in beerCtrl.beerDict" ng-click="beerCtrl.removeBeer(key)">{{key}}</md-button>
+                                      <md-button class="md-raised" ng-repeat="(key,value) in beerCtrl.beerDict" ng-click="beerCtrl.removeBeer(key)" style="text-transform: none;">{{key}}</md-button>
                                   </div>
                                   <br>
                                   <div>
@@ -208,7 +208,7 @@
                         <md-card flex md-theme="cyan-theme" ng-controller="drinkerController as d" ng-init="d.setDrinkers(personal.selectedBar.id)"md-theme-watch>
                             <md-card-title>
                                 <md-card-title-text>
-                                    <span class="md-headline">Drinker Data</span><br>
+                                    <span class="md-headline">Data of Drinkers who Frequent this Bar</span><br>
                                     <div>
                                         <table class="tableCSS">
                                             <tr>
@@ -226,7 +226,7 @@
                             <md-card-title>
                                 <md-card-title-text>
                                     <span class="md-headline">Music Trends</span>
-                                    <p>Drinkers' Genre Preferences:</p>
+                                    <p>Frequenters' Genre Preferences:</p>
                                     <md-card-content>
                                         <div>
                                             <canvas id="line" class="chart chart-bar"
@@ -350,6 +350,6 @@
             </form>
         </md-content>
 
-        </div>
+
     </md-content>
 </body>

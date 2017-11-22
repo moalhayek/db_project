@@ -12,57 +12,19 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
         total: 'Total Sales',
     }
 
-    /*this.refresh = function(shiftType,holdOld){
-        console.log('refreshing chart')
-        console.log(this.getDailyAverages())
-        var dailyAveArr = this.getDailyAverages()
-        var monthlyArr = this.getEarnings()
-        console.log('setting data_daily')
-        var new_data_daily = this.setData(dailyAveArr,shiftType);
-
-        console.log('setting daily labels')
-        this.labels_daily = this.setLabels(dailyAveArr);
-        console.log('setting monthly data')
-        var new_data_monthly = this.setData(monthlyArr,shiftType);
-        console.log('setting monthly labels')
-        this.labels_monthly = this.setLabels(monthlyArr)
-
-        if(holdOld){
-            if(shiftType=='early'){
-                var old_data_daily = this.data_daily[0]
-                var old_data_monthly = this.data_monthly[0]
-
-                this.data_daily[0] = new_data_daily
-                this.data_daily.push(old_data_daily)
-
-                this.data_monthly[0] = new_data_monthly
-                this.data_monthly.push(old_data_monthly)
-
-            }else if(shiftType=='late'){
-                this.data_daily.push(new_data_daily)
-                this.data_monthly.push(new_data_monthly)
-            }
-            this.series = ['Early Sales','Late Sales']
-        }else{
-            this.data_daily = []
-            this.data_daily.push(new_data_daily)
-
-            this.data_monthly = []
-            this.data_monthly.push(new_data_monthly)
-
-            this.series = []
-            this.series.push(shiftType)
-        }
-    }*/
-
     this.instantiate = function(barID){
+
+        this.data_daily = []
+        this.data_monthly = []
+        this.labels_monthly = []
+        this.series = []
 
         var options = {
             url: 'transactions/getDailyAverages',
             params: {
                 barId: barID,
                 startDate: this.startDate,
-                endDate: this.endDate,
+                endDate: this.dateMap[this.endDate],
             },
             method: 'GET',
             destination: 'dailyAverages'
@@ -73,7 +35,7 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
             params: {
                 barId: barID,
                 startDate: this.startDate,
-                endDate: this.endDate,
+                endDate: this.dateMap[this.endDate],
             },
             method: 'GET',
             destination: 'monthlyEarnings'
@@ -121,6 +83,22 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
     }
 
     this.dateOptions = ['2016-01','2016-02','2016-03','2016-04','2016-05','2016-06','2016-07','2016-08','2016-09','2016-10','2016-11','2016-12',]
+
+    this.dateMap = {
+        '2016-01': '2016-02'
+        ,'2016-02': '2016-03',
+        '2016-03': '2016-04',
+        '2016-04': '2016-05',
+        '2016-05': '2016-06',
+        '2016-06': '2016-07',
+        '2016-07': '2016-08',
+        '2016-08': '2016-09',
+        '2016-09': '2016-10',
+        '2016-10': '2016-11',
+        '2016-11': '2016-12',
+        '2016-12': '2017-01',
+    }
+
     this.early = false
     this.late = false
     this.total = true
@@ -166,20 +144,17 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
 
     this.setData = function(inputArr,shiftType){
         var tempData = [];
-      
-        //var averageArr = this.getDailyAverages();
+
         var averageArr = inputArr;
         console.log(averageArr)
 
         var prop = inputArr[0]['avg_early_earnings']? 'avg_'+shiftType + '_earnings': shiftType + '_earnings'
-        //console.log(prop)
-        averageArr.forEach(function(elem){
 
+        averageArr.forEach(function(elem){
             tempData.push(elem[prop]);
         })
         console.log(tempData)
 
-        //this.data = tempData;
         return tempData;
     };
 
