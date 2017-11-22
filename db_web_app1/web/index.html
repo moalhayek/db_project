@@ -28,6 +28,7 @@
     <script type="text/javascript" src="./js/earningsController.js"></script>
     <script type="text/javascript" src="./js/beerFilters.js"></script>
     <script type="text/javascript" src="./js/bartenderController.js"></script>
+    <script type="text/javascript" src="./js/modifyDataDashController.js"></script>
 
 </head>
 <body ng-controller="pageController as page">
@@ -58,7 +59,7 @@
                             </md-option>
                         </md-select>
                     </md-input-container>
-                    <md-button ng-click="personal.clearValue()" ng-disabled="!personal.selectedBar">Clear</md-button>
+                    <md-button ng-click="personal.clearValue()" class="md-raised" ng-disabled="!personal.selectedBar">Clear</md-button>
                 </div>
                 <div flex="87" layout="column" ng-if="personal.selectedBar">
                     <div  flex="40" layout="row" layout-align="center">
@@ -117,7 +118,7 @@
                               </md-card-title-text>
                             </md-card-title>
                         </md-card>
-                        <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id, 'total')" md-theme-watch>
+                        <md-card flex md-theme="cyan-theme" ng-controller="bartenders as bt" ng-init="bt.setBartenders(personal.selectedBar.id,'total')" md-theme-watch>
                             <md-card-title>
                               <md-card-title-text>
                                 <span class="md-headline">Bartender Sales</span>
@@ -246,205 +247,104 @@
         </div>
 
     </md-content>
-    <md-content ng-if="page.currPage=='modify_bar_data'" ng-controller="modifyDataDashController as modDat" layout-padding>
-        <!--<div flex="40" layout="row" layout-align="center">
-            <md-card flex md-theme="cyan-theme" ng-controller="drinkerController as d">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Add Drinker</span>
-                    </md-card-title-text>
-                    <md-card-title-media>
-                        <div class="md-media-lg card-media"></div>
-                    </md-card-title-media>
-                </md-card-title>
-                <md-card-content>
-                    <br/>
-                    <md-content class="md-no-momentum">
-                        <md-input-container class="md-icon-float md-block">
-                            <!-- Use floating label instead of placeholder --
-                            <label>Name</label>
-                            <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-                            <input ng-model="user.name" type="text">
-                        </md-input-container>
+    <md-content ng-if="page.currPage=='modify_bar_data'" ng-controller="modifyDataController as mod" layout-padding>
 
-                        <md-input-container md-no-float class="md-block">
-                            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
-                            <input ng-model="user.age" type="number" step="1" placeholder="Age">
-                        </md-input-container>
+        <md-content >
+            <form name="drinkerForm">
+            <h2>Add a new drinker: </h2>
+            <md-input-container>
+                <label>Name</label>
+                <input ng-model="mod.drinker.name" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Age</label>
+                <input ng-model="mod.drinker.age" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Gender</label>
+                <md-select ng-model="mod.drinker.gender"  required>
+                    <md-option ng-repeat="gender in mod.genderOptions"  ng-value="gender.abbrev">
+                        {{gender.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Street Address</label>
+                <input ng-model="mod.drinker.street_address" required>
+            </md-input-container>
+            <md-input-container>
+                <label>City</label>
+                <input ng-model="mod.drinker.city" required>
+            </md-input-container>
+            <md-input-container>
+                <label>State</label>
+                <md-select ng-model="mod.drinker.state"  required>
+                    <md-option ng-repeat="state in mod.states"  ng-value="state.abbrev">
+                        {{state.abbrev}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Salary</label>
+                <input type="text" ng-model="mod.drinker.salary" required>
+            </md-input-container>
+            <md-input-container>
+                <label>Spending per night</label>
+                <input ng-model="mod.drinker.spending_per_night" required >
+            </md-input-container>
+            <md-input-container>
+                <label>Crowding Preference</label>
+                <md-select ng-model="mod.drinker.crowding_pref"  required>
+                    <md-option ng-repeat="pref in mod.prefs"  ng-value="pref">
+                        {{pref}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Relationship Status</label>
+                <md-select ng-model="mod.drinker.relationship_status"  required>
+                    <md-option ng-repeat="status in mod.statuses"  ng-value="status">
+                        {{status}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-button class="md-raised" ng-click="mod.addDrinker(mod.drinker)" ng-disabled="drinkerForm.$invalid">Add new drinker</md-button>
+            </form>
+        </md-content>
 
-                        <md-input-container class="md-block">
-                            <!-- Use floating placeholder instead of label --
-                            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="gender"></md-icon>
-                            <input ng-model="user.gender" type="text" placeholder="Gender" ng-required="true">
-                        </md-input-container>
+        <md-content ng-init="mod.setData()">
+            <form name="beerForm">
+            <h2>Add a new beer to sell at your bar: </h2>
+            <p>Either add a new beer to sell at your bar, or update the sales price of an existing beer!</p>
+            <md-input-container>
+                <label>Bar</label>
+                <md-select ng-model="mod.beer.bar_id" required>
+                    <md-option ng-repeat="bar in mod.getBars()" ng-value="bar.id">
+                        {{bar.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Beer</label>
+                <md-select ng-model="mod.beer.beer_id"  required>
+                    <md-option ng-repeat="beer in mod.getBeers()" ng-value="beer.id">
+                        {{beer.manuf+': '+beer.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <md-checkbox ng-model="mod.drinker.is_on_tap" aria-label="Checkbox 1" >
+                    On tap?
+                </md-checkbox>
+            </md-input-container>
+            <md-input-container>
+                <label>Sales Price</label>
+                <input ng-model="mod.beer.price" required>
+            </md-input-container>
+            <md-button class="md-raised" ng-click="mod.addBeer(mod.beer)" ng-disabled="beerForm.$invalid">Add/update beer</md-button>
+            </form>
+        </md-content>
 
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.street_address" type="text" placeholder="Street Address" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
 
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.city" type="text" placeholder="City" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.state" type="text" placeholder="State" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.salary" type="number" step = "1" placeholder="Salary" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.spending_per_night" type="text" placeholder="Spending Per Night" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <md-radio-group ng-model="data.crowding_pref">
-
-                                <md-radio-button value="Not crowded" class="md-primary">Not Crowded</md-radio-button>
-                                <md-radio-button value="Moderately crowded">Moderately Crowded</md-radio-button>
-                                <md-radio-button value="Very crowded">Very Crowded</md-radio-button>
-
-                            </md-radio-group>
-
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <md-radio-group ng-model="data.relationship_status">
-
-                                <md-radio-button value="Single" class="md-primary">Single</md-radio-button>
-                                <md-radio-button value="In a relationship">In a relationship</md-radio-button>
-
-                            </md-radio-group>
-
-                        </md-input-container>
-
-                    </md-content>
-                </md-card-content>
-            </md-card>
-        </div>-->
-        <!--<div  layout="column" layout-padding ng-cloak>
-
-            <br/>
-            <md-content class="md-no-momentum">
-                <md-input-container class="md-icon-float md-block">
-                    <!-- Use floating label instead of placeholder --
-                    <label>Name</label>
-                    <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-                    <input ng-model="user.name" type="text">
-                </md-input-container>
-
-                <md-input-container md-no-float class="md-block">
-                    <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
-                    <input ng-model="user.phone" type="text" placeholder="Phone Number">
-                </md-input-container>
-
-                <md-input-container class="md-block">
-                    <!-- Use floating placeholder instead of label --
-                    <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
-                    <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
-                </md-input-container>
-
-                <md-input-container md-no-float class="md-block">
-                    <input ng-model="user.address" type="text" placeholder="Address" >
-                    <md-icon md-svg-src="img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
-                </md-input-container>
-
-                <md-input-container class="md-icon-float md-icon-right md-block">
-                    <label>Donation Amount</label>
-                    <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
-                    <input ng-model="user.donation" type="number" step="0.01">
-                    <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
-                </md-input-container>
-
-            </md-content>
-
-        </div>-->
-        <div flex="40" layout="row" layout-align="center">
-            <md-card flex md-theme="cyan-theme" ng-controller="drinkerController as d">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Add Drinker</span>
-                    </md-card-title-text>
-                    <md-card-title-media>
-                        <div class="md-media-lg card-media"></div>
-                    </md-card-title-media>
-                </md-card-title>
-                <md-card-content>
-                    <br/>
-                    <md-content class="md-no-momentum">
-                        <md-input-container class="md-icon-float md-block">
-                            <!-- Use floating label instead of placeholder -->
-                            <label>Name</label>
-                            <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-                            <input ng-model="user.name" type="text">
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
-                            <input ng-model="user.age" type="number" step="1" placeholder="Age">
-                        </md-input-container>
-
-                        <md-input-container class="md-block">
-                            <!-- Use floating placeholder instead of label -->
-                            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="gender"></md-icon>
-                            <input ng-model="user.gender" type="text" placeholder="Gender" ng-required="true">
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.street_address" type="text" placeholder="Street Address" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.city" type="text" placeholder="City" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.state" type="text" placeholder="State" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.salary" type="number" step = "1" placeholder="Salary" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <input ng-model="user.spending_per_night" type="text" placeholder="Spending Per Night" >
-                            <md-icon md-svg-src="img/icons/ic_place_24px.svg" ></md-icon>
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <md-radio-group ng-model="data.crowding_pref">
-
-                                <md-radio-button value="Not crowded" class="md-primary">Not Crowded</md-radio-button>
-                                <md-radio-button value="Moderately crowded">Moderately Crowded</md-radio-button>
-                                <md-radio-button value="Very crowded">Very Crowded</md-radio-button>
-
-                            </md-radio-group>
-
-                        </md-input-container>
-
-                        <md-input-container md-no-float class="md-block">
-                            <md-radio-group ng-model="data.relationship_status">
-
-                                <md-radio-button value="Single" class="md-primary">Single</md-radio-button>
-                                <md-radio-button value="In a relationship">In a relationship</md-radio-button>
-
-                            </md-radio-group>
-
-                        </md-input-container>
-
-                    </md-content>
-                </md-card-content>
-            </md-card>
-        </div>
     </md-content>
 </body>

@@ -6,6 +6,12 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
     this.startDate = '2016-01'
     this.endDate = '2016-12'
 
+    this.seriesMap = {
+        early: 'Early Sales',
+        late: 'Late Sales',
+        total: 'Total Sales',
+    }
+
     this.refresh = function(shiftType,holdOld){
         console.log('refreshing chart')
         console.log(this.getDailyAverages())
@@ -119,39 +125,33 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
 
     this.switchData = function(whichOne,checked){
         console.log(whichOne + ' just got clicked')
-        if(!checked&&whichOne=='total'){
-            this.early = false
-            this.late = false
-            this.refresh(whichOne,false)
-        }else if(!checked&&(whichOne =='early')){
-            this.total = false
-            if(this.late){
-                this.refresh(whichOne,true)
-            }else{
-                this.refresh(whichOne,false)
-            }
-            
-        }else if(!checked&&(whichOne=='late')){
-            this.total = false
-            this.refresh(whichOne)
-            if(this.early){
-                this.refresh(whichOne,true)
-            }else{
-                this.refresh(whichOne,false)
-            }
+        if(!checked){
+            this.addData(whichOne);
+        }else{
+            this.removeData(whichOne);
         }
     }
 
-    this.getTimeType = function(){
-        if(this.early&&this.late){
-            return 'both'
-        }else if(this.early){
-            return 'early'
-        }else if(this.late){
-            return 'late'
-        }else{
-            return 'total';
-        }
+    this.addData = function(whichOne){
+        this.series.push(seriesMap.whichOne)
+
+        var dailyAveArr = this.getDailyAverages()
+        var monthlyArr = this.getEarnings()
+
+        var new_data_daily = this.setData(dailyAveArr,whichOne);
+        var new_data_monthly = this.setData(monthlyArr,whichOne);
+
+        this.data_daily.push(new_data_daily)
+        this.data_monthly.push(new_data_monthly)
+    }
+
+    this.removeData = function(whichOne){
+        var str = seriesMap.whichOne
+
+        var index = this.series.indexOf(str)
+        this.series.splice(index,1)
+        this.data_daily.splice(index,1)
+        this.data_monthly.splice(index,1)
     }
 
     this.getEarnings = function(){
@@ -190,9 +190,6 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
         var monthMap = this.monthMap
         var dayMap = this.dayMap
 
-
-
-
         averageArr.forEach(function(elem){
             var dayOrMonth = elem.dayOfWeek? dayMap[elem.dayOfWeek] :monthMap[elem.month]
             //console.log(dayOrMonth)
@@ -214,7 +211,6 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
     this.data_monthly = []
 
     this.series = []
-
     this.data = []
     
     this.options = {

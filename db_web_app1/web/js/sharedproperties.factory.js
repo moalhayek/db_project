@@ -3,7 +3,9 @@ var app = angular.module('db-project');
 app.factory('sharedProperties',function($http,$timeout){
     var properties = {
         'barNames': [],
-        'musicData': []
+        'musicData': [],
+        'allBeers': [],
+        'allBars': []
         //add whatever properties we want here, JSON style
     };
 
@@ -19,21 +21,14 @@ app.factory('sharedProperties',function($http,$timeout){
         },
         //function template for http request, just need params as JSON
         httpReq: function(options){
-            return httpRequest = $http({
+            return $http({
                 method: options.method,
                 url: path+options.url,
                 params: options.params
             }).then(function mySuccess(response){
                 console.log('the request went well!');
                 return response.data;
-                //console.log(options)
-                /*$timeout(function(){
-                    if(options.destination != null){
-                        console.log(response.data)
-                        properties[options.destination] = response.data;
-                        //sharedProperties.setProperty(options.destination,response.data);
-                    }
-                });*/
+
             },function myError(response){
                 console.log(response.statusText);
                 console.log('the function failed horribly');
