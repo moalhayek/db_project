@@ -227,10 +227,11 @@ GROUP BY age;
 
 Select * From drinkers where id = %d;
 
-SELECT m1.genre, COUNT(l1.drinker_id) 
-FROM listens l1 INNER JOIN music m1 INNER JOIN drinkers d1 
-ON (l1.music_id = m1.id AND l1.drinker_id = d1.id) 
-WHERE (d1.age BETWEEN %d AND %d) GROUP BY m1.genre;
+SELECT m1.genre, COUNT(*) as number_of_people
+FROM listens l1 INNER JOIN music m1 INNER JOIN frequents f1
+    ON (l1.music_id = m1.id AND l1.drinker_id = f1.drinker_id)
+WHERE f1.bar_id = 1
+GROUP BY l1.music_id;
 
 SELECT t1.day_of_week, AVG(t1.total_revenue) as early_daily_average, AVG(t2.total_revenue) as late_daily_average
                     From (SELECT DAYOFWEEK(date_of_sale) as day_of_week, MONTH(date_of_sale) as month, YEAR(date_of_sale) as year,  SUM(sale_price) as total_revenue
