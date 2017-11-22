@@ -9,3 +9,13 @@ LOAD DATA LOCAL INFILE '/Users/Brian/Documents/School/Rutgers University/Senior 
 INTO TABLE listens
 FIELDS TERMINATED BY ','
 IGNORE 1 LINES;
+
+ALTER TABLE listens DROP FOREIGN KEY listens_ibfk_1;
+ALTER TABLE listens
+ADD CONSTRAINT listens_ibfk_1
+FOREIGN KEY (drinker_id) REFERENCES drinkers (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE listens DROP FOREIGN KEY listens_ibfk_2;
+ALTER TABLE listens
+ADD CONSTRAINT listens_ibfk_2
+FOREIGN KEY (music_id) REFERENCES music (id) ON DELETE CASCADE ON UPDATE CASCADE;
