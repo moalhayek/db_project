@@ -21,7 +21,7 @@ app.controller('modifyDataController',function(sharedProperties,$mdDialog,$http)
     this.addBeer = function(beer){
         var promise = $http({
             method: 'POST',
-            url: 'http://localhost:8080/rest/beers/addBeer',
+            url: 'http://ec2-18-216-165-164.us-east-2.compute.amazonaws.com:8080/db_project/rest/beers/addBeer',
             data: {
                 bar_id: beer.bar_id,
                 beer_id: beer.beer_id,
@@ -68,7 +68,7 @@ app.controller('modifyDataController',function(sharedProperties,$mdDialog,$http)
     this.addDrinker = function(drinker){
         var promise = $http({
             method: 'POST',
-            url: 'http://localhost:8080/rest/drinkers/addDrinker',
+            url: 'http://ec2-18-216-165-164.us-east-2.compute.amazonaws.com:8080/db_project/rest/drinkers/addDrinker',
             data: {
                 name: drinker.name,
                 age: drinker.age,
