@@ -18,4 +18,14 @@ public class IBeerEndpoints {
     public class IBeerResult{
         public List<IBeer> beers;
     }
+
+    public class IBeer2{
+        public String name;
+        public String manuf;
+        public int id;
+    }
+
+    public class IBeer2Result{
+        public List<IBeer2> beers2;
+    }
 }

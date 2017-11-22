@@ -18,6 +18,14 @@ public class BeerEndpoints {
         return b.getBeers(barId);
     }
 
+    @Path("/getAllBeers")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public IBeerEndpoints.IBeer2Result getBeers() {
+        BeerQueries b = new BeerQueries();
+        return b.getAllBeers();
+    }
+
     @Path("/addBeer")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

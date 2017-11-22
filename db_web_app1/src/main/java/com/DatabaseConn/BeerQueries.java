@@ -126,4 +126,43 @@ public class BeerQueries {
         return false;
     }
 
+    public IBeerEndpoints.IBeer2Result getAllBeers(){
+        IBeerEndpoints.IBeer2Result resultClass = new IBeerEndpoints().new IBeer2Result();
+        List<IBeerEndpoints.IBeer2> beersSold = new ArrayList<IBeerEndpoints.IBeer2>();
+
+        try {
+            //Get the database connection
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+
+            //Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
+            String str = String.format("SELECT id, name, manf FROM beers");
+
+            //Run the query against the database.
+            ResultSet result = stmt.executeQuery(str);
+
+            //each result represents an age group of drinkers
+            while (result.next()) {
+                //create a new object for each age group (result) and assign it the age and avg earning
+                IBeerEndpoints.IBeer2 beer = new IBeerEndpoints().new IBeer2();
+                //music age range
+                beer.name = result.getString("name");
+                beer.manuf = result.getString("manf");
+                beer.id = result.getInt("id");
+
+                //add the new age group to the list of ageEarningResult age groups
+                beersSold.add(beer);
+            }
+
+            db.closeConnection(con);
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        resultClass.beers2 = beersSold;
+
+        return resultClass;
+    }
 }
