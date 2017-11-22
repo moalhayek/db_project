@@ -4,7 +4,7 @@ var app = angular.module('db-project');
 app.controller("beerInfoController", function (sharedProperties) {
 
     this.data = [];
-    this.labels = [];
+    this.labels = ['Total Sold','Sale Price','Total Profit'];
     this.series = [];
 
     this.beerDict = {};
@@ -12,13 +12,20 @@ app.controller("beerInfoController", function (sharedProperties) {
     this.addBeer = function(newBeer){
         var name = newBeer.name
         var manf = newBeer.manuf
-        var name_str = name+' ' +manf
+        var name_str = manf +': ' +name
         this.beerDict[name_str] = newBeer;
+        this.series.push(name_str);
+        this.setData(newBeer);
     }
 
     this.removeBeer = function(beerName){
 
         delete this.beerDict[beerName]
+
+        var index = this.series.indexOf(beerName)
+
+        this.series.splice(index,1)
+        this.data.splice(index,1)
     }
 
     this.setAllBeers = function(barID){
@@ -39,6 +46,12 @@ app.controller("beerInfoController", function (sharedProperties) {
             console.log(sharedProperties.getProperty('myBeers'))
         }.bind(this))
     }
+
+    this.setData = function(newBeer){
+        console.log(newBeer);
+        var dataSet = [newBeer['totalSold'], newBeer['salePrice'], newBeer['totalProfit']];
+        this.data.push(dataSet);
+    };
 
     this.getAllBeers = function(){
         //console.log('heidy ho')

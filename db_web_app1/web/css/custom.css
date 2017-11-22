@@ -2,3 +2,26 @@
     position: fixed;
     top: 0;
 }
+
+table.tableCSS{
+    font-size: small;
+    border-collapse: collapse;
+    width: 100%;
+}
+table.tableCSS td, th{
+
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table.tableCSS tr:nth-child(even){background-color: #f2f2f2;}
+
+table.tableCSS tr:hover {background-color: #ddd;}
+
+table.tableCSS th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #75a3bd;
+    color: white;
+}

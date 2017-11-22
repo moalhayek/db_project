@@ -30,7 +30,7 @@ public class DrinkerQueries {
                     "                                   WHERE s1.beer_id = b1.id AND s1.bar_id = f.bar_id AND l1.drinker_id = f.drinker_id\n" +
                     "                                   ORDER BY s1.price DESC\n" +
                     "                                   LIMIT 1)\n" +
-                    "ORDER BY d.spending_per_night desc;", barId);
+                    "ORDER BY d.spending_per_night desc LIMIT 10;", barId);
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
