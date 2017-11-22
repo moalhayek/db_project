@@ -63,10 +63,10 @@
                 </div>
                 <div flex="87" layout="column" ng-if="personal.selectedBar">
                     <div  flex="40" layout="row" layout-align="center">
-                        <md-card flex md-theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" ng-init="earn.instantiate(personal.selectedBar.id,'total')" md-theme-watch>
+                        <md-card flex md-theme="cyan-theme" class="md-primary" ng-controller="earnings as earn" ng-init="earn.instantiate(personal.selectedBar.id)" md-theme-watch>
                             <md-card-title>
                               <md-card-title-text>
-                                <span class="md-headline">Earnings</span>
+                                <span class="md-headline">Earnings for 2016</span>
                                 <br>
                                   <md-card-content>
                                       <md-radio-group ng-model="earn.timeType"">
@@ -99,7 +99,7 @@
                                           <br>
                                           <md-input-container >
                                               <label>Start Date</label>
-                                              <md-select ng-model="earn.startDate" ng-change="earn.instantiate(personal.selectedBar.id,earn.getTimeType())">
+                                              <md-select ng-model="earn.startDate" ng-change="earn.instantiate(personal.selectedBar.id)">
                                                   <md-option ng-repeat="date in earn.dateOptions" ng-value="date">
                                                       {{date|dateFilter}}
                                                   </md-option>
@@ -152,7 +152,7 @@
                         <md-card flex md-theme="cyan-theme" ng-controller="advertisementController as ad" ng-init="ad.setAds(personal.selectedBar.id)"md-theme-watch>
                             <md-card-title>
                                 <md-card-title-text>
-                                    <span class="md-headline">Advertisements</span>
+                                    <span class="md-headline">Ad Campaign</span>
                                     <md-input-container >
                                         <label>Ad platform</label>
                                         <md-select ng-model="ad.selectedAd" ng-change="ad.setData(ad.selectedAd)">

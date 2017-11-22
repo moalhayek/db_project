@@ -12,7 +12,7 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
         total: 'Total Sales',
     }
 
-    this.refresh = function(shiftType,holdOld){
+    /*this.refresh = function(shiftType,holdOld){
         console.log('refreshing chart')
         console.log(this.getDailyAverages())
         var dailyAveArr = this.getDailyAverages()
@@ -53,9 +53,9 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
             this.series = []
             this.series.push(shiftType)
         }
-    }
+    }*/
 
-    this.instantiate = function(barID,shiftType){
+    this.instantiate = function(barID){
 
         var options = {
             url: 'transactions/getDailyAverages',
@@ -89,7 +89,9 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
             sharedProperties.setProperty('dailyAverages',res[0])
             sharedProperties.setProperty('monthlyEarnings',res[1])
             console.log('trying to refresh now')
-            this.refresh(shiftType, false)
+            this.labels_monthly = this.setLabels(this.getEarnings())
+            this.addData('total')
+
         }.bind(this));
     }
 
@@ -133,7 +135,7 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
     }
 
     this.addData = function(whichOne){
-        this.series.push(seriesMap.whichOne)
+        this.series.push(this.seriesMap.whichOne)
 
         var dailyAveArr = this.getDailyAverages()
         var monthlyArr = this.getEarnings()
@@ -146,7 +148,7 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
     }
 
     this.removeData = function(whichOne){
-        var str = seriesMap.whichOne
+        var str = this.seriesMap.whichOne
 
         var index = this.series.indexOf(str)
         this.series.splice(index,1)
@@ -204,7 +206,7 @@ app.controller("earnings", function (sharedProperties,$timeout,$q) {
 
     this.timeType = 'monthly';  
 
-    this.labels_daily = []
+    this.labels_daily = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
     this.data_daily = []
 
     this.labels_monthly = []
