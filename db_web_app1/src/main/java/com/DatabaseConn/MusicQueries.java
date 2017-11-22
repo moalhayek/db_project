@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MusicQueries {
-    public IMusicEndpoints.IMusicResult getMusicTrends(String lowerAge, String upperAge){
+    public IMusicEndpoints.IMusicResult getMusicTrends(int barId){
         IMusicEndpoints.IMusicResult resultClass = new IMusicEndpoints().new IMusicResult();
-        List<IMusicEndpoints.IMusic> musicAgeData = new ArrayList<IMusicEndpoints.IMusic>();
+        List<IMusicEndpoints.IMusic> musicData = new ArrayList<IMusicEndpoints.IMusic>();
 
         try {
             //Get the database connection
@@ -22,7 +22,11 @@ public class MusicQueries {
             Statement stmt = con.createStatement();
 
             //Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-            String str = String.format("SELECT m1.genre, COUNT(l1.drinker_id) FROM listens l1 INNER JOIN music m1 INNER JOIN drinkers d1 ON (l1.music_id = m1.id AND l1.drinker_id = d1.id) WHERE (d1.age BETWEEN "+lowerAge+" AND "+upperAge+") GROUP BY m1.genre");
+            String str = String.format("SELECT m1.genre, COUNT(*) as number_of_people\n" +
+                    "FROM listens l1 INNER JOIN music m1 INNER JOIN frequents f1\n" +
+                    "    ON (l1.music_id = m1.id AND l1.drinker_id = f1.drinker_id)\n" +
+                    "WHERE f1.bar_id = %d\n" +
+                    "GROUP BY l1.music_id", barId);
 
             //Run the query against the database.
             ResultSet result = stmt.executeQuery(str);
@@ -32,19 +36,18 @@ public class MusicQueries {
                 //create a new object for each age group (result) and assign it the age and avg earning
                 IMusicEndpoints.IMusic music = new IMusicEndpoints().new IMusic();
                 //music age range
-                music.ageGroup = String.format(lowerAge+"-"+upperAge);
-                music.genre = result.getString("m1.genre");
-                music.listeners = result.getString("COUNT(l1.drinker_id)");
+                music.genre = result.getString("genre");
+                music.listeners = result.getInt("number_of_people");
 
                 //add the new age group to the list of ageEarningResult age groups
-                musicAgeData.add(music);
+                musicData.add(music);
             }
 
             db.closeConnection(con);
         } catch (Exception e) {
             System.out.print(e);
         }
-        resultClass.musicAgeData = musicAgeData;
+        resultClass.musicData = musicData;
 
         return resultClass;
     }

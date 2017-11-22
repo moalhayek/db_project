@@ -11,8 +11,8 @@ public class MusicEndpoints {
     @Path("/getMusicTrends")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public IMusicEndpoints.IMusicResult getMusicTrends(@DefaultValue("21") @QueryParam("lowerAge") String lowerAge, @DefaultValue("60") @QueryParam("upperAge") String upperAge) {
+    public IMusicEndpoints.IMusicResult getMusicTrends(@DefaultValue("1") @QueryParam("barId") int barId) {
         MusicQueries m = new MusicQueries();
-        return m.getMusicTrends(lowerAge, upperAge);
+        return m.getMusicTrends(barId);
     }
 }
